@@ -20,3 +20,14 @@ module.exports = {
     flowbite.plugin(),
   ],
 };
+
+//custom colour used for the background, use this blue for all page backgrounds
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        customBlue: '#e8f1ff', // A color between blue-50 and blue-100
+      },
+    },
+  },
+};
