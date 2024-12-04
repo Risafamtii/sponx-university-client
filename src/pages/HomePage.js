@@ -1,4 +1,5 @@
 import React from "react";
+import ChartHome from "../components/ChartHome";
 
 const HomePage = () => {
   return (
@@ -24,6 +25,10 @@ const HomePage = () => {
         </div>
       </div>
       
+      <div className="mt-16">
+        <ChartHome />
+      </div>
+
     </div>
   )
 };
