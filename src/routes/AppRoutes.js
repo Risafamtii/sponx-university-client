@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import LoginPage from "../pages/LoginPage";
 import HomePage from "../pages/HomePage";
+import AdvertiseEvents from "../pages/AdvertiseEvents";
 // import { decodeJWT, isTokenExpired } from "../utils/auth";
 
 const AppRoutes = () => {
@@ -22,6 +23,7 @@ const AppRoutes = () => {
   return (
     <Routes location={location}>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/ad" element={<AdvertiseEvents/>} />
 
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<HomePage />} />
