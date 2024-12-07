@@ -22,7 +22,6 @@ const AppRoutes = () => {
   return (
     <Routes location={location}>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/home" element={<HomePage />} />
 
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<HomePage />} />
