@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+<<<<<<< HEAD
 
 html, body, #root{
   margin: 0;
@@ -16,3 +17,5 @@ html, body, #root{
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+=======
+>>>>>>> 58a907f29f4cb9c0c245fd314f918fd6d76a45dd
