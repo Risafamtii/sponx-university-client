@@ -2,6 +2,7 @@ import React from "react";
 import { assets } from "../assets/assets";
 
 const LoginPage = () => {
+
   React.useEffect(() => {
     // Prevent scrolling when the login page is open
     document.body.style.overflow = "hidden";
@@ -107,6 +108,13 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
+
+  return (
+  <div>
+    Login Page
+  </div>
+
+
   );
 };
 
