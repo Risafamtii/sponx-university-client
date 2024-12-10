@@ -1,31 +1,18 @@
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-
-import ProtectedRoute from "./ProtectedRoute";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
-import HomePage from "../pages/HomePage";
-// import { decodeJWT, isTokenExpired } from "../utils/auth";
+import SignupPage from "../pages/SignupPage";
+import ClubDetailsPage from "../pages/ClubDetailsPage";
+import BankDetails from "../pages/BankDetails";
 
 const AppRoutes = () => {
-  const location = useLocation();
-  const token = localStorage.getItem("token");
-
-  // const decodedToken = decodeJWT(token);
-  // const exp = decodedToken?.exp;
-
-  // if (token && !isTokenExpired(exp) && location.pathname === "/login") {
-  //   return <Navigate to="/" />;
-  // } else if (token && isTokenExpired(exp)) {
-  //   localStorage.clear();
-  //   return <Navigate to="/login" />;
-  // }
-
   return (
-    <Routes location={location}>
+    <Routes>
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/club-details" element={<ClubDetailsPage />} />
+      <Route path="/bank-details" element={<BankDetails />} />
 
-      <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<HomePage />} />
-      </Route>
     </Routes>
   );
 };
