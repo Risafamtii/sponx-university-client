@@ -108,13 +108,6 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
-
-  return (
-  <div>
-    Login Page
-  </div>
-
-
   );
 };
 
