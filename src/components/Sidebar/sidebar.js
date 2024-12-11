@@ -26,19 +26,14 @@ const Sidebar = () => {
 
   return (
     <div className="flex">
-      <div className={`bg-white h-screen pt-8 ${open ? "w-72" : "w-20"} duration-300 relative`}>
+      <div className={`bg-white h-screen pt-8 ${open ? "w-60" : "w-20"} duration-300 relative`}>
         <BsArrowLeftShort 
           className={`bg-white text-blue-900 text-2xl rounded-full absolute -right-3 top-9 border border-blue-900 cursor-pointer ${!open && 'rotate-180'}`} 
           onClick={() => setOpen(!open)} 
           aria-label="Toggle Sidebar"
         />
 
-        <div className="inline-flex">
-          <AiFillEnvironment
-            className={`bg-cyan-400 text-4xl rounded cursor-pointer block float-left ml-5 mr-2 duration-500 ${!open && 'rotate-[360deg]'}`} 
-          />
-          <h1 className={`text-blue-900 origin-left font-medium text-2xl duration-300 font-bold ${!open && 'scale-0'}`}>UPNECT</h1>
-        </div>
+        
 
         <ul className="pt-2">
           {Menus.map((menu, index) => (
@@ -59,7 +54,7 @@ const Sidebar = () => {
       </div>
 
       <div className="bg-slate-200 flex-1 p-7">
-        <h1 className="text-2xl font-semibold">Dashboard</h1>
+        <h1 className="text-2xl font-semibold"></h1>
       </div>
     </div>
   );
