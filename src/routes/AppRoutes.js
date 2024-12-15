@@ -13,9 +13,6 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/ad" element={<AdvertiseEvents/>} />
-      <Route path="/signup" element={<SignupPage />} />
-      <Route path="/club-details" element={<ClubDetailsPage />} />
-      <Route path="/bank-details" element={<BankDetails />} />
 
     </Routes>
   );
