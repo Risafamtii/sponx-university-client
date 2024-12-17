@@ -5,6 +5,7 @@ import SignupPage from "../pages/SignupPage";
 import ClubDetailsPage from "../pages/ClubDetailsPage";
 import BankDetails from "../pages/BankDetails";
 import AdvertiseEvents from "../pages/AdvertiseEvents";
+import SelectedAd from "../pages/SelectedAd";
 
 const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ const AppRoutes = () => {
       <Route path="/club-details" element={<ClubDetailsPage />} />
       <Route path="/bank-details" element={<BankDetails />} />
       <Route path="/advertise-events" element={<AdvertiseEvents />} />
+      <Route path="/selected-ad" element={<SelectedAd />} />
     </Routes>
   );
 };
