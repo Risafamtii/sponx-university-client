@@ -8,7 +8,7 @@ const AdvertiseEvents = () => {
         className="relative bg-cover bg-center h-96 flex items-center justify-center"
         style={{ backgroundImage: "url('/adPageHero.png')" }}
       >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 bg-black opacity-10"></div>
       </div>
 
                   {/* Search Bar */}
@@ -32,7 +32,7 @@ const AdvertiseEvents = () => {
           <option value="club2">Club 2</option>
           <option value="club3">Club 3</option>
         </select>
-        <button className="w-full md:w-auto px-6 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-700">
+        <button className="w-full md:w-auto px-6 py-2 bg-sky-950  hover:bg-gray-800 text-white rounded-md hover:bg-blue-700">
           Search
         </button>
       </div>
@@ -101,17 +101,18 @@ const AdvertiseEvents = () => {
               description: "Gear up for the Competition...",
               image: "/Picture.png",
             },
+            
             // Add more events here...
           ].map((event, index) => (
             <div
               key={index}
               className="bg-white shadow-md rounded-md overflow-hidden mb-4 p-2"
-              style={{ height: "300px", width: "250px" }}
+              style={{ height: "350px", width: "250px" }}
             >
               <img
                 src={event.image}
                 alt={event.title}
-                className="w-full h-[80px] object-cover"
+                className="w-full h-[180px] object-cover"
               />
               <div className="p-2">
                 <h3 className="text-lg font-bold">{event.title}</h3>
