@@ -5,7 +5,13 @@ import wso2 from "/home/WSO2.svg";
 import p99x1 from "/home/99x1.svg";
 import virtusa from "/home/virtusa.svg";
 import pagero from "/home/pagero.svg";
+import coreimg from "/home/core-mission-img.svg";
+import event1 from "/home/events/event1.svg";
+import event2 from "/home/events/event2.svg";
+import event3 from "/home/events/event3.svg";
+import event4 from "/home/events/event4.svg";
 import { Button, Card } from "flowbite-react";
+import { FaArrowCircleRight } from "react-icons/fa";
 
 export default function Home() {
   return (
@@ -25,7 +31,9 @@ export default function Home() {
             <h1 className="text-5xl font-serif text-white font-semibold">
               That Drive Impact
             </h1>
-            <button className="bg-white text-black w-max my-10 rounded-xl hover:bg-blue-900 hover:text-white px-3 py-2">
+
+            <button className="bg-white flex text-black w-max my-10 rounded-full hover:bg-blue-900 hover:text-white px-3 py-2">
+              <FaArrowCircleRight className="h-6 mr-3" />
               Contact Us
             </button>
           </div>
@@ -107,7 +115,98 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="bg-blue-600 text-white p-4 mt-6">
+      <div className="bg-blue-950 bg-cover bg-center min-h-screen flex flex-col justify-center">
+        <div className="flex flex-row items-center justify-center">
+          <div className="flex pr-10">
+            <img src={coreimg} className="max-h-[500px] max-w-[500px]" alt="" />
+          </div>
+          <div className="flex flex-col pl-10 flew-col">
+            <h1 className="text-5xl font-serif pb-3 text-white font-semibold">
+              The Core Mission Work
+            </h1>
+
+            <h1 className="text-5xl font-serif pb-3 text-white font-semibold">
+              Behind All Our
+            </h1>
+            <h1 className="text-5xl font-serif pb-3 text-white font-semibold">
+              Work
+            </h1>
+            <p className="text-white font-sans pt-5 max-w-[500px]">
+              Our mission is to connect brands with the right events and
+              audiences, creating meaningful experiences that drive real
+              results.
+            </p>
+
+            <div className="flex gap-12 pt-5 mt-8">
+              <div className="flex flex-col items-center">
+                <h1 className="text-5xl font-serif pb-3 text-white font-semibold">
+                  25 +
+                </h1>
+                <p className="text-md font-serif pb-3 text-white ">
+                  Companies Helped
+                </p>
+              </div>
+              <div className="flex flex-col items-center">
+                <h1 className="text-5xl font-serif pb-3 text-white font-semibold">
+                  36k +
+                </h1>
+                <p className="text-md font-serif pb-3 text-white ">
+                  Revenue Generated
+                </p>
+              </div>
+            </div>
+            <button className="bg-white text-black w-max my-10 flex rounded-full hover:bg-blue-900 hover:text-white px-3 py-2">
+              <FaArrowCircleRight className="h-6 mr-3" />
+              Get In Touch
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center px-10 py-10">
+        <h1 className="text-4xl font-bold pb-10">Upcoming Events</h1>
+        <div className="flex flex-row gap-28">
+          <div className="flex flex-col gap-20">
+            <div className="w-[400px] h-[300px] transition-all">
+              <img src={event1} alt="" />
+              <h1 className="text-xl pt-2 font-semibold">IEEE Xtream </h1>
+              <p className="text-sm text-gray-600">
+                University of Colombo - UCSC
+              </p>
+            </div>
+            <div className="w-[400px] h-[300px] transition-all">
+              <img src={event2} alt="" />
+              <h1 className="text-xl pt-2 font-semibold">Back To Moon</h1>
+              <p className="text-sm text-gray-600">
+                University of Peradeniya - FoE
+              </p>
+            </div>
+            <button className="bg-black text-white w-max flex rounded-full items-end hover:bg-blue-900 hover:text-white px-3 py-2">
+              <FaArrowCircleRight className="h-6 mr-3" />
+              Explore More
+            </button>
+          </div>
+          <div className="flex flex-col pt-28 gap-20">
+            <div className="w-[400px] h-[300px]transition-all">
+              <img src={event3} alt="" />
+              <h1 className="text-xl pt-2 font-semibold">Green Global</h1>
+              <p className="text-sm text-gray-600">
+                University of Peradeniya - FoA
+              </p>
+            </div>
+            <div className="w-[400px] h-[300px] transition-all">
+              <img src={event4} alt="" />
+
+              <h1 className="text-xl pt-2 font-semibold">Round The Gravity</h1>
+              <p className="text-sm text-gray-600">
+                University of Colombo - FoS
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer className="bg-blue-600 text-white p-4">
         <p className="text-center">
           &copy; 2023 SponX University. All rights reserved.
         </p>
