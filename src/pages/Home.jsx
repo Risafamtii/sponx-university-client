@@ -186,7 +186,7 @@ export default function Home() {
               Explore More
             </button>
           </div>
-          <div className="flex flex-col pt-28 gap-20">
+          <div className="flex flex-col pt-28 pb-10 gap-20">
             <div className="w-[400px] h-[300px]transition-all">
               <img src={event3} alt="" />
               <h1 className="text-xl pt-2 font-semibold">Green Global</h1>
@@ -206,11 +206,7 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className="bg-blue-600 text-white p-4">
-        <p className="text-center">
-          &copy; 2023 SponX University. All rights reserved.
-        </p>
-      </footer>
+      
     </div>
   );
 }
