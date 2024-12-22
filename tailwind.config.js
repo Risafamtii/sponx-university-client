@@ -1,13 +1,27 @@
-const flowbite = require("flowbite-react/tailwind");
-
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: [ "./index.html",
-  "./src/**/*.{js,ts,jsx,tsx}",
-  flowbite.content(),],
-
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}", // Ensure flowbite-react content is included
+  ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'dark-blue': '#001f3d',  // Customize your dark blue color
+      },
+      animation: {
+        'line-appear': 'line-appear 2.75s infinite',
+        'slowBounce': 'bounce 2.5s infinite',
+      },
+      keyframes: {
+        'line-appear': {
+          '0%, 100%': { opacity: '0' },
+          '45%, 55%': { opacity: '1' },
+        },
+      },
+    },
   },
-  plugins: [require('flowbite/plugin')],
-}
+  plugins: [
+    require('flowbite-react'),  // Correct way to import the plugin
+  ],
+};
