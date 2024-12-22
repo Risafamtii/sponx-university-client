@@ -19,8 +19,8 @@ export default function Header() {
      <button className="bg-blue-900 flex text-white w-max  rounded-full hover:bg-cyan-500 hover:text-black px-3 py-2 transition-all">Login</button>
      <Navbar.Toggle />
    </div>
-   <Navbar.Collapse>
-     <Navbar.Link href="#" active>
+   <Navbar.Collapse className="md:flex md:items-center md:w-auto md:space-x-6">
+     <Navbar.Link href="#">
        Home
      </Navbar.Link>
      <Navbar.Link href="#">About</Navbar.Link>
