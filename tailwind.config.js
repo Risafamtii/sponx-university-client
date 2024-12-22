@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         'dark-blue': '#001f3d',  // Customize your dark blue color
+        'light-blue': '#F2F5FF', // Added the light blue color
       },
       animation: {
         'line-appear': 'line-appear 2.75s infinite',
