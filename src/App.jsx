@@ -7,10 +7,14 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import ClubDetailsPage from './pages/ClubDetailsPage'
 import BankDetails from './pages/BankDetails'
+import Sidebar from './components/Sidebar/Sidebar';
+import Navbar from './components/Navbar/index'; 
 
 export default function App() {
   return (
     <BrowserRouter>
+       <Navbar/>
+       <Sidebar />
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
