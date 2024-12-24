@@ -7,8 +7,11 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import ClubDetailsPage from './pages/ClubDetailsPage'
 import BankDetails from './pages/BankDetails'
+import MyEvents from './pages/MyEvents'
+import Profile from './pages/Profile'
 import Sidebar from './components/Sidebar/Sidebar';
 import Navbar from './components/Navbar/index'; 
+import BreadCrumbs from './components/BreadCrumbs/index'; 
 
 export default function App() {
   return (
@@ -22,6 +25,8 @@ export default function App() {
         <Route path='/signup' element={<SignupPage />} />
         <Route path='/club-details' element={<ClubDetailsPage />} />
         <Route path='/bank-details' element={<BankDetails />} />
+        <Route path='/myevents' element={<MyEvents />} />
+        <Route path='/profile' element={<Profile />} />
        
       </Routes>
       <Footer />
