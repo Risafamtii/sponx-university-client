@@ -24,7 +24,7 @@ const Sidebar = () => {
       
   ];
 
-  const handleMenuClick = (menuTitle) => {
+  const handleMenuClick = (menuTitle,route) => {
     setActiveMenu(menuTitle); 
     if (route) {
       navigate(route);
