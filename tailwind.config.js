@@ -23,6 +23,9 @@ export default {
           '45%, 55%': { opacity: '1' },
         },
       },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
     },
   },
   plugins: [

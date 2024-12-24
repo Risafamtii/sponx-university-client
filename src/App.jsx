@@ -9,22 +9,24 @@ import ClubDetailsPage from './pages/ClubDetailsPage'
 import BankDetails from './pages/BankDetails'
 import Sidebar from './components/Sidebar/Sidebar';
 import Navbar from './components/Navbar/index'; 
+import EventForm from './pages/EventForm';
 
 export default function App() {
   return (
     <BrowserRouter>
-       <Navbar/>
+       {/* <Navbar/>
        <Sidebar />
-      <Header />
+      <Header /> */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignupPage />} />
         <Route path='/club-details' element={<ClubDetailsPage />} />
         <Route path='/bank-details' element={<BankDetails />} />
+        <Route path="/event-form" element={<EventForm />} />
        
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   )
 }
