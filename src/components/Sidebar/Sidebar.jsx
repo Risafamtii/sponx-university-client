@@ -1,27 +1,35 @@
 import React, { useState } from 'react';
 import { BsArrowLeftShort } from "react-icons/bs";
-import { AiFillEnvironment } from "react-icons/ai";
-import { AiOutlineFileText } from "react-icons/ai";
+import { MdEvent } from "react-icons/md";
+import { RiProfileLine } from "react-icons/ri";
 import { RiDashboardFill } from "react-icons/ri";
+import { IoIosLogOut } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import "../Sidebar/Sidebar.css"
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
+  const [activeMenu, setActiveMenu] = useState('Overview');
+  const navigate = useNavigate();
   const Menus = [
-    { title: "Dashboard" },
-    { title: "Pages", icon: <AiOutlineFileText />},
-    { title: "Media", icon:<AiOutlineFileText /> },
-    { title: "Analytics",icon:<AiOutlineFileText /> },
-    { title: "PagInboxes", icon:<AiOutlineFileText />},
-    { title: "Profile",icon:<AiOutlineFileText /> },
-    { title: "Setting",icon:<AiOutlineFileText /> },
+    { title: "Overview", route: "/" },
+    { title: "My Events", route: "/myevents" ,icon: <MdEvent />},
+    { title: "Profile",route: "/profile", icon:<RiProfileLine /> },
+  
     {
         title: <span style={{ color: 'red' }}>Logout</span>,
         spacing: true,
-        icon: <AiOutlineFileText style={{ color: 'red' }} />,
+        icon: <IoIosLogOut style={{ color: 'red' }} />,
       }
       
   ];
+
+  const handleMenuClick = (menuTitle,route) => {
+    setActiveMenu(menuTitle); 
+    if (route) {
+      navigate(route);
+    }
+  }
 
   return (
     <div className="flex">
@@ -40,7 +48,7 @@ const Sidebar = () => {
             <li 
               key={index} 
               className={`menu-item text-blue-900 text-sm flex items-center gap-x-4 cursor-pointer p-2 
-              hover:bg-slate-100  ml-4 ${menu.spacing ?"mt-9" : "mt-2"}`}>
+              hover:bg-slate-100  ml-4 ${menu.spacing ?"mt-9" : "mt-2"} ${activeMenu === menu.title ? "bg-slate-300" : ""} `} onClick={() => handleMenuClick(menu.title, menu.route)}>
                 <span className='text-2xl block float-left'>
                 {menu.icon ? menu.icon :<RiDashboardFill />}
                 </span>
