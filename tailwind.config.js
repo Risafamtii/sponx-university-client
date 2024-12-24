@@ -10,6 +10,7 @@ export default {
     extend: {
       colors: {
         'dark-blue': '#001f3d',  // Customize your dark blue color
+        'softYellow' : '#FFD599',
       },
       animation: {
         'line-appear': 'line-appear 2.75s infinite',
