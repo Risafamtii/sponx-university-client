@@ -1,29 +1,40 @@
 .menu-item {
-    position: relative;
-  }
+  position: relative;
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px; /* Adjust the width for the vertical bar */
+  height: 0;
+  background-color: #0D47A1; /* The color of the bar */
   
-  .menu-item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 4px; /* Adjust the width for the vertical bar */
-    height: 0;
-    background-color: #0D47A1; /* The color of the bar */
-    
-    border-radius: 4px; /* Optional for rounded edges */
-  }
+  border-radius: 4px; /* Optional for rounded edges */
+}
+
+.logout::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px; /* Adjust the width for the vertical bar */
+  height: 0;
+  background-color: red; /* The color of the bar */
   
-  .menu-item:hover::before {
-    height: 100%; /* Full height when hovered */
-  }
-  
-  .absolute {
-    z-index: 50; /* Ensure the button is always on top */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .absolute:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a shadow effect on hover */
-  }
-  
+  border-radius: 4px;
+}
+
+.menu-item:hover::before {
+  height: 100%; /* Full height when hovered */
+}
+
+.absolute {
+  z-index: 50;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.absolute:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
