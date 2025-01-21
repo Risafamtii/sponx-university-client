@@ -12,6 +12,9 @@ export default {
         'dark-blue': '#001f3d',  // Customize your dark blue color
         'softYellow' : '#FFD599',
       },
+      fontFamily: {
+        mono: ['Menlo', 'Monaco', 'Courier New'],  // Use Roboto as the default sans font
+      },
       animation: {
         'line-appear': 'line-appear 2.75s infinite',
         'slowBounce': 'bounce 2.5s infinite',

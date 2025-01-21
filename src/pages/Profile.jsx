@@ -1,9 +1,109 @@
-import React from 'react'
+import React from 'react';
+import { assets } from "../assets/assets"; // Assuming assets are imported from the assets folder
 
 const Profile = () => {
   return (
-    <div>Profile</div>
-  )
-}
+    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen">
+      {/* Cover Photo and Profile Photo Container */}
+      <div className="relative w-full">
+        {/* Cover Photo */}
+        <img
+          src={assets.head} // Replace with the actual path to your cover photo
+          alt="Cover"
+          className="w-full h-[300px] object-cover rounded-lg shadow-lg"
+        />
 
-export default Profile
+        {/* Profile Photo */}
+        <div className="absolute bottom-0 left-16 transform translate-y-1/2">
+          <img
+            src={assets.profile} // Replace with the actual path to your profile photo
+            alt="Profile"
+            className="w-[150px] h-[150px] rounded-full border-4 border-black"
+          />
+        </div>
+      </div>
+
+      {/* Information Section */}
+      <div className="-mt-2 w-full bg-white p-6 rounded-lg shadow-lg">
+        {/* Header and Description Section */}
+        <div className="flex justify-between items-start gap-8">
+          {/* Header Section */}
+          <div className="mt-20">
+            <h1 className="text-2xl font-bold">IEEE STUDENT BRANCH</h1>
+            <p className="text-gray-600">University of Colombo School of Computing</p>
+            <p className="italic text-gray-500">University of Colombo</p>
+          </div>
+
+
+
+          {/* Description Section */}
+          <div className="w-1/2">
+          <div className="mt-1 mb-4 ml-96">
+          <button className="text-red-600 font-semibold hover:underline flex items-center">
+            <span className="mr-1">✏️</span>Edit Profile
+          </button>
+        </div>
+            <h2 className="text-lg font-semibold">Description</h2>
+            <p className="text-gray-600 mt-2 leading-relaxed border-l-2 border-black pl-4">
+              University of Colombo School of Computing University of Colombo School of Computing
+              University of Colombo School of Computing University of Colombo School of Computing
+              University of Colombo School of Computing University of Colombo School of Computing.
+            </p>
+          </div>
+        </div>
+
+        
+
+      </div>
+
+      {/* Contact Details Section */}
+
+      <div className="mt-8 w-full bg-white p-6 rounded-lg shadow-lg flex items-center">
+<div className='-mt-[200px]'>
+<h2 className="text-lg font-semibold ">Contact Details</h2>
+</div>
+ 
+  <div className="flex-1">
+
+    <div className="space-y-4 border-l-2 border-black pl-4">
+      
+    <div className="flex items-left justify-left space-x-2">
+        <span>👤</span>
+        <p className="font-semibold text-lg">Amrah Slamath</p>
+      </div>
+      <div className="flex items-left justify-left space-x-2">
+        <span>👤</span>
+        <p className="text-gray-500">Secretary</p>
+      </div>
+    </div>
+  </div>
+
+  {/* Middle Section: Contact Information */}
+  <div className="flex-1 ">
+    <div className="space-y-4 border-l-2 border-black pl-4">
+      <div className="flex items-left justify-left space-x-2">
+        <span>📞</span>
+        <p className="font-semibold">077 - 1333 - 370</p>
+      </div>
+      <div className="flex items-center justify-left space-x-2">
+        <span>📧</span>
+        <p className="font-semibold">slamathamrah@gmail.com</p>
+      </div>
+    </div>
+  </div>
+
+  {/* Right Section: Image */}
+  <div className="w-1/3 ">
+    <img
+      src={assets.head} // Replace with the actual image path
+      alt="Contact"
+      className="w-full h-full object-cover rounded-lg"
+    />
+  </div>
+</div>
+
+    </div>
+  );
+};
+
+export default Profile;
