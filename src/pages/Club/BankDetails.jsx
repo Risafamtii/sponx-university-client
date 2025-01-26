@@ -1,5 +1,5 @@
 import React from "react";
-import { assets } from "../assets/assets"; // Assuming assets are imported from the assets folder
+import { assets } from "../../assets/assets"; // Assuming assets are imported from the assets folder
 
 const BankDetails = () => {
   React.useEffect(() => {
