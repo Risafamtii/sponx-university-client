@@ -1,4 +1,4 @@
-.menu-item {
+/* .menu-item {
   position: relative;
 }
 
@@ -7,11 +7,11 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 4px; /* Adjust the width for the vertical bar */
+  width: 4px;
   height: 0;
-  background-color: #0D47A1; /* The color of the bar */
+  background-color: #0D47A1; 
   
-  border-radius: 4px; /* Optional for rounded edges */
+  border-radius: 4px; 
 }
 
 .logout::before{
@@ -19,15 +19,15 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 4px; /* Adjust the width for the vertical bar */
+  width: 4px;
   height: 0;
-  background-color: red; /* The color of the bar */
+  background-color: red; 
   
   border-radius: 4px;
 }
 
 .menu-item:hover::before {
-  height: 100%; /* Full height when hovered */
+  height: 100%; 
 }
 
 .absolute {
@@ -37,4 +37,4 @@
 
 .absolute:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+} */
