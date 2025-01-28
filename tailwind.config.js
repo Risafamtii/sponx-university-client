@@ -13,7 +13,7 @@ export default {
         'softYellow' : '#FFD599',
       },
       fontFamily: {
-        mono: ['Menlo', 'Monaco', 'Courier New'],  // Use Roboto as the default sans font
+        mono: ['Menlo', 'Monaco', 'Courier New' ],  // Use Roboto as the default sans font
       },
       animation: {
         'line-appear': 'line-appear 2.75s infinite',
