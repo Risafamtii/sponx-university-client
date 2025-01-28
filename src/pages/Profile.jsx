@@ -58,50 +58,35 @@ const Profile = () => {
 
       {/* Contact Details Section */}
 
-      <div className="mt-8 w-full bg-white p-6 rounded-lg shadow-lg flex items-center">
-<div className='-mt-[200px]'>
-<h2 className="text-lg font-semibold ">Contact Details</h2>
-</div>
- 
-  <div className="flex-1">
+      <div className="mt-6 w-full bg-white p-6 rounded-lg shadow-lg flex items-center">
+      <h2 className='text-xl font-bolder -mt-2 mb-4'>Contact Details</h2>
+      <div className="flex justify-between items-start gap-8">
+          {/* Header Section */}
+          <div className="mt-20">
+            <h1 className="text-2xl font-bold">IEEE STUDENT BRANCH</h1>
+            <p className="text-gray-600">University of Colombo School of Computing</p>
+            <p className="italic text-gray-500">University of Colombo</p>
+          </div>
 
-    <div className="space-y-4 border-l-2 border-black pl-4">
+
+
+          {/* Description Section */}
+          <div className="w-1/2">
+          <div className="mt-1 mb-4 ml-96">
+          <button className="text-red-600 font-semibold hover:underline flex items-center">
+            <span className="mr-1">✏️</span>Edit Profile
+          </button>
+        </div>
+            <h2 className="text-lg font-semibold">Description</h2>
+            <p className="text-gray-600 mt-2 leading-relaxed border-l-2 border-black pl-4">
+              University of Colombo School of Computing University of Colombo School of Computing
+              University of Colombo School of Computing University of Colombo School of Computing
+              University of Colombo School of Computing University of Colombo School of Computing.
+            </p>
+          </div>
+        </div>
+      </div>
       
-    <div className="flex items-left justify-left space-x-2">
-        <span>👤</span>
-        <p className="font-semibold text-lg">Amrah Slamath</p>
-      </div>
-      <div className="flex items-left justify-left space-x-2">
-        <span>👤</span>
-        <p className="text-gray-500">Secretary</p>
-      </div>
-    </div>
-  </div>
-
-  {/* Middle Section: Contact Information */}
-  <div className="flex-1 ">
-    <div className="space-y-4 border-l-2 border-black pl-4">
-      <div className="flex items-left justify-left space-x-2">
-        <span>📞</span>
-        <p className="font-semibold">077 - 1333 - 370</p>
-      </div>
-      <div className="flex items-center justify-left space-x-2">
-        <span>📧</span>
-        <p className="font-semibold">slamathamrah@gmail.com</p>
-      </div>
-    </div>
-  </div>
-
-  {/* Right Section: Image */}
-  <div className="w-1/3 ">
-    <img
-      src={assets.head} // Replace with the actual image path
-      alt="Contact"
-      className="w-full h-full object-cover rounded-lg"
-    />
-  </div>
-</div>
-
     </div>
   );
 };

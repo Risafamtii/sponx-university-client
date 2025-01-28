@@ -1,0 +1,40 @@
+/* .menu-item {
+  position: relative;
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 0;
+  background-color: #0D47A1; 
+  
+  border-radius: 4px; 
+}
+
+.logout::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 0;
+  background-color: red; 
+  
+  border-radius: 4px;
+}
+
+.menu-item:hover::before {
+  height: 100%; 
+}
+
+.absolute {
+  z-index: 50;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.absolute:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+} */
