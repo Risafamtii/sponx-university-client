@@ -37,6 +37,7 @@ import AdminSent from '../pages/Admin/Sent'
 import Home from '../pages/Home/Home'
 import Header from '../components/Header'
 import Footer from '../components/FooterComp'
+import LoginPage from '../pages/LoginPage'
 
 
 
@@ -44,102 +45,34 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-
-      <Route
+        <Route
         path="/"
         element={
           <>
-            <Header/>
-            <Home/>
-            <Footer/>
+          <Header/>
+          <Home/>
+          <Footer/>
           </>
-          
         }
       />
+      <Route path="/login" element={<LoginPage/>}/>
 
-        <Route
-          path="/admin/overview"
-          element={
-            <AdminLayout>
-              <AdminOverview />
-            </AdminLayout>
-          }
-        />
+      <Route path="/admin" element={<AdminLayout/>}>
+        <Route path ="overview" element ={<AdminOverview/>}/>
+        <Route path ="bids" element ={<AdminBids/>}/>
+        <Route path ="events" element ={<AdminEvents/>}/>
+        <Route path ="users/companies" element ={<AdminCompanies/>}/>
+        <Route path ="users/clubs" element ={<AdminClubs/>}/>
+        <Route path ="payments" element ={<AdminCompose/>}/>
+        <Route path ="notifications/compose" element ={<AdminOverview/>}/>
+        <Route path ="notifications/sent" element ={<AdminSent/>}/>
+        <Route path ="settings" element ={<AdminSettings/>}/>
 
-        <Route
-          path="/admin/bids"
-          element={
-            <AdminLayout>
-              <AdminBids />
-            </AdminLayout>
-          }
-        />
 
-        <Route
-          path="/admin/users/companies"
-          element={
-            <AdminLayout>
-              <AdminCompanies />
-            </AdminLayout>
-          }
-        />
+      </Route>
+    </Routes>
+  </Router>
 
-        <Route
-          path="/admin/users/clubs"
-          element={
-            <AdminLayout>
-              <AdminClubs />
-            </AdminLayout>
-          }
-        />
-
-        <Route
-          path="/admin/events"
-          element={
-            <AdminLayout>
-              <AdminEvents />
-            </AdminLayout>
-          }
-        />
-
-        <Route
-          path="/admin/payments"
-          element={
-            <AdminLayout>
-              <AdminPayments />
-            </AdminLayout>
-          }
-        />
-
-        <Route
-          path="/admin/notifications/compose"
-          element={
-            <AdminLayout>
-              <AdminCompose />
-            </AdminLayout>
-          }
-        />
-
-        <Route
-          path="/admin/notifications/sent"
-          element={
-            <AdminLayout>
-              <AdminSent />
-            </AdminLayout>
-          }
-        />     
-      
-        <Route
-          path="/admin/settings"
-          element={
-            <AdminLayout>
-              <AdminSettings />
-            </AdminLayout>
-          }
-        />
-
-      </Routes>
-    </Router>
   )
 }
 
