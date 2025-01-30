@@ -1,40 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { assets } from '../../assets/assets';
 import { HelpCircle } from 'lucide-react';
 
 const Sidebar = ({ menuItems }) => {
   const [dropDown, setDropDown] = useState(null);
-  const [reSize, setReSize] = useState(false);
 
   const handleDropDown = (index) => {
     setDropDown(dropDown === index ? null : index);
   };
 
-  const handleSize = () => {
-    if (window.innerWidth < 1024) {
-      setReSize(true);
-    } else {
-      setReSize(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', handleSize);
-    handleSize();
-
-    return () => {
-      window.removeEventListener('resize', handleSize);
-    };
-  }, []);
-
   return (
-    <div className={`transition-all duration-300 ${reSize ? 'w-[5%]' : 'w-[17%]'}`}>
-      <div className="body bg-[#192440] flex flex-col gap-10 py-4 items-center h-full">
+    <div className={'transition-all duration-300 w-[17%] fixed top-0 left-0 h-full overflow-y-autol'}>
+      <div className="body bg-[#192440] flex flex-col gap-10 py-4 items-center h-[100%]">
         
         {/* Logo */}
         <div>
-          <img src={assets.logo} alt="Logo" className={reSize ? 'w-10' : 'w-auto'} />
+          <img src={assets.logo} alt="Logo" className='w-auto' />
         </div>
 
         {/* Menu Items */}
@@ -54,7 +36,7 @@ const Sidebar = ({ menuItems }) => {
                     <span className="text-xl">
                       <item.icon />
                     </span>
-                    {!reSize && <span>{item.name}</span>}
+                    <span>{item.name}</span>
                   </NavLink>
                 ) : (
                   <>
@@ -66,7 +48,7 @@ const Sidebar = ({ menuItems }) => {
                       <span className="text-xl">
                         <item.icon />
                       </span>
-                      {!reSize && <span>{item.name}</span>}
+                      <span>{item.name}</span>
                     </button>
 
                     {/* Child Items (Dropdown) */}
@@ -96,7 +78,7 @@ const Sidebar = ({ menuItems }) => {
         </div>
 
         {/* Help Center */}
-        {!reSize && dropDown === null && (
+        {dropDown === null && (
           <div className="help-box relative bg-[#12192C] text-white w-[70%] text-center rounded-xl py-5 px-4 border border-[#8E92BC] shadow-lg pt-2 h-[30%]">
             <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-[#192440] w-12 h-12 rounded-full flex items-center justify-center border border-[#8E92BC] shadow-md">
               <HelpCircle size={24} className="text-white" />
