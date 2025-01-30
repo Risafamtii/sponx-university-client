@@ -86,12 +86,18 @@ function MyEvents() {
                       <span className="text-sm font-medium">Sponsorship</span>
                       <span className="text-sm font-medium">{event.sponsorship}%</span>
                     </div>
-                    <div className="w-full mt-2 bg-gray-200 rounded-full h-2">
+                    <div className="relative w-full mt-2 bg-gray-200 rounded-full h-2">
                       <div
                         className={`h-2 rounded-full ${
                           event.sponsorship < 30 ? "bg-red-500" : event.sponsorship === 100 ? "bg-green-400" : "bg-blue-500"
                         }`}
                         style={{ width: `${event.sponsorship}%` }}
+                      ></div>
+                      <div
+                        className={`absolute top-1/2 transform -translate-y-1/2 right-0 w-3 h-3 -ml-1 rounded-full ${
+                          event.sponsorship < 30 ? "bg-red-500" : event.sponsorship === 100 ? "bg-green-400" : "bg-blue-500"
+                        }`}
+                        style={{ left: `${event.sponsorship}%` }}
                       ></div>
                     </div>
                   </div>
