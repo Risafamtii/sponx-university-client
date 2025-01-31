@@ -19,6 +19,7 @@ import { BiSolidSelectMultiple } from "react-icons/bi";
 import { MdEvent } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 
+//const userType = [admin,club,company]
 
 const menuConfig = {
     admin: [
