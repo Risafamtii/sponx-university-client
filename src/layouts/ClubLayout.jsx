@@ -17,4 +17,4 @@ const ClubLayout = () => {
   )
 }
 
-export default ClubLayout
+export default ClubLayout;

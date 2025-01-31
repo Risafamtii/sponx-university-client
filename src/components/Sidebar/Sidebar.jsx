@@ -11,7 +11,7 @@ const Sidebar = ({ menuItems }) => {
   };
 
   return (
-    <div className={'transition-all duration-300 w-[17%] fixed top-0 left-0 h-full overflow-y-autol'}>
+    <div className={'transition-all duration-300 w-[17%] fixed top-0 left-0 h-full overflow-y-auto'}>
       <div className="body bg-[#192440] flex flex-col gap-10 py-4 items-center h-[100%]">
         
         {/* Logo */}
@@ -78,12 +78,8 @@ const Sidebar = ({ menuItems }) => {
         </div>
 
         {/* Help Center */}
-
-        {!reSize && dropDown === null && (
+        {!dropDown && (
           <div className="help-box relative bg-[#12192C] text-white w-[70%] text-center rounded-xl py-5 px-4 border border-[#8E92BC] shadow-lg pt-2 h-[30%] mt-32">
-
-        {dropDown === null && (
-          <div className="help-box relative bg-[#12192C] text-white w-[70%] text-center rounded-xl py-5 px-4 border border-[#8E92BC] shadow-lg pt-2 h-[30%]">
             <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-[#192440] w-12 h-12 rounded-full flex items-center justify-center border border-[#8E92BC] shadow-md">
               <HelpCircle size={24} className="text-white" />
             </div>
