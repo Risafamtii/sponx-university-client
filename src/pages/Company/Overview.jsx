@@ -1,5 +1,10 @@
 import React from "react";
 import { FaClipboardCheck, FaHandHoldingUsd, FaHandshake } from "react-icons/fa";
+import { FaRegCalendar } from "react-icons/fa";
+import { FaRegClock } from "react-icons/fa";
+import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
+import { useState } from "react";
+import dayjs from "dayjs";
 import { Doughnut, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -31,10 +36,17 @@ const stats = [
     { id: "05822-FXSP", event: "Belarus", code: "BY", date: "02/04/2020", status: "Rejected", amount: "100,000", category: "Houses & Hotels", badge: "Bidding", badgeColor: "bg-yellow-200 text-yellow-700" },
     { id: "00347-BCLQ", event: "Phillipines", code: "PH", date: "23/12/2020", status: "Paid", amount: "100,000", category: "Transportation", badge: "Success", badgeColor: "bg-green-200 text-green-700" },
     { id: "4472-QREX", event: "Argentina", code: "AR", date: "17/09/2021", status: "Pending", amount: "10,000", category: "Insurance", badge: "Rejected", badgeColor: "bg-red-200 text-red-700" },
+    { id: "00347-BCLQ", event: "Phillipines", code: "PH", date: "23/12/2020", status: "Paid", amount: "100,000", category: "Transportation", badge: "Success", badgeColor: "bg-green-200 text-green-700" },
+    
   ];
 
 const Overview = () => {
 
+    const [currentDate, setCurrentDate] = useState(dayjs());
+    const [showFullMonth, setShowFullMonth] = useState(false);
+    const startOfWeek = currentDate.startOf('week');
+    const days = Array.from({ length: 7 }, (_, i) => startOfWeek.add(i + 9, 'day'));
+    const fullMonthDays = Array.from({ length: currentDate.daysInMonth() }, (_, i) => currentDate.startOf('month').add(i, 'day'));
     const doughnutData = {
         datasets: [
           {
@@ -72,7 +84,7 @@ const Overview = () => {
     <div className="overview-container w-[83%] ml-[17%] bg-[#F9F9F9]  flex">
       
       {/* left side of the page */}
-      <div className="flex-[2] p-4">
+      <div className="flex-[3] p-4">
         
         {/* the black colour chart and bar chart  */}
         <div className="flex h-[250px] w-full p-6 gap-4">
@@ -151,9 +163,95 @@ const Overview = () => {
       </div>
       
       {/* right side of the page*/}
-      <div className="flex-[1] bg-gray-100 p-4">
-        <h2 className="text-xl font-bold">Right Column</h2>
-        <p>This column takes up less space.</p>
+      <div className="flex-[1] bg-[#F3F3F3] p-4">
+        <div className="bg-white shadow-sm rounded-xl p-2 flex flex-col items-center">
+            <div className="flex items-center justify-between w-full">
+            <ChevronLeft className="cursor-pointer" onClick={() => setCurrentDate(currentDate.subtract(1, 'month'))} />
+            <h3 className="text-lg font-normal text-sm">{currentDate.format("MMMM YYYY")}</h3>
+            <ChevronRight className="cursor-pointer" onClick={() => setCurrentDate(currentDate.add(1, 'month'))} />
+            </div>
+            
+            <div className="flex gap-2 mt-4">
+            {(!showFullMonth ? days : fullMonthDays).map((day, index) => (
+                <div key={index} className={`flex flex-col items-center w-8 p-2 rounded-full ${day.date() === 14 ? "bg-black text-white" : "text-gray-500 bg-gray-100"}`}>
+                <span className="text-xs font-semibold">{day.format("dd").charAt(0)}</span>
+                <span className={`text-md font-bold ${day.date() === 14 ? "text-blue-400" : ""}`}>{day.date()}</span>
+                </div>
+            ))}
+            </div>
+            
+        </div>
+
+        <div className="flex flex-col gap-6 p-4 items-center">
+            {/* First Event Card */}
+            <div className="bg-white shadow-sm rounded-2xl p-4">
+                <p className="text-sm font-semibold text-gray-500">Events Today</p>
+                <div className="mt-2">
+                <img
+                    src="/Image.png"
+                    alt="Event"
+                    className="w-full h-32 object-cover rounded-lg"
+                />
+                </div>
+                <h2 className="mt-2 text-sm">Creating Awesome Mobile Apps</h2>
+                <p className="text-gray-500 text-xs">IEEE - UCSC</p>
+                <div className="flex items-center justify-between mt-3">
+                    <div className="flex items-center text-gray-500 text-xs">
+                        <span className="mr-1 text-lg"><FaRegClock/></span> 1pm - 3pm
+                    </div>
+                    
+                    <div className="flex -space-x-2">
+                        <img className="w-6 h-6 rounded-full border border-white" src="/avatar1.jpg" alt="user" />
+                        <img className="w-6 h-6 rounded-full border border-white" src="/avatar2.jpg" alt="user" />
+                        <img className="w-6 h-6 rounded-full border border-white" src="/avatar3.jpg" alt="user" />
+                        <img className="w-6 h-6 rounded-full border border-white" src="/avatar4.jpg" alt="user" />
+                    </div>
+                </div>
+            </div>
+
+            {/* Second Event Card */}
+            <div className="bg-white shadow-sm rounded-2xl p-4">
+                <img
+                src="/Image.png"
+                alt="Event"
+                className="w-full h-32 object-cover rounded-lg"
+                />
+                <h2 className="mt-3 text-sm font-semibold">Creating Awesome Mobile Apps</h2>
+                <p className="text-gray-500 text-xs">IEEE - UCSC</p>
+                
+                <div className="flex justify-between items-center mt-2">
+                <p className="text-gray-500 text-xs">Progress</p>
+                <p className="text-blue-600">120,000 LKR</p>
+                </div>
+
+                <div className="w-full bg-gray-200 rounded-full h-1 mt-2 relative">
+                    <div className="bg-blue-600 h-1 rounded-full" style={{ width: "50%" }}></div>
+                    <div
+                        className="absolute -top-1 right-0 bg-blue-600 w-3 h-3 rounded-full -mr-0"
+                        style={{ right: `calc(50% - 0.5rem)` }} // Position the circle at the endpoint of the blue line
+                    ></div>
+                </div>
+
+
+
+                <div className="flex justify-between items-center mt-2">
+                <p className="text-gray-500 text-sm"><FaRegCalendar className="text-sm" /> 1 day</p>
+                </div>
+
+                <div className="flex justify-between mt-2">
+                    <button className="bg-green-500 text-white px-3 py-1 rounded-lg w-1/4 text-xs flex items-center justify-center">
+                        Accept
+                    </button>
+                    <button className="bg-red-500 text-white px-3 py-1 rounded-lg w-1/4 text-xs flex items-center justify-center">
+                        Reject
+                    </button>
+                    <button className="bg-yellow-400 text-white px-3 py-1 rounded-lg w-1/4 text-xs flex items-center justify-center">
+                        More Info
+                    </button>
+                </div>
+
+            </div>
+        </div>
       </div>
     </div>
   );
