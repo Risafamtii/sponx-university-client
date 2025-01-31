@@ -36,7 +36,7 @@ const stats = [
     { id: "05822-FXSP", event: "Belarus", code: "BY", date: "02/04/2020", status: "Rejected", amount: "100,000", category: "Houses & Hotels", badge: "Bidding", badgeColor: "bg-yellow-200 text-yellow-700" },
     { id: "00347-BCLQ", event: "Phillipines", code: "PH", date: "23/12/2020", status: "Paid", amount: "100,000", category: "Transportation", badge: "Success", badgeColor: "bg-green-200 text-green-700" },
     { id: "4472-QREX", event: "Argentina", code: "AR", date: "17/09/2021", status: "Pending", amount: "10,000", category: "Insurance", badge: "Rejected", badgeColor: "bg-red-200 text-red-700" },
-    { id: "00347-BCLQ", event: "Phillipines", code: "PH", date: "23/12/2020", status: "Paid", amount: "100,000", category: "Transportation", badge: "Success", badgeColor: "bg-green-200 text-green-700" },
+    
     
   ];
 
@@ -87,10 +87,10 @@ const Overview = () => {
       <div className="flex-[3] p-4">
         
         {/* the black colour chart and bar chart  */}
-        <div className="flex h-[250px] w-full p-6 gap-4">
+        <div className="flex h-[300px] w-full p-6 gap-4">
 
             {/* that black colour chart */}
-            <div className="flex-[2] bg-gray-900 text-white p-6 rounded-2xl shadow-md flex flex-col justify-between">
+            <div className="flex-[1] bg-gray-900 text-white p-6 rounded-2xl shadow-md flex flex-col justify-between">
                 <div>
                 <h3 className="text-lg  mb-2">Vault Balance</h3>
                 <p className="text-3xl font-semibold">65,000 LKR</p>
@@ -106,11 +106,41 @@ const Overview = () => {
                 </div>
             </div>
 
+                    {/* Monthly Spending Card */}
+            <div className="flex-[2] bg-white p-6 rounded-2xl shadow-sm">
+                <h3 className="text-lg font-semibold mb-4">Monthly Spending (LKR)</h3>
+                <div className="flex justify-between items-end h-full">
+                {[
+                    { month: "Aug", value: 50 },
+                    { month: "Sep", value: 80 },
+                    { month: "Oct", value: 60 },
+                    { month: "Nov", value: 40 },
+                    { month: "Dec", value: 125, highlight: true },
+                    { month: "Jan", value: 60 },
+                ].map((data, index) => (
+                    <div key={index} className="flex flex-col items-center">
+                    <div
+                        className={`w-8 ${
+                        data.highlight ? "bg-indigo-500" : "bg-indigo-200"
+                        } rounded-t-lg`}
+                        style={{ height: `${data.value}px` }}
+                    ></div>
+                    <p
+                        className={`mt-2 text-sm ${
+                        data.highlight ? "text-indigo-500 font-semibold" : "text-gray-500"
+                        }`}
+                    >
+                        {data.month}
+                    </p>
+                    </div>
+                ))}
+                </div>
+            </div>
             
         </div>
 
 
-        <div className="flex gap-4 justify-center">
+        <div className="flex gap-4 justify-center mt-8">
             {stats.map((stat, index) => (
             <div key={index} className="flex items-center p-4 rounded-xl shadow-sm bg-white border border-gray-200 w-[190px]">
                 <div className="flex items-center space-x-4">
@@ -228,7 +258,7 @@ const Overview = () => {
                     <div className="bg-blue-600 h-1 rounded-full" style={{ width: "50%" }}></div>
                     <div
                         className="absolute -top-1 right-0 bg-blue-600 w-3 h-3 rounded-full -mr-0"
-                        style={{ right: `calc(50% - 0.5rem)` }} // Position the circle at the endpoint of the blue line
+                        style={{ right: `calc(50% - 0.5rem)` }} 
                     ></div>
                 </div>
 
