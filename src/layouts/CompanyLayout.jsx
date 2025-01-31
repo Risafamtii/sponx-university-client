@@ -10,7 +10,7 @@ const CompanyLayout = () => {
       <Sidebar menuItems={menuConfig.club} />
       
       {/* Main content area where child routes will render */}
-      <div className="flex-1 p-4 bg-gray-100">
+      <div className="flex-1">
         <Outlet /> {/* Renders the content of the nested route */}
       </div>
     </div>
