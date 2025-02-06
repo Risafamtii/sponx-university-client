@@ -11,8 +11,15 @@ import {
     FaCog,
     FaEnvelope,
     FaMobileAlt,
+    FaAd,
+    FaMoneyCheckAlt 
              
 } from 'react-icons/fa';
+import { BiSolidSelectMultiple } from "react-icons/bi";
+import { MdEvent } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
+
+//const userType = [admin,club,company]
 
 const menuConfig = {
     admin: [
@@ -39,6 +46,18 @@ const menuConfig = {
         },
 
         { name: 'Settings', basePath: '/admin/settings', icon: FaCog },
+    ],
+
+    club: [
+        { name: 'Overview', basePath: '/club/overview', icon: FaBorderAll },
+        { name: 'Advertise', basePath: '/club/advertise', icon: FaAd },
+        { name: 'Bank', basePath: '/club/bankdetails', icon: FaMoneyCheckAlt  },
+        { name: 'Club', basePath: '/club/clubdetails', icon: FaRegFutbol },
+        { name: 'Events', basePath: '/club/myevents', icon: MdEvent },
+        { name: 'Profile', basePath: '/club/profile', icon: CgProfile },
+        { name: 'Ad', basePath: '/club/selectad', icon: BiSolidSelectMultiple },
+
+
     ]
 };
 
