@@ -100,7 +100,7 @@ const notifications = [
 
 const Overview = () => {
   return (
-    <div className="w-[83%] bg-white-200 ml-[17%] p-6 ">
+    <div className="w-[83%] bg-white-200 ml-[17%] p-6 mt-[20px]">
       
 
       <div className="grid grid-cols-3 gap-4 mt-6">
@@ -184,7 +184,10 @@ const Overview = () => {
         </div>
      
   );
+
+  
 }
+export default Overview
 // import React from "react";
 // import { Line, Bar } from "react-chartjs-2";
 // import "chart.js/auto";
