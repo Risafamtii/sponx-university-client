@@ -78,8 +78,8 @@ const Sidebar = ({ menuItems }) => {
         </div>
 
         {/* Help Center */}
-        {!dropDown && (
-          <div className="help-box relative bg-[#12192C] text-white w-[70%] text-center rounded-xl py-5 px-4 border border-[#8E92BC] shadow-lg pt-2 h-[30%] mt-32">
+        {dropDown === null && (
+          <div className="help-box relative bg-[#12192C] text-white w-[70%] text-center rounded-xl py-5 px-4 border border-[#8E92BC] shadow-lg pt-2 h-[30%]">
             <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-[#192440] w-12 h-12 rounded-full flex items-center justify-center border border-[#8E92BC] shadow-md">
               <HelpCircle size={24} className="text-white" />
             </div>
