@@ -24,6 +24,8 @@ import ClubProfile from '../pages/Club/Profile'
 import ClubSelectAd from '../pages/Club/SelectedAd'
 import ClubAdvertise from '../pages/Club/AdvertiseEvents'
 
+import CompanyLayout from '../layouts/CompanyLayout';
+import CompanyOverview from '../pages/Company/Overview';
 
 const AppRoutes = () => {
   return (
@@ -61,6 +63,10 @@ const AppRoutes = () => {
         <Route path ="myevents" element ={<ClubEvents/>}/>
         <Route path ="profile" element ={<ClubProfile/>}/>
         <Route path ="selectad" element ={<ClubSelectAd/>}/>
+      </Route>
+
+      <Route path="/company" element={<CompanyLayout/>}>
+      <Route path ="overview" element ={<CompanyOverview/>}/>
       </Route>
       
     </Routes>
