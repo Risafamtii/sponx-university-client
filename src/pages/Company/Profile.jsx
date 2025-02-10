@@ -1,5 +1,6 @@
 import React from "react";
-import { FaLock, FaGlobe, FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import { FaGlobe, FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import { FaCog, FaLock, FaEdit } from "react-icons/fa";
 
 const Profile = () => {
   return (
@@ -11,14 +12,30 @@ const Profile = () => {
         </div>
         
         <div className="p-6 flex items-center gap-4 border-b">
-            <div className="bg-white w-full rounded-xl p-4 -mt-20 z-10 opacity-90">
-                <div className="w-16 h-16 bg-gray-300 rounded-full"></div>
-                <div>
-                    <h2 className="text-xl font-semibold">SyscoLabs</h2>
-                    <p className="text-gray-500">esthera@simmmpIe.com</p>
-                </div>
+          <div className="flex gap-8 bg-white/90 w-full rounded-xl p-4 -mt-20 z-10">
+            {/* Profile Info */}
+            <div className="w-20 h-20 bg-gray-300 rounded-full"></div>
+            <div className="items-center justify-center flex flex-col">
+              <h2 className="text-xl font-semibold">SyscoLabs</h2>
+              <p className="text-gray-500">esthera@simmmpIe.com</p>
             </div>
+
+            {/* Buttons */}
+            <div className="ml-auto flex items-center gap-2">
+              <button className="px-2 py-1 flex items-center gap-1 rounded-lg shadow text-gray-700 font-medium hover:bg-white">
+               <FaCog /> Overview
+              </button>
+              <button className="px-2 py-1 rounded-lg shadow text-gray-700 font-medium hover:bg-white">
+                <span>🔒</span> Security
+              </button>
+              <button className="px-2 py-1 rounded-lg shadow text-gray-700 font-medium hover:bg-white">
+                <span>✏️</span> Edit
+              </button>
+            </div>
+          </div>
         </div>
+
+
         
         <div className="p-6">
           <h3 className="text-lg font-semibold mb-4">Company Bio</h3>
