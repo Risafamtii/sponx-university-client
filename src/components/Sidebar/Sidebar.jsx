@@ -11,7 +11,7 @@ const Sidebar = ({ menuItems }) => {
   };
 
   return (
-    <div className={'transition-all duration-300 w-[17%] fixed top-0 left-0 h-full overflow-y-autol'}>
+    <div className={'transition-all duration-300 w-[17%] fixed top-0 left-0 h-full overflow-y-auto'}>
       <div className="body bg-[#192440] flex flex-col gap-10 py-4 items-center h-[100%]">
         
         {/* Logo */}
