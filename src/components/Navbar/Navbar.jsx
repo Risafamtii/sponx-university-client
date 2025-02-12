@@ -98,7 +98,7 @@ const Navbar = ({ userType }) => {
   ];
 
   return (
-    <nav className="fixed flex items-center justify-between w-[83%] ml-[17%] px-4 py-2 bg-white shadow-md h-[10%]">
+    <nav className="fixed flex items-center justify-between w-[83%] ml-[17%] px-4 py-2 bg-white  shadow-md h-[10%] z-50">
       <div className="flex-1 text-lg font-semibold text-gray-800">
         {currentPage}
       </div>
