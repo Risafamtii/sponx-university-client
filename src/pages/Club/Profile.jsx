@@ -3,9 +3,9 @@ import { assets } from '../../assets/assets';
 
 const Profile = () => {
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen">
+    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen ml-60 mt-10">
       {/* Cover Photo and Profile Photo Container */}
-      <div className="relative w-full">
+      <div className="relative w-full ml-6 mt-6">
         {/* Cover Photo */}
         <img
           src={assets.header} // Replace with the actual path to your cover photo
@@ -24,7 +24,7 @@ const Profile = () => {
       </div>
 
       {/* Information Section */}
-      <div className="-mt-2 w-full bg-white p-6 rounded-lg shadow-lg">
+      <div className="-mt-2 w-full bg-white p-6 rounded-lg shadow-lg ml-6">
         {/* Header and Description Section */}
         <div className="flex justify-between items-start gap-8">
           {/* Header Section */}
@@ -52,7 +52,7 @@ const Profile = () => {
       </div>
 
       {/* Contact Details Card */}
-      <div className="mt-8 w-full bg-white p-6 rounded-lg shadow-lg flex flex-col lg:flex-row gap-6">
+      <div className="mt-8 w-full bg-white p-6 rounded-lg shadow-lg flex flex-col lg:flex-row gap-6 ml-6">
         {/* Left Section: Contact Person */}
         <div className="flex-1">
           <h2 className="text-xl font-bold text-gray-800 mb-4">Contact Person</h2>
