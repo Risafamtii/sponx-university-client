@@ -7,6 +7,8 @@ import rac from './img/rac.png'
 import header from './header_img.jpg'
 import profile from './female.jpg'
 import profilepic from './img/Profil.png'
+import compro from './img/compro.png'
+import clubCover from './img/coverimg.png'
 
 
 export const assets = {
@@ -18,5 +20,7 @@ export const assets = {
     rac,
     header,
     profile,
-    profilepic
+    profilepic,
+    compro,
+    clubCover
 }
