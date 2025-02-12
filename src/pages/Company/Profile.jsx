@@ -5,7 +5,7 @@ import { FaCog, FaLock, FaEdit } from "react-icons/fa";
 const Profile = () => {
   return (
     <div className="min-h-screen bg-[#F9F9F9] flex flex-col items-center w-[83%] ml-[17%]">
-      <div className="relative w-full bg-white overflow-hidden h-screen">
+      <div className="relative w-full bg-white h-screen">
         <div className="bg-black text-white flex justify-center items-center p-6 relative min-h-[30%] rounded-b-2xl">
           <h1 className="text-3xl font-semi-bold">Technology that Moves Human Civilization</h1>
          
