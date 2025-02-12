@@ -26,6 +26,8 @@ import ClubAdvertise from '../pages/Club/AdvertiseEvents'
 
 import CompanyLayout from '../layouts/CompanyLayout';
 import CompanyOverview from '../pages/Company/Overview';
+import AdminCompanyView from '../pages/Admin/CompanyView';
+import AdminClubView from '../pages/Admin/ClubView';
 
 const AppRoutes = () => {
   return (
@@ -53,6 +55,8 @@ const AppRoutes = () => {
         <Route path ="notifications/compose" element ={<AdminCompose/>}/>
         <Route path ="notifications/sent" element ={<AdminSent/>}/>
         <Route path ="settings" element ={<AdminSettings/>}/>
+        <Route path ="users/companies/view" element ={<AdminCompanyView/>}/>
+        <Route path ="users/clubs/view" element={<AdminClubView/>}/>
       </Route>
 
       <Route path='/club' element={<ClubLayout/>}>
