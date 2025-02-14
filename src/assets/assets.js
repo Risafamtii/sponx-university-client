@@ -9,7 +9,11 @@ import profile from './female.jpg'
 import profilepic from './img/Profil.png'
 import compro from './img/compro.png'
 import clubCover from './img/coverimg.png'
-
+import facebook from './img/facebook.png'
+import instagram from './img/insta.png'
+import phone from './img/Phone.png'
+import mail from './img/Mail.png'
+import location from './img/location.png'
 
 export const assets = {
     
@@ -22,5 +26,10 @@ export const assets = {
     profile,
     profilepic,
     compro,
-    clubCover
+    clubCover,
+    facebook,
+    instagram,
+    phone,
+    mail,
+    location
 }
