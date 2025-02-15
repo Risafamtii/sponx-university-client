@@ -51,7 +51,7 @@ const menuConfig = {
     club: [
         { name: 'Overview', basePath: '/club/overview', icon: FaBorderAll },
         { name: 'Advertise', basePath: '/club/advertise', icon: FaAd },
-        { name: 'Bank', basePath: '/club/bankdetails', icon: FaMoneyCheckAlt  },
+        { name: 'Transaction', basePath: '/club/bankdetails', icon: FaMoneyCheckAlt  },
         { name: 'Club', basePath: '/club/clubdetails', icon: FaRegFutbol },
         { name: 'Events', basePath: '/club/myevents', icon: MdEvent },
         { name: 'Profile', basePath: '/club/profile', icon: CgProfile },
