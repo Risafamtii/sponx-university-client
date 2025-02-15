@@ -16,7 +16,7 @@ const AdminLayout = () => {
       <Sidebar menuItems={menuConfig.admin}/>
       
       {/* Main content area where child routes will render */}
-      <div className="flex-1 p-4 bg-gray-100">
+      <div className="flex flex-col flex-1 h-full min-h-screen p-4 overflow-auto bg-[#F3F6F9]">
         <Outlet /> {/* Renders the content of the nested route */}
       </div>
     </div>
