@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import event1 from "../../assets/img/event1.png";
 import WSO2 from '../../assets/img/WSO2.png';
 import { Filter, Search } from 'lucide-react';
 import { assets } from '../../assets/assets';
+import { Link } from 'react-router-dom';
+
 
 const Events = () => {
   const [activeBar, setActiveBar] = useState('Approved');
@@ -194,9 +196,12 @@ const Events = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-center">
+                    <Link 
+                    to= "/admin/events/view">
                     <button className="px-4 py-2 text-sm text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200">
                       View
                     </button>
+                    </Link>
                   </td>
                 </tr>
               ))}

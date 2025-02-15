@@ -10,6 +10,8 @@ import AdminPayments from '../pages/Admin/Payments'
 import AdminSettings from '../pages/Admin/Settings'
 import AdminCompose from '../pages/Admin/Compose'
 import AdminSent from '../pages/Admin/Sent'
+import AdminEventsView from '../pages/Admin/EventsView';
+
 import Home from '../pages/Home/Home'
 import Header from '../components/Header'
 import Footer from '../components/FooterComp'
@@ -57,6 +59,8 @@ const AppRoutes = () => {
         <Route path ="settings" element ={<AdminSettings/>}/>
         <Route path ="users/companies/view" element ={<AdminCompanyView/>}/>
         <Route path ="users/clubs/view" element={<AdminClubView/>}/>
+        <Route path ="events/view" element={<AdminEventsView/>}/>
+
       </Route>
 
       <Route path='/club' element={<ClubLayout/>}>
