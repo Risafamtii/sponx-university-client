@@ -63,7 +63,7 @@ const menuConfig = {
     company: [
         { name: 'Overview', basePath: '/company/overview', icon: FaBorderAll },
         { name: 'Sponsorship', basePath: '/company/sponsorship', icon: FaAd },
-        { name: 'Bank', basePath: '/company/bankdetails', icon: FaMoneyCheckAlt  },
+        { name: 'Payment', basePath: '/company/payment', icon: FaMoneyCheckAlt  },
         { name: 'Events', basePath: '/company/myevents', icon: MdEvent },
         { name: 'Profile', basePath: '/company/profile', icon: CgProfile },
 

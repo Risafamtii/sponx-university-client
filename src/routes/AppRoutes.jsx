@@ -28,6 +28,7 @@ import ClubEventDetails from '../pages/Club/EventDetails'
 import CompanyLayout from '../layouts/CompanyLayout';
 import CompanyOverview from '../pages/Company/Overview';
 import CompanyProfile from '../pages/Company/Profile';
+import CompanyPayment from '../pages/Company/Payment';
 
 import AdminCompanyView from '../pages/Admin/CompanyView';
 import AdminClubView from '../pages/Admin/ClubView';
@@ -77,6 +78,7 @@ const AppRoutes = () => {
       <Route path="/company" element={<CompanyLayout/>}>
       <Route path ="overview" element ={<CompanyOverview/>}/>
       <Route path ="profile" element ={<CompanyProfile/>}/>
+      <Route path ="payment" element ={<CompanyPayment/>}/>
       </Route>
       
     </Routes>
