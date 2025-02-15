@@ -1,10 +1,10 @@
 import React from "react";
-import { FaGlobe, FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaGlobe, FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { FaCog, FaLock, FaEdit } from "react-icons/fa";
 
 const Profile = () => {
   return (
-    <div className="min-h-screen bg-[#F9F9F9] flex flex-col items-center w-[83%] ml-[17%]">
+    <div className="mt-[5%] bg-[#F9F9F9] flex flex-col items-center w-[83%] ml-[17%]">
       <div className="relative w-full bg-white h-screen">
         <div className="bg-black text-white flex justify-center items-center p-6 relative min-h-[30%] rounded-b-2xl">
           <h1 className="text-3xl font-semi-bold">Technology that Moves Human Civilization</h1>
@@ -39,7 +39,7 @@ const Profile = () => {
         
         <div className="p-6">
           <h3 className="text-lg font-semibold mb-4">Company Bio</h3>
-          <p className="text-gray-600 mb-4">
+          <p className="text-[#A0AEC0] mb-4 font-normal">
             Hi, I'm Alec Thompson. Decisions: If you can't decide, the answer is no.
             If two equally difficult paths, choose the one more painful in the short term
             (pain avoidance is creating an illusion of equality).
@@ -50,22 +50,30 @@ const Profile = () => {
             <p><FaEnvelope className="inline mr-2" /> <strong>Email:</strong> alecThompson@mail.com</p>
             <p><FaMapMarkerAlt className="inline mr-2" /> <strong>Location:</strong> 55A, Dharmapala Mawatha, Colombo, Sri Lanka</p>
             <p><FaGlobe className="inline mr-2" /> <strong>Website:</strong> syscolabs.lk</p>
+            <p className="flex items-center space-x-3">
+        <strong>Social Media:</strong>
+        <FaFacebook className="text-blue-600 cursor-pointer" />
+        <FaTwitter className="text-blue-400 cursor-pointer" />
+        <FaInstagram className="text-pink-500 cursor-pointer" />
+      </p>
           </div>
         </div>
         
         <div className="p-6 border-t">
           <h3 className="text-lg font-semibold mb-4">Security</h3>
           <div className="space-y-4">
-            <div>
-              <label className="block text-gray-700 mb-1">Password</label>
-              <input type="password" className="w-full border rounded px-4 py-2" placeholder="**********" />
-            </div>
-            <div>
-              <label className="block text-gray-700 mb-1">Backup Email</label>
-              <input type="email" className="w-full border rounded px-4 py-2" placeholder="**********" />
-            </div>
-          </div>
+  <div>
+    <label className="block text-gray-700 mb-1">Password</label>
+    <input type="password" className="w-80 border border-gray-300 rounded-xl px-4 py-1" placeholder="**********" />
+  </div>
+  <div>
+    <label className="block text-gray-700 mb-1">Backup Email</label>
+    <input type="email" className="w-80 border border-gray-300 rounded-xl px-4 py-1" placeholder="**********" />
+  </div>
+</div>
+
         </div>
+
       </div>
     </div>
   );
