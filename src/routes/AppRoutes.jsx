@@ -47,6 +47,7 @@ import ClubEvents from '../pages/Club/MyEvents'
 import ClubProfile from '../pages/Club/Profile'
 import ClubSelectAd from '../pages/Club/SelectedAd'
 import ClubAdvertise from '../pages/Club/AdvertiseEvents'
+import ClubCreateEvent from '../pages/Club/CreateEvent'
 
 
 const AppRoutes = () => {
@@ -83,6 +84,7 @@ const AppRoutes = () => {
       <Route path ="bankdetails" element ={<ClubBank/>}/>
       <Route path ="clubdetails" element ={<ClubDetails/>}/>
       <Route path ="myevents" element ={<ClubEvents/>}/>
+      <Route path ="createevent" element ={<ClubCreateEvent/>}/>
       <Route path ="profile" element ={<ClubProfile/>}/>
       <Route path ="selectad" element ={<ClubSelectAd/>}/>
       
