@@ -85,14 +85,14 @@ const Payment = () => {
         </button>
       </div>
 
-      <div className="flex items-center justify-between mt-10 w-full px-4 ml-8">
+      <div className="flex items-center justify-between w-full px-4 mt-10 ml-8">
         {/* Search Bar (Left) */}
         <div className="relative w-1/4">
-          <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <FaSearch className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
           <input
             type="text"
             placeholder="Search..."
-            className="w-full border border-gray-200 rounded-full px-10 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-10 py-2 text-sm border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -103,8 +103,8 @@ const Payment = () => {
       {/* Content Area */}
       <div className="mt-6">
         {activeTab === "pending" && (
-          <div className="p-4 max-w-5xl mx-auto">
-            <table className="w-full border border-gray-200 rounded-lg overflow-hidden">
+          <div className="max-w-5xl p-4 mx-auto">
+            <table className="w-full overflow-hidden border border-gray-200 rounded-lg">
               <thead>
                 <tr className="bg-white border-b">
                   <th className="text-left p-4 text-sm font-medium text-[#718EBF]">Event Name</th>
@@ -144,8 +144,8 @@ const Payment = () => {
         </div>
         )}
         {activeTab === "completed" && (
-          <div className="p-4 max-w-5xl mx-auto">
-          <table className="w-full border border-gray-200 rounded-lg overflow-hidden">
+          <div className="max-w-5xl p-4 mx-auto">
+          <table className="w-full overflow-hidden border border-gray-200 rounded-lg">
             <thead>
               <tr className="bg-white border-b">
                 <th className="text-left p-4 text-sm font-medium text-[#718EBF]">Event Name</th>
@@ -179,7 +179,7 @@ const Payment = () => {
                     </span>
                   </td>
                   <td className="p-4 text-sm">
-                  <button className="px-2 py-1 border border-blue-800 text-blue-800 rounded-full hover:border-purple-500 hover:bg-gray-100 hover:text-purple-800 hover:font-semi-bold transition">
+                  <button className="px-2 py-1 text-blue-800 transition border border-blue-800 rounded-full hover:border-purple-500 hover:bg-gray-100 hover:text-purple-800 hover:font-semi-bold">
       Download
     </button>
                   </td>
