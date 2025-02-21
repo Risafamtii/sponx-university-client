@@ -1,158 +1,132 @@
-import React from "react";
-import { assets } from "../../assets/assets"; // Assuming assets are imported from the assets folder
+import React, { useState } from "react";
+import { assets } from "../../assets/assets";
+
+
+const activities = [
+  { id: "56037-XDER", event: "Brasil", code: "BR", date: "05/28/2020", status: "Paid", amount: "100,000",amount: "100,000", category: "Web, UI/UX Design", badge: "Approved", badgeColor: "bg-purple-200 text-purple-700" },
+  { id: "05822-FXSP", event: "Belarus", code: "BY", date: "02/04/2020", status: "Rejected", amount: "100,000",amount: "100,000", category: "Houses & Hotels", badge: "Bidding", badgeColor: "bg-yellow-200 text-yellow-700" },
+  { id: "00347-BCLQ", event: "Phillipines", code: "PH", date: "23/12/2020", status: "Paid", amount: "100,000",amount: "100,000", category: "Transportation", badge: "Success", badgeColor: "bg-green-200 text-green-700" },
+  { id: "4472-QREX", event: "Argentina", code: "AR", date: "17/09/2021", status: "Pending", amount: "10,000",amount: "100,000", category: "Insurance", badge: "Rejected", badgeColor: "bg-red-200 text-red-700" },
+  
+  
+];
 
 const BankDetails = () => {
-  React.useEffect(() => {
-    // Prevent scrolling when the page is open
-    document.body.style.overflow = "hidden";
+  const [progress, setProgress] = useState(null);
 
-    return () => {
-      // Restore scrolling when the component unmounts
-      document.body.style.overflow = "auto";
-    };
-  }, []);
+  // Handler function to show progress
+  const showProgress = () => {
+    setProgress("Progress checked successfully!");
+  };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      {/* Main form content */}
-      <div className="fixed w-full max-w-3xl p-8 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg top-1/2 left-1/2">
-        
-        {/* Header with logo and title */}
-        <div className="flex items-center mb-6">
-          <img src={assets.logo} alt="Logo" className="mr-4 h-18 w-18" />
-          <h2 className="text-4xl text-blue-900 font-xs">Bank Details</h2>
-        </div>
-
-        {/* Form */}
-        <form className="space-y-6">
-          {/* Account Holder and Account Number */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <label htmlFor="accountHolder" className="block text-sm font-medium text-gray-700">
-                Account Holder's Name
-              </label>
-              <input
-                type="text"
-                id="accountHolder"
-                placeholder="Enter name"
-                className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="accountNumber" className="block text-sm font-medium text-gray-700">
+    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen ml-60">
+      {/* Information Section */}
+      <div className="w-full max-w-6xl bg-white p-6 rounded-lg shadow-lg mt-24">
+        <p className="text-3xl font-bold mb-6">Bank Details</p>
+        <hr className="mb-6" />
+        <div className="w-full p-6  rounded-xl">
+          <div className="flex justify-between mb-4">
+            <div className="w-1/2 pr-2">
+              <label className="block mb-2 text-sm font-medium">
                 Account Number
               </label>
               <input
-                type="number"
-                id="accountNumber"
-                placeholder="Enter account number"
-                className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
+                type="text"
+                value="22001369"
+                readOnly
+                className="w-full p-2 border rounded-md bg-gray-200"
               />
             </div>
-          </div>
-
-          {/* Bank Name and Branch */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <label htmlFor="bankName" className="block text-sm font-medium text-gray-700">
+            <div className="w-1/2 pr-2">
+              <label className="block mb-2 text-sm font-medium">
+                Account Name
+              </label>
+              <input
+                type="text"
+                value="Amrah Slamath"
+                readOnly
+                className="w-full p-2 border rounded-md bg-gray-200"
+              />
+            </div>
+            <div className="w-1/2 pr-2">
+              <label className="block mb-2 text-sm font-medium">
                 Bank Name
               </label>
               <input
                 type="text"
-                id="bankName"
-                placeholder="Enter bank name"
-                className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
+                value="Commercial Bank"
+                readOnly
+                className="w-full p-2 border rounded-md bg-gray-200"
               />
             </div>
-            <div>
-              <label htmlFor="branch" className="block text-sm font-medium text-gray-700">
-                Bank Branch
-              </label>
+          </div>
+          <div className="mb-4 flex justify-between">
+            <div className="w-1/2 pr-2">
+              <label className="block mb-2 text-sm font-medium">Branch</label>
               <input
                 type="text"
-                id="branch"
-                placeholder="Enter branch name"
-                className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
+                value="Maradana"
+                readOnly
+                className="w-full p-2 border rounded-md bg-gray-200"
               />
             </div>
-          </div>
-
-          {/* Account Type and Holder's NIC */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <label htmlFor="accountType" className="block text-sm font-medium text-gray-700">
-                Account Type
-              </label>
-              <select
-                id="accountType"
-                className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              >
-                <option value="">Select account type</option>
-                <option value="savings">Savings</option>
-                <option value="current">Current</option>
-                <option value="fixed">Fixed Deposit</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="holderNIC" className="block text-sm font-medium text-gray-700">
-                Account Holder's NIC
+            <div className="w-1/2 pr-2">
+              <label className="block mb-2 text-sm font-medium">
+                Upload Bank Document (PDF)
               </label>
               <input
-                type="text"
-                id="holderNIC"
-                placeholder="Enter NIC"
-                className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
+                type="file"
+                accept=".pdf"
+                className="w-full h-[42px] p-2 border border-black rounded-md bg-gray-200 "
               />
             </div>
           </div>
-
-          {/* Address and Contact Number */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div>
-              <label htmlFor="holderAddress" className="block text-sm font-medium text-gray-700">
-                Account Holder's Address
-              </label>
-              <textarea
-                id="holderAddress"
-                rows="3"
-                placeholder="Enter address"
-                className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              ></textarea>
-            </div>
-            <div>
-              <label htmlFor="holderContactNumber" className="block text-sm font-medium text-gray-700">
-                Contact Number
-              </label>
-              <input
-                type="tel"
-                id="holderContactNumber"
-                placeholder="Enter contact number"
-                className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                pattern="[0-9]{10}"
-                required
-              />
-            </div>
-          </div>
-
-          {/* Submit Button */}
-          <div className="text-center">
-            <button
-              type="submit"
-              className="px-6 py-2 text-lg font-semibold text-white bg-blue-900 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
+        </div>
+        {progress && (
+          <p className="mt-4 text-center text-green-500">{progress}</p>
+        )}
       </div>
-    </div>
+
+      {/* Additional Information Section (can be filled in later) */}
+      <div className="w-full max-w-6xl bg-white p-6 rounded-lg shadow-lg mt-10">
+            <h2 className="text-3xl font-bold mb-6">Transaction</h2>
+            <table className="w-full text-left border-collapse">
+                <thead>
+                    <tr className="border-b">
+                    <th className="py-2 px-4 text-gray-400 text-sm font-semibold">Event Name</th>
+                    <th className="py-2 px-4 text-gray-400 text-sm font-semibold">Company Name</th>
+                    <th className="py-2 px-4 text-blue-400 text-sm font-semibold">Sponsorship Type</th>
+                    <th className="py-2 px-4 text-gray-400 text-sm font-semibold">Date</th>
+                    <th className="py-2 px-4 text-gray-400 text-sm font-semibold">Amount</th>
+                    <th className="py-2 px-4 text-gray-400 text-sm font-semibold">Receipt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {activities.map((activity, index) => (
+                    <tr key={index} className="border-b">
+                        <td className="py-2 px-4 font-medium text-xs text-gray-600">{activity.id}</td>
+                        <td className="py-2 px-4">
+                        <div>{activity.event}</div>
+                        <div className="text-sm text-gray-500 text-xs">Code: {activity.code}</div>
+                        </td>
+                        <div>{activity.amount}</div>
+                        <td className="py-2 px-4 text-blue-600 font-medium text-xs">{activity.date}</td>
+                        <td className="py-2 px-4 text-xs">
+                        <div>{activity.amount}</div>
+                        
+                        <div className="text-sm text-gray-500 text-xs">{activity.category}</div>
+                        </td>
+                        <td className="py-2 px-4">
+                        <span className={`px-3 py-1 rounded-full text-sm ${activity.badgeColor}`}>{activity.badge}</span>
+                        </td>
+                    </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+      </div>
+  
   );
 };
 

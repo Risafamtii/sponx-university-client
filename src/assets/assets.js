@@ -14,6 +14,11 @@ import instagram from './img/insta.png'
 import phone from './img/Phone.png'
 import mail from './img/Mail.png'
 import location from './img/location.png'
+import event from './img/event.png'
+import gold from './img/Gold.png'
+import silver from "./img/Silver.png"
+import bronze from "./img/Bronze.png"
+import platinum from "./img/Platinum.png"
 
 export const assets = {
     
@@ -31,5 +36,10 @@ export const assets = {
     instagram,
     phone,
     mail,
-    location
+    location,
+    event,
+    gold,
+    silver,
+    bronze,
+    platinum
 }

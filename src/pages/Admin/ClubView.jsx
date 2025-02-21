@@ -114,8 +114,8 @@ const ClubView = () => {
       </div>
 
       {showEvents && (
-  <div className="fixed inset-0 z-50 flex justify-end bg-black bg-opacity-50">
-    <div className="w-[20%] bg-[#303972] rounded-l-lg p-6 shadow-xl border border-[#303972] relative">
+  <div className="fixed inset-0 z-50 flex justify-end overflow-y-auto bg-black bg-opacity-50">
+    <div className="w-[20%] bg-[#303972] rounded-l-lg p-6 shadow-xl border border-[#303972] relative overflow-y-auto">
       <button 
         onClick={() => setShowEvents(false)} 
         className="absolute text-xl text-white top-2 right-2 hover:text-gray-300"
@@ -127,13 +127,13 @@ const ClubView = () => {
         {upcomingEvents.map((event, index) => (
           <div
             key={index}
-            className="relative p-4 bg-gradient-to-r from-[#374785] to-[#4A5FA2] rounded-lg shadow-md border-l-8 border-[#F8F9FC] 
+            className="relative p-4 bg-white rounded-lg shadow-md border-l-8 border-[#8591c2] 
                       group transition-all duration-300 hover:from-[#4A5FA2] hover:to-[#6B7FD7] hover:border-gray-800 hover:scale-105"
           >
-            <h3 className="font-semibold text-white">{event.title}</h3>
-            <p className="text-[#E0E7FF] text-sm">{event.class}</p>
-            <p className="text-[#E0E7FF] text-sm">{event.date}</p>
-            <p className="text-[#E0E7FF] text-sm">{event.time}</p>
+            <h3 className="font-semibold text-black">{event.title}</h3>
+            <p className="text-[#374785] text-sm">{event.class}</p>
+            <p className="text-[#374785] text-sm">{event.date}</p>
+            <p className="text-[#374785] text-sm">{event.time}</p>
 
             {/* View Button - More Vibrant and Visible on Hover */}
             <button 
