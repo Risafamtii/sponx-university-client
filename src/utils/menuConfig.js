@@ -51,7 +51,7 @@ const menuConfig = {
     club: [
         { name: 'Overview', basePath: '/club/overview', icon: FaBorderAll },
         { name: 'Advertise', basePath: '/club/advertise', icon: FaAd },
-        { name: 'Bank', basePath: '/club/bankdetails', icon: FaMoneyCheckAlt  },
+        { name: 'Transaction', basePath: '/club/bankdetails', icon: FaMoneyCheckAlt  },
         { name: 'Club', basePath: '/club/clubdetails', icon: FaRegFutbol },
         { name: 'Events', basePath: '/club/myevents', icon: MdEvent },
         { name: 'Profile', basePath: '/club/profile', icon: CgProfile },
@@ -63,11 +63,9 @@ const menuConfig = {
     company: [
         { name: 'Overview', basePath: '/company/overview', icon: FaBorderAll },
         { name: 'Sponsorship', basePath: '/company/sponsorship', icon: FaAd },
-        { name: 'Bank', basePath: '/club/bankdetails', icon: FaMoneyCheckAlt  },
-        { name: 'Club', basePath: '/club/clubdetails', icon: FaRegFutbol },
-        { name: 'Events', basePath: '/club/myevents', icon: MdEvent },
-        { name: 'Profile', basePath: '/club/profile', icon: CgProfile },
-        { name: 'Ad', basePath: '/club/selectad', icon: BiSolidSelectMultiple },
+        { name: 'Payment', basePath: '/company/payment', icon: FaMoneyCheckAlt  },
+        { name: 'Events', basePath: '/company/myevents', icon: MdEvent },
+        { name: 'Profile', basePath: '/company/profile', icon: CgProfile },
 
 
     ]
