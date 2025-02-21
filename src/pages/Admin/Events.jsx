@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import event1 from "../../assets/img/event1.png";
 import WSO2 from '../../assets/img/WSO2.png';
-import { Filter, Search } from 'lucide-react';
+import { Filter } from 'lucide-react';
+import { FaSearch } from 'react-icons/fa';
 import { assets } from '../../assets/assets';
+import { Link } from 'react-router-dom';
+
 
 const Events = () => {
   const [activeBar, setActiveBar] = useState('Approved');
@@ -83,7 +86,7 @@ const Events = () => {
         ))}
       </div>
 
-      <div className='w-full p-4 bg-white mt-9 rounded-2xl'>
+      <div className='w-full p-4 mt-9 rounded-2xl'>
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
           {eventCard.map((event) => (
             <div
@@ -127,21 +130,21 @@ const Events = () => {
       </div>
 
 
-      <div className="w-full p-4 mt-4 bg-white rounded-2xl">
-        <div className="flex items-center justify-between w-full mb-4">
+      <div className="p-4 bg-white border-2 shadow-2xl w-[97%] itemt-4 rounded-2xl">
+        <div className="flex items-center justify-between w-full mb-4 ">
           <div className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-gray-100 border rounded-full shadow-sm cursor-pointer hover:bg-gray-200">
             <Filter />
             <button className="font-medium">Filter</button>
           </div>
           
           
-          <div className="flex items-center gap-2 px-4 py-2 bg-gray-100 border rounded-full shadow-sm hover:bg-gray-200">
-            <Search />
-            <input 
-              type="text" 
-              placeholder="Search..." 
-              className="w-40 text-sm bg-transparent border-none outline-none focus:ring-2 focus:ring-blue-400" 
-            />
+          <div className="relative w-1/4">
+            <FaSearch className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
+              <input
+                type="text"
+                placeholder="Search..."
+                className="w-full px-10 py-2 text-sm border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
           </div>
         </div>
 
@@ -194,9 +197,12 @@ const Events = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-center">
+                    <Link 
+                    to= "/admin/events/view">
                     <button className="px-4 py-2 text-sm text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200">
                       View
                     </button>
+                    </Link>
                   </td>
                 </tr>
               ))}

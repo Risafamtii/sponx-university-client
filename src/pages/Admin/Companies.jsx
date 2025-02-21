@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Filter, Search } from "lucide-react";
+import { Filter } from "lucide-react";
+import { FaSearch } from 'react-icons/fa';
 import profilepic from '../../assets/img/Profil.png';
 import coverpic from '../../assets/img/coverpic.png';
 import propic from '../../assets/img/pro.png';
@@ -64,10 +65,14 @@ const Companies = () => {
           <Filter />
           <button className='font-medium'>Filter</button>
         </div>
-        <div className='flex items-center gap-3 px-4 py-1 bg-gray-100 border rounded-full shadow-md cursor-pointer hover:bg-gray-200'>
-          <Search />
-          <input type="text" placeholder="Search..." className="w-40 px-2 py-1 bg-transparent border-none outline-none focus:ring-2 focus:ring-blue-500" />
-        </div>
+        <div className="relative w-1/4">
+          <FaSearch className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full px-10 py-2 text-sm border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
       </div>
 
 
