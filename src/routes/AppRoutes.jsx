@@ -77,6 +77,7 @@ const AppRoutes = () => {
         <Route path ="myevents" element ={<ClubEvents/>}/>
         <Route path ="createevents" element ={<ClubCreateEvent/>}/>
         <Route path ="eventdetails" element ={<ClubEventDetails/>}/>
+        <Route path ="createevent" element ={<ClubCreateEvent/>}/>
         <Route path ="profile" element ={<ClubProfile/>}/>
         <Route path ="selectad" element ={<ClubSelectAd/>}/>
       </Route>
