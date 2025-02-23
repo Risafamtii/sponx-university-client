@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;  
+.input-field {
+  @apply p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
 
 /* ignore the errors */
 
@@ -53,5 +57,9 @@ body {
 .post-content ol {
    list-style-type: decimal;
    margin-left: 2rem;
+}
+
+.bg-radial-pink {
+  background: radial-gradient(circle, #ec4899 0%, #f472b6 100%);
 }
 

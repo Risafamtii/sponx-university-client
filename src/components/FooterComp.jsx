@@ -7,7 +7,7 @@ export default function FooterComp() {
    return (
       <Footer container>
         <div className="w-full font-sans">
-          <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
+          <div className="grid justify-between w-full sm:flex sm:justify-between md:flex md:grid-cols-1">
             <div>
               <Footer.Brand
                 href="https://flowbite.com"
@@ -42,7 +42,7 @@ export default function FooterComp() {
           <Footer.Divider />
           <div className="w-full sm:flex sm:items-center sm:justify-between">
             <Footer.Copyright href="#" by=" UPNECT™" year={2025} />
-            <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+            <div className="flex mt-4 space-x-6 sm:mt-0 sm:justify-center">
               <Footer.Icon href="#" icon={BsFacebook} />
               <Footer.Icon href="#" icon={BsInstagram} />
               <Footer.Icon href="#" icon={BsTwitter} />

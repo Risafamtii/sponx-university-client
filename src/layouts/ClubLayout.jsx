@@ -2,10 +2,13 @@ import React from 'react'
 import Sidebar from '../components/Sidebar/Sidebar'
 import { Outlet } from 'react-router-dom'
 import menuConfig from '../utils/menuConfig'
+import Navbar from '../components/Navbar/Navbar'
 
 const ClubLayout = () => {
+  const userType = 'club';
   return (
     <div className="flex h-full">
+      <Navbar userType={userType}/>
       {/* Sidebar on the left */}
       <Sidebar menuItems={menuConfig.club} />
       
@@ -17,4 +20,4 @@ const ClubLayout = () => {
   )
 }
 
-export default ClubLayout
+export default ClubLayout;
