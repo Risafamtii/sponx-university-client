@@ -24,7 +24,7 @@ const CreateEvent = () => {
   };
 
   return (
-    <div className="flex gap-6 p-6">
+    <div className="flex gap-6 p-6 ml-60 mt-10">
       {/* Event Information Card */}
       <div className="bg-white p-6 rounded-2xl shadow-md max-w-3xl flex-1">
         <h2 className="text-xl font-semibold text-[#333]">Event Information</h2>
