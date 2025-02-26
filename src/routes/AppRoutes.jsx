@@ -69,29 +69,29 @@ const AppRoutes = () => {
           <Route path="users/clubs/view" element={<AdminClubView />} />
           <Route path="events/view" element={<AdminEventsView />} />
 
-      </Route>
+        </Route>
 
-      <Route path='/club' element={<ClubLayout/>}>
-        <Route path ="overview" element ={<ClubOverview/>}/>
-        <Route path ="advertise" element ={<ClubAdvertise/>}/>
-        <Route path ="bankdetails" element ={<ClubBank/>}/>
-        <Route path ="clubdetails" element ={<ClubDetails/>}/>
-        <Route path ="myevents" element ={<ClubEvents/>}/>
-        <Route path ="eventdetails" element ={<ClubEventDetails/>}/>
-        <Route path ="profile" element ={<ClubProfile/>}/>
-        <Route path ="selectad" element ={<ClubSelectAd/>}/>
-      </Route>
+        <Route path='/club' element={<ClubLayout />}>
+          <Route path="overview" element={<ClubOverview />} />
+          <Route path="advertise" element={<ClubAdvertise />} />
+          <Route path="bankdetails" element={<ClubBank />} />
+          <Route path="clubdetails" element={<ClubDetails />} />
+          <Route path="myevents" element={<ClubEvents />} />
+          <Route path="eventdetails" element={<ClubEventDetails />} />
+          <Route path="profile" element={<ClubProfile />} />
+          <Route path="selectad" element={<ClubSelectAd />} />
+        </Route>
 
-      <Route path="/company" element={<CompanyLayout/>}>
-      <Route path ="overview" element ={<CompanyOverview/>}/>
-      <Route path ="profile" element ={<CompanyProfile/>}/>
-      <Route path ="payment" element ={<CompanyPayment/>}/>
-      <Route path="sponsorship" element={<CompanySponsorship />} />
-      <Route path="events" element={<CompanyEvents />} />
-      </Route>
-      
-    </Routes>
-  </Router>
+        <Route path="/company" element={<CompanyLayout />}>
+          <Route path="overview" element={<CompanyOverview />} />
+          <Route path="profile" element={<CompanyProfile />} />
+          <Route path="payment" element={<CompanyPayment />} />
+          <Route path="sponsorship" element={<CompanySponsorship />} />
+          <Route path="events" element={<CompanyEvents />} />
+        </Route>
+
+      </Routes>
+    </Router>
 
 
 
