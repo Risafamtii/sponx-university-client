@@ -1,11 +1,12 @@
 import React from 'react'
 
-const Payments = () => {
+const ProfileCard = () => {
+
   return (
     <div>
-      hi risafa
+      
     </div>
   )
 }
 
-export default Payments
+export default ProfileCard
