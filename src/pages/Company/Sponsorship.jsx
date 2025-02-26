@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { BsGridFill, BsBarChartFill } from "react-icons/bs";
 import { FaEllipsisH } from "react-icons/fa";
-import event1 from "../../assets/img/event1.png";
-import event3 from "../../assets/img/event3.png";
-import event2 from "../../assets/img/event2.png";
+import { assets } from "../../assets/assets";
 
 export default function SponsorshipDashboard() {
     const [selectedEvent, setSelectedEvent] = useState(null); // State to store the selected event for modal
@@ -16,7 +14,7 @@ export default function SponsorshipDashboard() {
             amount: "120,000 LKR",
             time: "1 day",
             description: "Progress",
-            image: event3,
+            image: assets.image3,
         },
         {
             id: 2,
@@ -25,7 +23,7 @@ export default function SponsorshipDashboard() {
             amount: "120,000 LKR",
             time: "1 day",
             description: "Progress",
-            image: event1,
+            image: assets.image1,
         },
         {
             id: 3,
@@ -34,21 +32,30 @@ export default function SponsorshipDashboard() {
             amount: "120,000 LKR",
             time: "1 day",
             description: "Progress",
-            image: event3,
+            image: assets.image3,
         },
         {
             id: 4,
             org: "IEEE - UCSC",
-            event: "Creating Awesome Mobile Apps",
+            event: "Celebrating 25 Years of Excellence",
             amount: "120,000 LKR",
             time: "1 day",
             description: "Progress",
-            image: event2,
+            image: assets.image2,
+        },
+        {
+            id: 5,
+            org: "IEEdE - UCSC",
+            event: "Celedbrating 25 Years of Excellence",
+            amount: "120,3000 LKR",
+            time: "1 dsssay",
+            description: "Prosssgress",
+            image: assets.image2,
         },
     ];
 
     return (
-        <div className="w-[83%] bg-white ml-[17%]">
+        <div className="w-[83%] mt-[4%] bg-white ml-[17%]">
             {/* Main Content */}
             <div className="flex-1 grid grid-cols-3 gap-6">
                 {/* Left Section (2/3) */}
