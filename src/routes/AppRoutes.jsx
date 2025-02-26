@@ -75,6 +75,7 @@ const AppRoutes = () => {
         <Route path ="bankdetails" element ={<ClubBank/>}/>
         <Route path ="clubdetails" element ={<ClubDetails/>}/>
         <Route path ="myevents" element ={<ClubEvents/>}/>
+        <Route path ="createevents" element ={<ClubCreateEvent/>}/>
         <Route path ="eventdetails" element ={<ClubEventDetails/>}/>
         <Route path ="createevent" element ={<ClubCreateEvent/>}/>
         <Route path ="profile" element ={<ClubProfile/>}/>
