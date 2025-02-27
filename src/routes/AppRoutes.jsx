@@ -12,10 +12,10 @@ import AdminCompose from '../pages/Admin/Compose'
 import AdminSent from '../pages/Admin/Sent'
 import AdminEventsView from '../pages/Admin/EventsView';
 
-import Home from '../pages/Home/Home'
-import Header from '../components/Header'
-import Footer from '../components/FooterComp'
-import LoginPage from '../pages/LoginPage'
+import Home from '../pages/Home/Home';
+import Header from '../components/Header';
+import Footer from '../components/FooterComp';
+import LoginPage from '../pages/LoginPage';
 
 import ClubLayout from '../layouts/ClubLayout'
 import ClubOverview from '../pages/Club/Overview'
@@ -36,60 +36,64 @@ import CompanyPayment from '../pages/Company/Payment';
 import AdminCompanyView from '../pages/Admin/CompanyView';
 import AdminClubView from '../pages/Admin/ClubView';
 
+import CompanySponsorship from '../pages/Company/Sponsorship';
+import CompanyEvents from '../pages/Company/Eventlist';
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
         <Route
-        path="/"
-        element={
-          <>
-          <Header/>
-          <Home/>
-          <Footer/>
-          </>
-        }
-      />
-      <Route path="/login" element={<LoginPage/>}/>
+          path="/"
+          element={
+            <>
+              <Header />
+              <Home />
+              <Footer />
+            </>
+          }
+        />
+        <Route path="/login" element={<LoginPage />} />
 
-      <Route path="/admin" element={<AdminLayout/>}>
-        <Route path ="overview" element ={<AdminOverview/>}/>
-        <Route path ="bids" element ={<AdminBids/>}/>
-        <Route path ="events" element ={<AdminEvents/>}/>
-        <Route path ="users/companies" element ={<AdminCompanies/>}/>
-        <Route path ="users/clubs" element ={<AdminClubs/>}/>
-        <Route path ="payments" element ={<AdminPayments/>}/>
-        <Route path ="notifications/compose" element ={<AdminCompose/>}/>
-        <Route path ="notifications/sent" element ={<AdminSent/>}/>
-        <Route path ="settings" element ={<AdminSettings/>}/>
-        <Route path ="users/companies/view" element ={<AdminCompanyView/>}/>
-        <Route path ="users/clubs/view" element={<AdminClubView/>}/>
-        <Route path ="events/view" element={<AdminEventsView/>}/>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="overview" element={<AdminOverview />} />
+          <Route path="bids" element={<AdminBids />} />
+          <Route path="events" element={<AdminEvents />} />
+          <Route path="users/companies" element={<AdminCompanies />} />
+          <Route path="users/clubs" element={<AdminClubs />} />
+          <Route path="payments" element={<AdminPayments />} />
+          <Route path="notifications/compose" element={<AdminCompose />} />
+          <Route path="notifications/sent" element={<AdminSent />} />
+          <Route path="settings" element={<AdminSettings />} />
+          <Route path="users/companies/view" element={<AdminCompanyView />} />
+          <Route path="users/clubs/view" element={<AdminClubView />} />
+          <Route path="events/view" element={<AdminEventsView />} />
 
-      </Route>
+        </Route>
 
-      <Route path='/club' element={<ClubLayout/>}>
-        <Route path ="overview" element ={<ClubOverview/>}/>
-        <Route path ="advertise" element ={<ClubAdvertise/>}/>
-        <Route path ="bankdetails" element ={<ClubBank/>}/>
-        <Route path ="clubdetails" element ={<ClubDetails/>}/>
-        <Route path ="myevents" element ={<ClubEvents/>}/>
-        <Route path ="createevents" element ={<ClubCreateEvent/>}/>
-        <Route path ="eventdetails" element ={<ClubEventDetails/>}/>
-        <Route path ="createevent" element ={<ClubCreateEvent/>}/>
-        <Route path ="profile" element ={<ClubProfile/>}/>
-        <Route path ="selectad" element ={<ClubSelectAd/>}/>
-      </Route>
+        <Route path='/club' element={<ClubLayout />}>
+          <Route path="overview" element={<ClubOverview />} />
+          <Route path="advertise" element={<ClubAdvertise />} />
+          <Route path="bankdetails" element={<ClubBank />} />
+          <Route path="clubdetails" element={<ClubDetails />} />
+          <Route path="myevents" element={<ClubEvents />} />
+          <Route path="eventdetails" element={<ClubEventDetails />} />
+          <Route path="profile" element={<ClubProfile />} />
+          <Route path="selectad" element={<ClubSelectAd />} />
+        </Route>
 
-      <Route path="/company" element={<CompanyLayout/>}>
-      <Route path ="overview" element ={<CompanyOverview/>}/>
-      <Route path ="profile" element ={<CompanyProfile/>}/>
-      <Route path ="payment" element ={<CompanyPayment/>}/>
-      </Route>
-      
-    </Routes>
-  </Router>
+        <Route path="/company" element={<CompanyLayout />}>
+          <Route path="overview" element={<CompanyOverview />} />
+          <Route path="profile" element={<CompanyProfile />} />
+          <Route path="payment" element={<CompanyPayment />} />
+          <Route path="sponsorship" element={<CompanySponsorship />} />
+          <Route path="events" element={<CompanyEvents />} />
+        </Route>
+
+      </Routes>
+    </Router>
+
+
 
   )
 }
