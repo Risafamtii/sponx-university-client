@@ -32,6 +32,7 @@ import CompanyLayout from '../layouts/CompanyLayout';
 import CompanyOverview from '../pages/Company/Overview';
 import CompanyProfile from '../pages/Company/Profile';
 import CompanyPayment from '../pages/Company/Payment';
+import CompanyReport from '../pages/Company/Report';
 
 import AdminCompanyView from '../pages/Admin/CompanyView';
 import AdminClubView from '../pages/Admin/ClubView';
@@ -88,6 +89,7 @@ const AppRoutes = () => {
           <Route path="payment" element={<CompanyPayment />} />
           <Route path="sponsorship" element={<CompanySponsorship />} />
           <Route path="events" element={<CompanyEvents />} />
+          <Route path="report" element={<CompanyReport />} />
         </Route>
 
       </Routes>
