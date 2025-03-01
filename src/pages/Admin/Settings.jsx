@@ -15,7 +15,7 @@ const Settings = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 mt-10">
+    <div className="bg-white w-[83%] ml-[17%] mt-[5%] rounded-xl shadow-lg items-start py-4 h-[90vh] overflow-y-auto">
       <div className="max-w-2xl mx-auto bg-white rounded-lg shadow">
         <div className="p-8">
           <div className="flex flex-col items-center mb-8">
@@ -23,16 +23,16 @@ const Settings = () => {
               <img
                 src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&h=150"
                 alt="Profile"
-                className="w-32 h-32 rounded-full object-cover"
+                className="object-cover w-32 h-32 rounded-full"
               />
-              <button className="absolute bottom-0 right-0 bg-blue-800 p-2 rounded-full text-white">
+              <button className="absolute bottom-0 right-0 p-2 text-white bg-blue-800 rounded-full">
                 <MdCameraAlt size={20} />
               </button>
             </div>
-            <h1 className="text-xl font-semibold mt-4">Danish Heilium</h1>
+            <h1 className="mt-4 text-xl font-semibold">Danish Heilium</h1>
           </div>
 
-          <div className="border-b mb-6">
+          <div className="mb-6 border-b">
             <div className="flex gap-8">
               <button
                 className={`pb-4 ${
@@ -60,9 +60,9 @@ const Settings = () => {
           {activeTab === 'edit' ? (
             <form className="space-y-6">
               <h2 className="text-lg font-semibold">Change Credentials</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Your Name
                   </label>
                   <input
@@ -75,7 +75,7 @@ const Settings = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     User Name
                   </label>
                   <input
@@ -88,7 +88,7 @@ const Settings = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Email
                   </label>
                   <input
@@ -101,7 +101,7 @@ const Settings = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block mb-2 text-sm font-medium text-gray-700">
                     Password
                   </label>
                   <input
@@ -117,7 +117,7 @@ const Settings = () => {
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="px-6 py-2 text-white transition-colors bg-blue-800 rounded-lg hover:bg-blue-700"
                 >
                   Save
                 </button>
@@ -148,7 +148,7 @@ const Settings = () => {
                 <h2 className="text-lg font-semibold">Change Password</h2>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block mb-2 text-sm font-medium text-gray-700">
                       Current Password
                     </label>
                     <input
@@ -162,7 +162,7 @@ const Settings = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block mb-2 text-sm font-medium text-gray-700">
                       New Password
                     </label>
                     <input
@@ -180,7 +180,7 @@ const Settings = () => {
               <div className="flex justify-end">
                 <button
                   type="button"
-                  className="px-6 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="px-6 py-2 text-white transition-colors bg-blue-800 rounded-lg hover:bg-blue-700"
                 >
                   Save
                 </button>

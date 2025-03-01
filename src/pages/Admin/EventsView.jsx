@@ -161,13 +161,16 @@ const EventsView = () => {
               <img 
                 src={event4} 
                 alt='Event' 
-                className='rounded-lg w-[2000px] h-auto border border-gray-300 opacity-70' 
+                className='rounded-lg w-[2000px] h-auto border border-gray-300 opacity-30' 
               />
             </div>
 
             <div className="absolute flex gap-4 transform -translate-x-1/2 top-1/4 left-1/2">
-              <button className='p-3 bg-[#131822] text-white font-bold rounded-full hover:bg-[#0a0e15] transition duration-300 px-5'>
+              <button className='p-3 bg-[#192440] text-white font-bold rounded-full hover:bg-[#131822] transition duration-300 px-5'>
                 Generate Report
+              </button>
+              <button className='p-3 bg-[#192440] text-white font-bold rounded-full hover:bg-[#131822] transition duration-300 px-5'>
+                Feedback
               </button>
             </div>
 
