@@ -11,6 +11,8 @@ import AdminSettings from '../pages/Admin/Settings'
 import AdminCompose from '../pages/Admin/Compose'
 import AdminSent from '../pages/Admin/Sent'
 import AdminEventsView from '../pages/Admin/EventsView';
+import AdminReport from '../pages/Admin/Report';
+import AdminFeedback from '../pages/Admin/Feedback';
 
 import Home from '../pages/Home/Home';
 import Header from '../components/Header';
@@ -55,19 +57,23 @@ const AppRoutes = () => {
         />
         <Route path="/login" element={<LoginPage />} />
 
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route path="overview" element={<AdminOverview />} />
-          <Route path="bids" element={<AdminBids />} />
-          <Route path="events" element={<AdminEvents />} />
-          <Route path="users/companies" element={<AdminCompanies />} />
-          <Route path="users/clubs" element={<AdminClubs />} />
-          <Route path="payments" element={<AdminPayments />} />
-          <Route path="notifications/compose" element={<AdminCompose />} />
-          <Route path="notifications/sent" element={<AdminSent />} />
-          <Route path="settings" element={<AdminSettings />} />
-          <Route path="users/companies/view" element={<AdminCompanyView />} />
-          <Route path="users/clubs/view" element={<AdminClubView />} />
-          <Route path="events/view" element={<AdminEventsView />} />
+      <Route path="/admin" element={<AdminLayout/>}>
+        <Route path ="overview" element ={<AdminOverview/>}/>
+        <Route path ="bids" element ={<AdminBids/>}/>
+        <Route path ="events" element ={<AdminEvents/>}/>
+        <Route path ="users/companies" element ={<AdminCompanies/>}/>
+        <Route path ="users/clubs" element ={<AdminClubs/>}/>
+        <Route path ="payments" element ={<AdminPayments/>}/>
+        <Route path ="notifications/compose" element ={<AdminCompose/>}/>
+        <Route path ="notifications/sent" element ={<AdminSent/>}/>
+        <Route path ="settings" element ={<AdminSettings/>}/>
+        <Route path ="users/companies/view" element ={<AdminCompanyView/>}/>
+        <Route path ="users/clubs/view" element={<AdminClubView/>}/>
+        <Route path ="events/view" element={<AdminEventsView/>}/>
+        <Route path ="events/view/report" element={<AdminReport/>}/>
+        <Route path ="events/view/feedback" element={<AdminFeedback/>}/>
+
+
 
         </Route>
 

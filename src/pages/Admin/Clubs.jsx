@@ -6,6 +6,7 @@ import propic from '../../assets/img/pro.png';
 import location from '../../assets/img/location.png';
 import phone from '../../assets/img/Phone.png';
 import mail from '../../assets/img/Mail.png';
+import { FaSearch } from 'react-icons/fa';
 
 const Clubs = () => {
   const [activeBar, setActiveBar] = useState('Register');
@@ -59,15 +60,19 @@ const Clubs = () => {
       </div>
 
       <div className="flex items-center justify-between w-full px-[5%] my-3 pt-3">
-        <div className='flex items-center gap-3 px-4 py-2 bg-gray-100 border rounded-full shadow-md cursor-pointer hover:bg-gray-200'>
-          <Filter />
-          <button className='font-medium'>Filter</button>
-        </div>
-        <div className='flex items-center gap-3 px-4 py-1 bg-gray-100 border rounded-full shadow-md cursor-pointer hover:bg-gray-200'>
-          <Search />
-          <input type="text" placeholder="Search..." className="w-40 px-2 py-1 bg-transparent border-none outline-none focus:ring-2 focus:ring-blue-500" />
-        </div>
-      </div>
+              <div className='flex items-center gap-3 px-4 py-2 bg-gray-100 border rounded-full shadow-md cursor-pointer hover:bg-gray-200'>
+                <Filter />
+                <button className='font-medium'>Filter</button>
+              </div>
+              <div className="relative w-1/4">
+                <FaSearch className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    className="w-full px-10 py-2 text-sm border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+            </div>
 
 
      
