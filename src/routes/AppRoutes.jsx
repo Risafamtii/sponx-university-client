@@ -14,6 +14,7 @@ import AdminEventsView from '../pages/Admin/EventsView';
 import AdminReport from '../pages/Admin/Report';
 import AdminFeedback from '../pages/Admin/Feedback';
 
+
 import Home from '../pages/Home/Home';
 import Header from '../components/Header';
 import Footer from '../components/FooterComp';
@@ -37,6 +38,7 @@ import CompanyPayment from '../pages/Company/Payment';
 
 import AdminCompanyView from '../pages/Admin/CompanyView';
 import AdminClubView from '../pages/Admin/ClubView';
+//import AdminCompanyAdd from '../pages/Admin/CompanyAdd';
 
 import CompanySponsorship from '../pages/Company/Sponsorship';
 import CompanyEvents from '../pages/Company/Eventlist';
@@ -67,15 +69,13 @@ const AppRoutes = () => {
         <Route path ="notifications/compose" element ={<AdminCompose/>}/>
         <Route path ="notifications/sent" element ={<AdminSent/>}/>
         <Route path ="settings" element ={<AdminSettings/>}/>
-        <Route path ="users/companies/view" element ={<AdminCompanyView/>}/>
+        <Route path ="users/companies/view/:id" element ={<AdminCompanyView/>}/>
+        {/* <Route path ="users/companies/add" element={<AdminCompanyAdd/>}/> */}
         <Route path ="users/clubs/view" element={<AdminClubView/>}/>
         <Route path ="events/view" element={<AdminEventsView/>}/>
         <Route path ="events/view/report" element={<AdminReport/>}/>
         <Route path ="events/view/feedback" element={<AdminFeedback/>}/>
-
-
-
-        </Route>
+      </Route>
 
         <Route path='/club' element={<ClubLayout />}>
           <Route path="overview" element={<ClubOverview />} />
