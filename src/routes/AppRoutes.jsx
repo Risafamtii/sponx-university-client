@@ -81,7 +81,6 @@ const AppRoutes = () => {
           <Route path="overview" element={<ClubOverview />} />
           <Route path="advertise" element={<ClubAdvertise />} />
           <Route path="bankdetails" element={<ClubBank />} />
-          <Route path="clubdetails" element={<ClubDetails />} />
           <Route path="myevents" element={<ClubEvents />} />
           <Route path="eventdetails" element={<ClubEventDetails />} />
           <Route path="profile" element={<ClubProfile />} />
@@ -98,8 +97,6 @@ const AppRoutes = () => {
 
       </Routes>
     </Router>
-
-
 
   )
 }

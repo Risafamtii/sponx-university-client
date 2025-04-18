@@ -4,7 +4,7 @@ function SelectedAd() {
   // CourseCard Component
   const CourseCard = () => {
     return (
-      <div className="flex items-center justify-center grid-cols-1 gap-1 p-4 lg:grid-cols-2">
+      <div className="flex items-center justify-center grid-cols-1 gap-1 p-4 lg:grid-cols-2 ">
         
         <div>
             <div className="p-2 mb-4 rounded-sm shadow-sm ">
@@ -144,7 +144,7 @@ function SelectedAd() {
   ];
 
   return (
-    <div className="container p-6 mx-auto bg-gray-50">
+    <div className="container p-6 mx-auto bg-gray-50 w-[83%] ml-[17%] mt-[5%] flex flex-col ">
       {/* Course Card */}
       <CourseCard />
 
