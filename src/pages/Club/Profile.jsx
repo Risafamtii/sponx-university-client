@@ -3,7 +3,7 @@ import { assets } from '../../assets/assets';
 
 const Profile = () => {
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen ml-60 mt-10">
+    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen w-[83%] ml-[17%] mt-[5%] pr-4">
       {/* Cover Photo and Profile Photo Container */}
       <div className="relative w-full ml-6 mt-6">
         {/* Cover Photo */}
