@@ -20,6 +20,11 @@ import silver from "./img/Silver.png"
 import bronze from "./img/Bronze.png"
 import platinum from "./img/Platinum.png"
 
+import image1 from './img/event1.png'
+import image2 from './img/event2.png'
+import image3 from './img/event2.png'
+import image4 from './img/event2.png'
+
 export const assets = {
     
     logo,
@@ -41,5 +46,9 @@ export const assets = {
     gold,
     silver,
     bronze,
-    platinum
+    platinum,
+    image1,
+    image2,
+    image3,
+    image4
 }
