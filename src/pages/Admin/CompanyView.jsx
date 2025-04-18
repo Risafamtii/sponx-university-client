@@ -1,8 +1,81 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 import { assets } from '../../assets/assets'
+import { getCompanyById , blockCompany , unblockCompany } from '../../utils/api/admin';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const CompanyView = () => {
+
+    const [company, setCompany] = useState(null);
+    const { id } = useParams();
+
+    useEffect(() => {
+        const fetchCompany = async () => {
+            try {
+                const res = await getCompanyById(id);
+                setCompany(res.data.company);
+            } catch (error) {
+                console.error("Failed to fetch company:", error);
+            }
+        };
+    
+        fetchCompany();
+    }, [id]);
+
+    //console.log(company);
+
+    const handleBack = () => {
+        window.history.back();
+    }
+
+    const handleBlock = async (id) => {
+        try {
+            const updatedCompany = await blockCompany(id);
+
+            setCompany(prev => ({
+                ...prev,
+                user: {
+                    ...prev.user,
+                    isBlock: true,
+                },
+            }));
+    
+            console.log("Company successfully blocked:", updatedCompany);
+            toast.success("Company blocked successfully!");
+        } catch (error) {
+            
+            console.error("Error blocking company with ID", id, ":", error.message);
+    
+            toast.error("Error blocking company");
+        }
+    };
+
+    const handleUnblock = async(id) => {
+        try {
+            const updatedCompany = await unblockCompany(id);
+
+            setCompany(prev => ({
+                ...prev,
+                user: {
+                    ...prev.user,
+                    isBlock: false,
+                },
+            }));
+
+            console.log("Company successfully unblocked:", updatedCompany);
+
+            toast.success("Company unblocked successfully!");
+            
+
+        } catch (error) {
+            
+            console.log("Error unblocking company with ID", id, ":", error.message);
+            
+            toast.error("Error unblocking company");
+        }
+    }
+    
 
     const data = [
         { name: "Jan", investment: 10000 },
@@ -47,27 +120,48 @@ const CompanyView = () => {
             
             <div className="p-6 m-4 rounded-lg shadow-lg profile border-[1px]">
                 <div className="flex items-center gap-8">
-                    <img src={assets.compro} alt="Company Profile" className="object-cover rounded-full h-30 w-30" />
+                    <img   src={company?.user?.profilePic || assets.compro} alt="Company Profile" className="object-cover rounded-full h-30 w-30" />
                     <div className="w-full">
                         <form action="" className="grid grid-cols-2 gap-6">
                             <div className="flex flex-col gap-4">
                                 <label className="flex flex-col font-medium text-gray-700">
+                            
                                     Company Name:
-                                    <input type="text" placeholder="WSO2" className="input-field" readOnly/>
+                                    <input
+                                        type="text"
+                                        className="input-field"
+                                        value={company?.name || "Loading...."}
+                                        readOnly
+                                    />
                                 </label>
                                 <label className="flex flex-col font-medium text-gray-700">
                                     Email:
-                                    <input type="email" placeholder="wso2@info.com" className="input-field" readOnly/>
+                                    <input 
+                                        type="email" 
+                                        className="input-field" 
+                                        value={company?.user?.email || "Loading...."}
+                                        readOnly
+                                    />
                                 </label>
                             </div>
                             <div className="flex flex-col gap-4">
                                 <label className="flex flex-col font-medium text-gray-700">
                                     Industry Type:
-                                    <input type="text" placeholder="IT Industry" className="input-field" readOnly/>
+                                    <input 
+                                        type="text" 
+                                        className="input-field" 
+                                        value={company?.industry || "Loading...."}
+                                        readOnly
+                                    />
                                 </label>
                                 <label className="flex flex-col font-medium text-gray-700">
                                     Registration Number:
-                                    <input type="text" placeholder="C22000216" className="input-field" readOnly/>
+                                    <input 
+                                        type="text" 
+                                        className="input-field" 
+                                        value={company?.user?.id || "Loading...."}
+                                        readOnly
+                                    />
                                 </label>
                             </div>
                         </form>
@@ -164,12 +258,12 @@ const CompanyView = () => {
 
         <div className='col-span-1 rightside'>
             
-            <div className='flex flex-col items-center justify-center gap-4 p-8 m-4 bg-white rounded-lg shadow-lg border-[1px]'>
+            {/* <div className='flex flex-col items-center justify-center gap-4 p-8 m-4 bg-white rounded-lg shadow-lg border-[1px]'>
                 <span className='text-lg font-semibold text-gray-800'>Create Monthly Report</span>
                 <button className='bg-[#5F5CF1] py-2 px-4 rounded-lg text-white font-semibold shadow-md hover:bg-[#4d4ae8] transition duration-200'>
                     Start Now
                 </button>
-            </div>
+            </div> */}
 
             <div className='p-4 m-4 bg-white border-[1px] rounded-lg shadow-lg'>
                 <div className='flex items-center justify-between'>
@@ -207,6 +301,17 @@ const CompanyView = () => {
                         <span className='text-[#34E4B5] text-sm font-semibold'>LKR 568.11</span>
                     </div>
                 </div>
+
+                <div className='flex items-center justify-between gap-4 mt-4'>
+                    <div className='flex flex-col gap-1'>
+                        <span className='text-base'>Happy Birthday (UOJ)</span>
+                        <span className='text-[#1E2434] text-xs'>19 July 2021</span>
+                    </div>
+                    <div>
+                        <span className='text-[#34E4B5] text-sm font-semibold'>LKR 568.11</span>
+                    </div>
+                </div>
+                
             </div>
 
             <div className="p-4 m-4 bg-white border rounded-lg shadow-md">
@@ -229,16 +334,81 @@ const CompanyView = () => {
                 </div>
             </div>
 
-            <div className="flex justify-center gap-4 m-8 align">
-                <button className="px-6 py-2 font-semibold text-white transition duration-200 bg-green-500 rounded-lg shadow-md hover:bg-green-600">
-                    Accept
+
+            <div className="flex flex-col items-center justify-center gap-4 p-8 m-4 bg-white rounded-lg shadow-lg border-[1px]">
+                
+                <button 
+                    onClick={handleBack}
+                    className="flex items-center justify-center gap-2 px-6 py-2.5 w-full text-sm font-medium text-gray-700 bg-white rounded-lg border border-gray-200 shadow-sm hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                    </svg>
+                    Back to Companies
                 </button>
-                <button className="px-6 py-2 font-semibold text-white transition duration-200 bg-red-500 rounded-lg shadow-md hover:bg-red-600">
-                    Reject
-                </button>
-                <button className="px-6 py-2 font-semibold text-white transition duration-200 bg-gray-500 rounded-lg shadow-md hover:bg-gray-600">
-                    Block
-                </button>
+
+                {company?.user?.status === 'PENDING' && !company?.user?.isBlock ? (
+                    
+                    <div className="flex flex-col w-full gap-3">
+                        <button
+                            //onClick={handleAccept}
+                            className="flex items-center justify-center gap-2 px-6 py-2.5 w-full text-sm font-medium text-white bg-green-600 rounded-lg shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                            Approve Company
+                        </button>
+                        
+                        <button
+                            //onClick={handleReject}
+                            className="flex items-center justify-center gap-2 px-6 py-2.5 w-full text-sm font-medium text-white bg-red-600 rounded-lg shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                            </svg>
+                            Reject Application
+                        </button>
+                    </div>
+                    
+                ) : company?.user?.status === 'ACTIVE' && !company?.user?.isBlock ? (
+                    <div className="w-full">
+                        
+                        <button
+                            onClick={() => handleBlock(company?.id)}
+                            className="flex items-center justify-center gap-2 px-6 py-2.5 w-full text-sm font-medium text-white bg-red-600 rounded-lg shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clipRule="evenodd" />
+                            </svg>
+                            Block Company
+                        </button>
+                        
+                        {/* <button
+                            //onClick={handleEdit}
+                            className="flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-gray-700 bg-white rounded-lg border border-gray-300 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                            </svg>
+                            Edit
+                        </button> */}
+                        
+                    </div>
+                    
+                ) : company?.user?.isBlock ? (
+                    
+                    <button
+                    onClick= {() => handleUnblock(company?.id)}
+                    className="flex items-center justify-center gap-2 px-6 py-2.5 w-full text-sm font-medium text-white bg-gray-600 rounded-lg shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200"
+                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+                    </svg>
+                        Unblock Company
+                    </button>
+                    
+                ) : null}
             </div>
             
         </div>
