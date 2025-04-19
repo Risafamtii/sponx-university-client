@@ -83,6 +83,7 @@ const AppRoutes = () => {
           <Route path="bankdetails" element={<ClubBank />} />
           <Route path="myevents" element={<ClubEvents />} />
           <Route path="eventdetails" element={<ClubEventDetails />} />
+          <Route path="createevent" element={<ClubCreateEvent />} />
           <Route path="profile" element={<ClubProfile />} />
           <Route path="selectad" element={<ClubSelectAd />} />
         </Route>
