@@ -1,270 +1,256 @@
-import { React, useState } from "react";
-import { Calendar, Eye, MessageCircle, Pen } from "lucide-react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useState } from 'react';
 import {
-  Chart as ChartJS,
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js';
-import { Doughnut, Bar } from 'react-chartjs-2';
+  ArrowUpRight,
+  Bell,
+  Calendar,
+  Clock,
+  DollarSign,
+  FileText,
+  HelpCircle,
+  Mail,
+  PieChart,
+  Search,
+  Settings,
+  TrendingUp,
+  Users
+} from 'react-feather';
 
-ChartJS.register(
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+const Overview = () => {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
 
-function Overview() {
-  const [selectedDate, setSelectedDate] = useState(14);
-  const days = [10, 11, 12, 13, 14, 15, 16];
-  const weekdays = ["S", "M", "T", "W", "T", "F", "S"];
+  // Sample data
+  const metrics = [
+    { title: 'Active Sponsorships', value: 5, icon: <DollarSign size={18} />, change: '+2' },
+    { title: 'Pending Requests', value: 3, icon: <Mail size={18} />, change: '-1' },
+    { title: 'Success Rate', value: '72%', icon: <TrendingUp size={18} />, change: '+5%' },
+    { title: 'Total Funding', value: '$12,500', icon: <PieChart size={18} />, change: '+$2K' }
+  ];
 
-  const doughnutData = {
-    labels: ['Fashion', 'Accessories'],
-    datasets: [
-      {
-        data: [251, 176],
-        backgroundColor: ['#2563eb', '#67e8f9'],
-        borderColor: ['#2563eb', '#67e8f9'],
-        borderWidth: 2,
-      },
-    ],
-  };
+  const pipeline = [
+    { stage: 'Draft', count: 2, color: 'bg-gray-200' },
+    { stage: 'Submitted', count: 3, color: 'bg-blue-100' },
+    { stage: 'Under Review', count: 1, color: 'bg-yellow-100' },
+    { stage: 'Confirmed', count: 1, color: 'bg-green-100' }
+  ];
 
-  const doughnutOptions = {
-    cutout: '70%',
-    plugins: {
-      legend: {
-        display: false,
-      },
+  const recentActivity = [
+    { 
+      id: 1, 
+      title: 'TechCorp accepted your proposal!', 
+      time: '2 hours ago', 
+      icon: <FileText size={16} className="text-green-500" /> 
     },
-    maintainAspectRatio: false,
-  };
-
-  const barData = {
-    labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S', 'M', 'T', 'W'],
-    datasets: [
-      {
-        label: 'Primary',
-        data: Array.from({ length: 10 }, () => Math.floor(Math.random() * 30 + 20)),
-        backgroundColor: '#2563eb',
-        borderRadius: 4,
-      },
-      {
-        label: 'Secondary',
-        data: Array.from({ length: 10 }, () => Math.floor(Math.random() * 40 + 10)),
-        backgroundColor: '#67e8f9',
-        borderRadius: 4,
-      },
-    ],
-  };
-
-  const barOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
+    { 
+      id: 2, 
+      title: 'Deadline: Submit materials for FoodFest', 
+      time: '1 day ago', 
+      icon: <Clock size={16} className="text-yellow-500" /> 
     },
-    scales: {
-      x: {
-        grid: {
-          display: false,
-        },
-      },
-      y: {
-        grid: {
-          display: false,
-        },
-        display: false,
-      },
+    { 
+      id: 3, 
+      title: 'New sponsor (GreenEnergy) joined platform', 
+      time: '2 days ago', 
+      icon: <Users size={16} className="text-blue-500" /> 
+    }
+  ];
+
+  const upcomingEvents = [
+    { 
+      id: 1, 
+      title: 'Annual Hackathon', 
+      deadline: 'Jun 30', 
+      sponsorsNeeded: 3, 
+      status: 'Draft',
+      categories: ['Tech', 'Food']
     },
-    maintainAspectRatio: false,
-  };
+    { 
+      id: 2, 
+      title: 'Charity Gala', 
+      deadline: 'Jul 15', 
+      sponsorsNeeded: 2, 
+      status: 'Pending',
+      categories: ['Beverage']
+    }
+  ];
+
+  const recommendedCompanies = [
+    { name: 'TechCorp', match: '92%', previous: 'Sponsored 3 events' },
+    { name: 'EduSolutions', match: '85%', previous: 'New to platform' },
+    { name: 'GreenEnergy', match: '78%', previous: 'Prefers sustainability events' }
+  ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="ml-60 max-w-7xl mx-auto mt-10">
+    <div className="flex min-h-screen bg-gray-50">
+      {/* Sidebar */}
+      <div className="w-64 bg-white shadow-md">
+        <div className="p-4 border-b border-gray-200">
+          <h1 className="text-xl font-bold text-indigo-600">SponsorConnect</h1>
+          <p className="text-xs text-gray-500">University Club Platform</p>
+        </div>
+        <nav className="p-4 space-y-1">
+          {[
+            { id: 'dashboard', icon: <PieChart size={18} />, label: 'Dashboard' },
+            { id: 'proposals', icon: <FileText size={18} />, label: 'Proposals' },
+            { id: 'calendar', icon: <Calendar size={18} />, label: 'Calendar' },
+            { id: 'companies', icon: <Users size={18} />, label: 'Companies' },
+            { id: 'reports', icon: <TrendingUp size={18} />, label: 'Reports' },
+            { id: 'settings', icon: <Settings size={18} />, label: 'Settings' }
+          ].map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setActiveTab(item.id)}
+              className={`flex items-center w-full p-3 rounded-lg text-sm ${activeTab === item.id ? 'bg-indigo-50 text-indigo-600' : 'text-gray-600 hover:bg-gray-100'}`}
+            >
+              <span className="mr-3">{item.icon}</span>
+              {item.label}
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 p-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-semibold">Hi, IEEE STUDENT BRANCH,</h1>
-          <p className="text-gray-500">Let's finish your task today!</p>
+        
+        {/* Key Metrics */}
+        <div className="grid grid-cols-1 gap-6 mt-12 mb-8 md:grid-cols-2 lg:grid-cols-4">
+          {metrics.map((metric, index) => (
+            <div key={index} className="p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+              <div className="flex justify-between">
+                <div>
+                  <p className="text-sm font-medium text-gray-500">{metric.title}</p>
+                  <h3 className="mt-1 text-2xl font-bold">{metric.value}</h3>
+                  <p className="mt-2 text-xs text-green-500">{metric.change}</p>
+                </div>
+                <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-indigo-50">
+                  {metric.icon}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Profile Card */}
-          <div className="bg-white p-4 rounded-2xl shadow-sm">
-            <h2 className="text-xl font-semibold mb-1 ml-3">Profile</h2>
-            <div className="flex flex-col items-center">
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=200&h=200"
-                alt="Profile"
-                className="w-24 h-24 rounded-full mb-4 object-cover"
-              />
-              <h2 className="text-xl font-semibold mb-1">Rotract Club</h2>
-              <p className="text-sm text-gray-500 ">
-                University of Colombo School of Computing
-              </p>
-              <p className="text-sm text-gray-500 mb-2">
-                University of Colombo
-              </p>
-              <div className="flex gap-8 m-6">
-                <button className="p-2 hover:bg-gray-100 rounded-full">
-                  <Pen className="w-5 h-5 text-gray-600" />
-                </button>
-                <button className="p-2 hover:bg-gray-100 rounded-full">
-                  <Eye className="w-5 h-5 text-gray-600" />
-                </button>
-                <button className="p-2 hover:bg-gray-100 rounded-full">
-                  <MessageCircle className="w-5 h-5 text-gray-600" />
-                </button>
-              </div>
+        {/* Pipeline and Activity */}
+        <div className="grid grid-cols-1 gap-6 mb-8 lg:grid-cols-3">
+          {/* Sponsorship Pipeline */}
+          <div className="p-6 bg-white border border-gray-100 shadow-sm rounded-xl lg:col-span-1">
+            <h2 className="mb-4 text-lg font-semibold text-gray-800">Sponsorship Pipeline</h2>
+            <div className="space-y-4">
+              {pipeline.map((stage, index) => (
+                <div key={index} className="flex items-center">
+                  <div className={`w-4 h-4 rounded-full ${stage.color} mr-3`}></div>
+                  <span className="flex-1 text-sm font-medium text-gray-700">{stage.stage}</span>
+                  <span className="text-sm text-gray-500">{stage.count}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Calendar Card */}
-          <div className="flex flex-col items-center gap-4">
-            <div className="bg-white p-3 rounded-xl shadow-md w-full max-w-sm mx-auto h-40 flex flex-col justify-between">
-              <div className="flex items-center justify-between mb-3">
-                <FaChevronLeft className="text-gray-400 cursor-pointer" />
-                <h3 className="text-base font-bold">July 2022</h3>
-                <FaChevronRight className="text-gray-400 cursor-pointer" />
-              </div>
-
-              <div className="grid grid-cols-7 gap-2 text-center mb-1 text-gray-500 font-medium text-sm">
-                {weekdays.map((day, index) => (
-                  <div key={index}>{day}</div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-7 gap-2 text-center">
-                {days.map((day) => (
-                  <div
-                    key={day}
-                    className={`relative p-2 rounded-full w-10 h-10 flex items-center justify-center text-sm 
-                          ${
-                            day === selectedDate
-                              ? "bg-black text-white"
-                              : "bg-gray-200 text-gray-600"
-                          }`}
-                    onClick={() => setSelectedDate(day)}
-                  >
-                    {day === selectedDate && (
-                      <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-blue-500 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs">
-                        {day}
-                      </span>
-                    )}
-                    {day !== selectedDate && day}
+          {/* Recent Activity */}
+          <div className="p-6 bg-white border border-gray-100 shadow-sm rounded-xl lg:col-span-2">
+            <h2 className="mb-4 text-lg font-semibold text-gray-800">Recent Activity</h2>
+            <div className="space-y-4">
+              {recentActivity.map((activity) => (
+                <div key={activity.id} className="flex items-start p-3 transition-colors rounded-lg hover:bg-gray-50">
+                  <div className="p-2 mr-4 rounded-lg">
+                    {activity.icon}
                   </div>
-                ))}
-              </div>
+                  <div className="flex-1">
+                    <p className="font-medium text-gray-800">{activity.title}</p>
+                    <p className="mt-1 text-xs text-gray-500">{activity.time}</p>
+                  </div>
+                  <button className="text-gray-400 hover:text-gray-600">
+                    <ArrowUpRight size={16} />
+                  </button>
+                </div>
+              ))}
             </div>
+          </div>
+        </div>
 
-            <div className="bg-white p-3 rounded-xl shadow-md w-full max-w-sm mx-auto h-40">
-              <div className="grid grid-cols-2 gap-4 pt-4 mt-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold">36</div>
-                  <div className="text-lg text-gray-500">Upcoming Events</div>
-                </div>
-                <div className="text-center border-l-2 border-black pl-4">
-                  <div className="text-3xl font-bold">36</div>
-                  <div className="text-lg text-gray-500">Past Events</div>
-                </div>
-              </div>
+        {/* Upcoming Events and Recommended Companies */}
+        <div className="grid grid-cols-1 gap-6 mb-8 lg:grid-cols-2">
+          {/* Upcoming Events */}
+          <div className="p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-gray-800">Upcoming Events</h2>
+              <button className="text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                View All
+              </button>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead>
+                  <tr>
+                    <th className="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Event</th>
+                    <th className="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Deadline</th>
+                    <th className="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Sponsors</th>
+                    <th className="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {upcomingEvents.map((event) => (
+                    <tr key={event.id} className="hover:bg-gray-50">
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <div className="font-medium text-gray-800">{event.title}</div>
+                        <div className="mt-1 text-xs text-gray-500">{event.categories.join(', ')}</div>
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-500 whitespace-nowrap">
+                        {event.deadline}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-500 whitespace-nowrap">
+                        {event.sponsorsNeeded}
+                      </td>
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <span className={`px-2 py-1 text-xs rounded-full ${
+                          event.status === 'Draft' ? 'bg-gray-100 text-gray-800' :
+                          event.status === 'Pending' ? 'bg-blue-100 text-blue-800' :
+                          'bg-green-100 text-green-800'
+                        }`}>
+                          {event.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
 
-          {/* Stats Card */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm">
-          <h2 className="text-xl font-semibold mb-2 -mt-1 ml-3">Upcoming Event</h2>
-            <div className="flex items-center gap-4 mb-4">
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=100&h=100"
-                alt="Event"
-                className="w-[350px] h-[150px] rounded-lg object-cover"
-              />
-            </div>
-            <div className="mb-4">
-              <h3 className="font-semibold">Reid Shadow 1.0</h3>
-              <p className="text-sm text-gray-500">30/12/2024</p>
+          {/* Recommended Companies */}
+          <div className="p-6 bg-white border border-gray-100 shadow-sm rounded-xl">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-gray-800">Recommended Companies</h2>
+              <button className="text-sm font-medium text-indigo-600 hover:text-indigo-800">
+                View All
+              </button>
             </div>
             <div className="space-y-4">
-              <div>
-                <div className="flex justify-between mb-1">
-                  <span className="text-lg font-medium">
-                    Bidding in Progress
-                  </span>
-                  <span className="text-sm font-medium">40%</span>
+              {recommendedCompanies.map((company, index) => (
+                <div key={index} className="flex items-center p-4 transition-shadow border border-gray-100 rounded-lg hover:shadow-sm">
+                  <div className="flex items-center justify-center w-10 h-10 mr-4 font-medium text-indigo-600 rounded-full bg-indigo-50">
+                    {company.name.charAt(0)}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-medium text-gray-800">{company.name}</h3>
+                    <p className="mt-1 text-xs text-gray-500">{company.previous}</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="block font-medium text-indigo-600">{company.match}</span>
+                    <span className="text-xs text-gray-500">Match</span>
+                  </div>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-blue-600 h-2 rounded-full"
-                    style={{ width: "40%" }}
-                  ></div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Chart Section */}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-        <div className="bg-white p-6 rounded-2xl shadow-sm">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="font-semibold text-xl">Earnings</h3>
-            <select className="text-sm text-gray-500 border rounded-md px-2 py-1">
-              <option>This Week</option>
-            </select>
-          </div>
-          <div className="flex gap-8 items-center">
-            <div className="relative w-48 h-48 m-10">
-              <Doughnut data={doughnutData} options={doughnutOptions} />
-            </div>
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-                <div>
-                  <div className="font-medium">Fashion</div>
-                  <div className="text-sm text-gray-500">251K</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-cyan-300"></div>
-                <div>
-                  <div className="font-medium">Accessories</div>
-                  <div className="text-sm text-gray-500">176K</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-2xl shadow-sm">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="font-semibold text-xl">Conversions</h3>
-            <select className="text-sm text-gray-500 border rounded-md px-2 py-1">
-              <option>This Week</option>
-            </select>
-          </div>
-          <div className="h-[300px]">
-            <Bar data={barData} options={barOptions} />
-          </div>
-        </div>
+        {/* Performance and Quick Actions */}
+        
       </div>
     </div>
-      </div>
-  
   );
-}
+};
 
 export default Overview;

@@ -61,15 +61,16 @@ const ClubDetailsPage = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="fixed w-full max-w-3xl transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg top-1/2 left-1/2">
-        <div className="flex items-center p-4 mb-6">
-          <img src={assets.logo} alt="Logo" className="mr-4 h-18 w-18" />
-          {/* <h2 className="text-4xl text-blue-900">Club Details</h2> */}
+      <div className="p-6 text-white bg-blue-900">
+          <div className="flex items-center">
+            <img src={assets.logo} alt="Logo" className="w-12 h-12 mr-4" />
+            <h1 className="text-2xl font-semibold">Club Registration</h1>
+          </div>
         </div>
         <div className="h-[500px] overflow-y-auto px-8 py-6 custom-scrollbar">
 
           <form className="space-y-6" onSubmit={handleNext}>
-            {/* University and Faculty */}
-            <h1>Club Details</h1>
+           
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div>
                 <label htmlFor="university" className="block text-sm font-medium text-gray-700">
@@ -195,7 +196,7 @@ const ClubDetailsPage = () => {
               type="submit"
               className="px-6 py-2 text-white bg-blue-900 rounded-md hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-300"
             >
-              Next
+              Submit
             </button>
           </div>
 
