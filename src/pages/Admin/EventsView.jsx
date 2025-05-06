@@ -16,7 +16,7 @@ const EventsView = () => {
       companyImage: WSO2,
       estimatedBudget: '22000',
       left: '2000',
-      type: 'Completed'
+      type: 'Pending'
     }
   ];
 

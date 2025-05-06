@@ -102,7 +102,7 @@ const LoginPage = () => {
           <div className="flex flex-col items-center text-center text-white">
             <div className="relative w-40 h-40 mb-4 md:w-64 md:h-64">
               <img
-                src={assets.logo}
+                src={assets.logomark}
                 alt="Logo"
                 className="absolute inset-0 w-full h-full animate-professional-bounce"
               />

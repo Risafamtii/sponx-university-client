@@ -46,6 +46,8 @@ import AdminClubView from '../pages/Admin/ClubView';
 import CompanySponsorship from '../pages/Company/Sponsorship';
 import CompanyEvents from '../pages/Company/Eventlist';
 
+import SignUp from '../pages/SignupPage';
+
 const AppRoutes = () => {
   return (
     <Router>
@@ -61,6 +63,8 @@ const AppRoutes = () => {
           }
         />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUp />} />
+
 
 
         <Route element={<PrivateRoutes />}>
