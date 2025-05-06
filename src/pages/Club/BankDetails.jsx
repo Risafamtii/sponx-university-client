@@ -20,7 +20,7 @@ const BankDetails = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-100 min-h-screen ml-60">
+    <div className="flex flex-col items-center justify-center bg-gray-100 w-[83%] ml-[17%] mt-1 py-4 ">
       {/* Information Section */}
       <div className="w-full max-w-6xl bg-white p-6 rounded-lg shadow-lg mt-24">
         <p className="text-3xl font-bold mb-6">Bank Details</p>
@@ -108,14 +108,14 @@ const BankDetails = () => {
                         <td className="py-2 px-4 font-medium text-xs text-gray-600">{activity.id}</td>
                         <td className="py-2 px-4">
                         <div>{activity.event}</div>
-                        <div className="text-sm text-gray-500 text-xs">Code: {activity.code}</div>
+                        <div className="text-sm text-gray-500 ">Code: {activity.code}</div>
                         </td>
                         <div>{activity.amount}</div>
                         <td className="py-2 px-4 text-blue-600 font-medium text-xs">{activity.date}</td>
                         <td className="py-2 px-4 text-xs">
                         <div>{activity.amount}</div>
                         
-                        <div className="text-sm text-gray-500 text-xs">{activity.category}</div>
+                        <div className="text-sm text-gray-500 ">{activity.category}</div>
                         </td>
                         <td className="py-2 px-4">
                         <span className={`px-3 py-1 rounded-full text-sm ${activity.badgeColor}`}>{activity.badge}</span>

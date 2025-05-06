@@ -62,6 +62,7 @@ const AppRoutes = () => {
         />
         <Route path="/login" element={<LoginPage />} />
 
+
         <Route element={<PrivateRoutes />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="overview" element={<AdminOverview />} />
@@ -103,8 +104,6 @@ const AppRoutes = () => {
 
       </Routes>
     </Router>
-
-
 
   )
 }

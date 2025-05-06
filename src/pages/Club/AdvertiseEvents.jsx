@@ -2,10 +2,10 @@ import React from "react";
 
 const AdvertiseEvents = () => {
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 w-[83%] ml-[17%] mt-[5%] rounded-xl shadow-lg flex flex-col items-center py-4 h-[90vh] overflow-y-auto">
       {/* Hero Section */}
       <div
-        className="relative flex items-center justify-center bg-center bg-cover h-96"
+        className="relative flex items-center justify-center bg-center bg-cover"
         style={{ backgroundImage: "url('/adPageHero.png')" }}
       >
         <div className="absolute inset-0 bg-black opacity-10"></div>
@@ -42,7 +42,7 @@ const AdvertiseEvents = () => {
       {/* Events Section */}
       <div className="max-w-6xl px-6 mx-auto mt-12">
         <h2 className="mb-10 text-2xl font-bold">Upcoming Events</h2>
-        <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-4 sm:grid-cols-2 gap-4 lg:grid-cols-4">
           {/* Event Cards */}
           {[
             {
