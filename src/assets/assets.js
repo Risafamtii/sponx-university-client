@@ -15,6 +15,8 @@ import phone from './img/Phone.png'
 import mail from './img/Mail.png'
 import location from './img/location.png'
 import event from './img/event.png'
+import event2 from './img/event2.png'
+
 import gold from './img/Gold.png'
 import silver from "./img/Silver.png"
 import bronze from "./img/Bronze.png"
@@ -24,6 +26,7 @@ import image1 from './img/event1.png'
 import image2 from './img/event2.png'
 import image3 from './img/event2.png'
 import image4 from './img/event2.png'
+import logomark from './img/Logomark.svg'
 
 export const assets = {
     
@@ -50,5 +53,6 @@ export const assets = {
     image1,
     image2,
     image3,
-    image4
+    image4,event2,
+    logomark
 }
