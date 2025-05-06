@@ -3,16 +3,18 @@ import { useLocation } from 'react-router-dom';
 import { assets } from "../../assets/assets";
 import { IoSettings } from "react-icons/io5";
 import { IoIosNotifications } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
+import { CgLogOut, CgProfile } from "react-icons/cg";
 import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 import { MdClose, MdEdit } from "react-icons/md";
 import menuConfig from '../../utils/menuConfig';
 import { FaArrowRight } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 const Navbar = ({ userType }) => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
+  const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
   const location = useLocation();
   
   const getCurrentPage = () => {
@@ -45,7 +47,6 @@ const Navbar = ({ userType }) => {
 
   const [currentPage, setCurrentPage] = useState(getCurrentPage());
 
-  // Update currentPage whenever the route changes
   useEffect(() => {
     setCurrentPage(getCurrentPage());
   }, [location.pathname]);
@@ -60,6 +61,15 @@ const Navbar = ({ userType }) => {
 
   const toggleEditProfile = () => {
     setEditProfile(!editProfile);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    toast.success("Logged out successfully!");
+    setTimeout(() => {
+      window.location.href = "/login";
+    }, 1000);
   };
 
   const notifications = [
@@ -177,6 +187,49 @@ const Navbar = ({ userType }) => {
         >
           <CgProfile className="w-8 h-8 rounded-full" />
         </button>
+
+        {/* Logout Button */}
+        <button
+          className="p-2 text-red-600 transition-colors duration-200 rounded-full hover:bg-red-50 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          onClick={() => setLogoutConfirmOpen(true)}
+          title="Logout"
+        >
+          <CgLogOut className="w-6 h-6" />
+        </button>
+
+        {/* Logout Confirmation Popup */}
+        {logoutConfirmOpen && (
+          <>
+            <div
+              className="fixed inset-0 z-40 bg-black bg-opacity-25"
+              onClick={() => setLogoutConfirmOpen(false)}
+            ></div>
+            <div className="absolute z-50 p-6 bg-white rounded-lg shadow-xl right-4 top-14 animate-fade-in-down w-72">
+              <div className="text-center">
+                <h3 className="text-lg font-medium text-gray-900">Logout Confirmation</h3>
+                <div className="mt-2">
+                  <p className="text-sm text-gray-500">Are you sure you want to logout?</p>
+                </div>
+                <div className="flex justify-center gap-3 mt-4">
+                  <button
+                    type="button"
+                    className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                    onClick={() => setLogoutConfirmOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Profile Popup */}

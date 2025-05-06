@@ -30,7 +30,7 @@ const menuConfig = {
         { name: 'Users', basePath: '/admin/users', icon: FaUsers ,
             Children: [
                 { name: 'Companies', basePath: '/admin/users/companies', icon: FaBuilding },
-                { name: 'Clubs', basePath: '/admin/users/clubs', icon: FaRegFutbol },
+                { name: 'Organizations', basePath: '/admin/users/orgs', icon: FaRegFutbol },
             ]
         },
 
@@ -66,8 +66,6 @@ const menuConfig = {
         { name: 'Payment', basePath: '/company/payment', icon: FaMoneyCheckAlt  },
         { name: 'Events', basePath: '/company/events', icon: MdEvent },
         { name: 'Profile', basePath: '/company/profile', icon: CgProfile },
-
-
     ]
 };
 

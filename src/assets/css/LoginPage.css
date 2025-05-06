@@ -1,0 +1,41 @@
+/* Professional Bounce Animation */
+@keyframes professional-bounce {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    }
+    50% {
+      transform: translateY(-12px) scale(1.02);
+      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    }
+  }
+  
+  /* Subtle Expand Animation */
+  @keyframes subtle-expand {
+    0%, 100% {
+      transform: translateX(-50%) scaleX(1);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translateX(-50%) scaleX(1.2);
+      opacity: 1;
+    }
+  }
+  
+  .animate-professional-bounce {
+    animation: professional-bounce 3s ease-in-out infinite;
+  }
+  
+  .animate-subtle-expand {
+    animation: subtle-expand 3s ease-in-out infinite;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .animate-professional-bounce {
+      animation: professional-bounce 3.5s ease-in-out infinite;
+    }
+    .animate-subtle-expand {
+      animation: subtle-expand 3.5s ease-in-out infinite;
+    }
+  }

@@ -8,7 +8,7 @@ import phone from '../../assets/img/Phone.png';
 import mail from '../../assets/img/Mail.png';
 import { FaSearch } from 'react-icons/fa';
 
-const Clubs = () => {
+const Organizations = () => {
   const [activeBar, setActiveBar] = useState('Register');
   const tabs = ["Register", "Pending", "Blocked"];
   const profiles = [
@@ -105,4 +105,4 @@ const Clubs = () => {
   )
 }
 
-export default Clubs
+export default Organizations
