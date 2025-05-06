@@ -10,4 +10,5 @@ export const getAllCompanies = () => API.get("/api/v1/admin/all-companies");
 export const getCompanyById = (id) => API.get(`/api/v1/admin/company/${id}`);
 export const blockCompany = (id) => API.put(`/api/v1/admin/company/block-company/${id}`);
 export const unblockCompany = (id) => API.put(`/api/v1/admin/company/unblock-company/${id}`);
+export const createCompany = (companyData) => API.post("/api/v1/admin/company/add", companyData);
 

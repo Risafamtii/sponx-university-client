@@ -42,6 +42,7 @@ const CompanyView = () => {
             }));
     
             console.log("Company successfully blocked:", updatedCompany);
+            
             toast.success("Company blocked successfully!");
         } catch (error) {
             

@@ -67,17 +67,21 @@ const Companies = () => {
 
       <div className="flex items-center justify-between w-full px-[5%] my-3 pt-3">
         
-        <div className='flex items-center gap-4'>
-          <div className='flex items-center gap-3 px-4 py-2 bg-gray-100 border rounded-full shadow-md cursor-pointer hover:bg-gray-200'>
-            <Filter />
-            <button className='font-medium'>Filter</button>
-          </div>
-          <div>
-            <button className='flex items-center justify-center w-10 h-10 text-xl font-bold text-white bg-blue-600 rounded-full shadow-md hover:bg-blue-700'>
-              <IoAdd />
-            </button>
-          </div>
+      <div className='flex items-center gap-4'>
+        <div className='flex items-center gap-3 px-4 py-2 bg-gray-100 border rounded-full shadow-md cursor-pointer hover:bg-gray-200'>
+          <Filter />
+          <button className='font-medium'>Filter</button>
         </div>
+        <div>
+          <Link to = {"/admin/users/companies/add"}>
+            <button className='flex items-center justify-center gap-1 px-4 py-2 text-sm font-medium text-white transition-all duration-300 bg-blue-600 rounded-full shadow-md hover:bg-blue-700'>
+              <IoAdd className="text-lg" />
+              Add Company
+            </button>
+          </Link>
+          
+        </div>
+      </div>
         
         <div className="relative w-1/4">
           <FaSearch className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
