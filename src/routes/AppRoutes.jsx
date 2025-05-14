@@ -79,7 +79,7 @@ const AppRoutes = () => {
             <Route path="notifications/sent" element={<AdminSent />} />
             <Route path="settings" element={<AdminSettings />} />
             <Route path="users/companies/view/:id" element={<AdminCompanyView />} />
-            <Route path="users/clubs/view" element={<AdminClubView />} />
+            <Route path="users/orgs/view" element={<AdminClubView />} />
             <Route path="events/view" element={<AdminEventsView />} />
             <Route path="events/view/report" element={<AdminReport />} />
             <Route path="events/view/feedback" element={<AdminFeedback />} />
@@ -94,6 +94,8 @@ const AppRoutes = () => {
             <Route path="myevents" element={<ClubEvents />} />
             <Route path="eventdetails" element={<ClubEventDetails />} />
             <Route path="profile" element={<ClubProfile />} />
+            <Route path="createevent" element={<ClubCreateEvent />} />
+
             <Route path="selectad" element={<ClubSelectAd />} />
           </Route>
 

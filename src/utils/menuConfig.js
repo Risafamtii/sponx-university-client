@@ -57,6 +57,7 @@ const menuConfig = {
         { name: 'Ad', basePath: '/club/selectad', icon: BiSolidSelectMultiple },
 
 
+
     ],
 
     company: [

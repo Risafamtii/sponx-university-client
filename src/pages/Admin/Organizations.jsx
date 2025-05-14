@@ -7,6 +7,7 @@ import location from '../../assets/img/location.png';
 import phone from '../../assets/img/Phone.png';
 import mail from '../../assets/img/Mail.png';
 import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Organizations = () => {
   const [activeBar, setActiveBar] = useState('Register');
@@ -88,7 +89,9 @@ const Organizations = () => {
             <div className="px-4 py-6">
               <div className='flex items-center justify-between'>
                 <h2 className='text-xl font-extrabold text-gray-800'>{profile.clubName}</h2>
-                <button className='px-4 py-1 font-medium text-white transition duration-300 bg-blue-600 rounded-full hover:bg-blue-800'>View</button>
+                <Link to="/admin/users/orgs/view">
+                    <button className='px-4 py-1 font-medium text-white transition duration-300 bg-blue-600 rounded-full hover:bg-blue-800'>View</button>
+                </Link>
               </div>
 
               <div className='flex items-center justify-center gap-20 mt-4 font-medium text-gray-700 flex- text-md'>

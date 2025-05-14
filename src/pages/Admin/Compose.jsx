@@ -56,23 +56,7 @@ const Compose = () => {
           </div>
         </div>
 
-        <div className='p-5 border border-gray-300 rounded-lg'>
-          <p className='mb-3 text-lg font-semibold text-gray-800'>Schedule</p>
-          <label className='flex items-center space-x-3'>
-            <input type='radio' name='schedule' checked={!scheduleLater} onChange={() => setScheduleLater(false)} className='text-[#6379c2] form-radio' />
-            <span>Send Now</span>
-          </label>
-          <label className='flex items-center mt-2 space-x-3'>
-            <input type='radio' name='schedule' checked={scheduleLater} onChange={() => setScheduleLater(true)} className='text-[#6379c2] form-radio' />
-            <span>Schedule Later</span>
-          </label>
-          {scheduleLater && (
-            <div className='mt-3'>
-              <input type='date' className='w-full p-3 mb-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6379c2] focus:outline-none' />
-              <input type='time' className='w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6379c2] focus:outline-none' />
-            </div>
-          )}
-        </div>
+        
 
         <div className='flex justify-center'>
           <button type='submit' className='w-1/4 py-3 text-lg font-semibold text-white bg-[#1B264B] rounded-lg hover:bg-[#101935] focus:ring-2 focus:ring-blue-400 focus:outline-none'>
