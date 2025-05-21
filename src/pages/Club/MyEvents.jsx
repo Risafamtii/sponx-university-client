@@ -7,41 +7,52 @@ import {
 } from "react-icons/fa";
 import eventImg from "/club/event.svg";
 import { IoCalendarOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function MyEvents() {
+  const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(14);
   const days = [10, 11, 12, 13, 14, 15, 16];
   const weekdays = ["S", "M", "T", "W", "T", "F", "S"];
 
+  const desc = "University of Colombo School of Computing University of Colombo School of Computing University of Colombo School of Computing University of Colombo School of Computing University of Colombo School of Computing University of Colombo School of Computing."
   const events = [
     {
       name: "Halloween Fest 2024",
       type: "Fun and Activity",
+      banner: eventImg,
       sponsorship: 90,
       date: "31 Dec 2024",
       status: "Active",
+      description: desc,
     },
     {
       name: "IEEE Xtream 2024",
       type: "Hackathon",
+      banner: eventImg,
       sponsorship: 100,
       date: "07 Nov 2024",
       status: "Closed",
+      description: desc,
     },
     {
       name: "Reid Shadows 2024",
       type: "Fun and Activity",
+      banner: eventImg,
       sponsorship: 25,
       date: "13 OCT 2024",
       status: "Closed",
+      description: desc,
     },
     {
       name: "Reid Shadows 2024",
       type: "Fun and Activity",
+      banner: eventImg,
       sponsorship: 25,
       date: "13 OCT 2024",
       status: "Closed",
+      description: desc,
     },
   ];
 
@@ -81,14 +92,15 @@ function MyEvents() {
           </div>
 
           {/* Events List Section */}
-          <div className="flex gap-10 flex-wrap">
+          <div className="flex gap-10 flex-wrap" >
             {events.map((event, index) => (
               <div
                 key={index}
-                className="p-4 max-w-[350px] bg-white rounded-2xl shadow-lg"
+                onClick={() => navigate("/club/eventdetails",{ state: { event }})}
+                className="cursor-pointer hover:bg-gray-100 p-4 rounded p-4 max-w-[350px] bg-white rounded-2xl shadow-lg"
               >
                 <img
-                  src={eventImg}
+                  src={event.banner}
                   alt="Event"
                   className=" h-32 object-cover rounded-t-2xl"
                 />

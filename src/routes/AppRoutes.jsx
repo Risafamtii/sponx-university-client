@@ -67,7 +67,7 @@ const AppRoutes = () => {
 
 
 
-        <Route element={<PrivateRoutes />}>
+        {/* <Route element={<PrivateRoutes />}> */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="overview" element={<AdminOverview />} />
             <Route path="bids" element={<AdminBids />} />
@@ -104,7 +104,7 @@ const AppRoutes = () => {
             <Route path="sponsorship" element={<CompanySponsorship />} />
             <Route path="events" element={<CompanyEvents />} />
           </Route>
-        </Route>
+        {/* </Route> */}
 
       </Routes>
     </Router>
