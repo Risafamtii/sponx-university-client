@@ -1,41 +1,85 @@
-/* Professional Bounce Animation */
-@keyframes professional-bounce {
-    0%, 100% {
-      transform: translateY(0) scale(1);
-      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
-    }
-    50% {
-      transform: translateY(-12px) scale(1.02);
-      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
-    }
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
   }
-  
-  /* Subtle Expand Animation */
-  @keyframes subtle-expand {
-    0%, 100% {
-      transform: translateX(-50%) scaleX(1);
-      opacity: 0.9;
-    }
-    50% {
-      transform: translateX(-50%) scaleX(1.2);
-      opacity: 1;
-    }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
   }
-  
-  .animate-professional-bounce {
-    animation: professional-bounce 3s ease-in-out infinite;
+  100% {
+    transform: translateY(0) rotate(0deg);
   }
-  
-  .animate-subtle-expand {
-    animation: subtle-expand 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    width: 24px;
   }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .animate-professional-bounce {
-      animation: professional-bounce 3.5s ease-in-out infinite;
-    }
-    .animate-subtle-expand {
-      animation: subtle-expand 3.5s ease-in-out infinite;
-    }
+  50% {
+    opacity: 0.7;
+    width: 32px;
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Smooth transitions */
+input, button, select {
+  transition: all 0.2s ease;
+}
+
+/* Focus styles */
+input:focus, button:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+@keyframes logo-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes underline-expand {
+  0%, 100% {
+    width: 100px;
+    opacity: 0.8;
+  }
+  50% {
+    width: 150px;
+    opacity: 1;
+  }
+}
+
+.animate-logo-float {
+  animation: logo-float 3s ease-in-out infinite;
+}
+
+.animate-underline-expand {
+  animation: underline-expand 3s ease-in-out infinite;
+  animation-delay: 0.15s; /* slight delay to sync with logo */
+}
