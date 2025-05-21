@@ -87,6 +87,7 @@ const CompanyAdd = () => {
         }
       };
 
+      console.log(companyData);
       const response = await createCompany(companyData);
       navigate('/companies', { state: { success: 'Company created successfully!' } });
     } catch (error) {
