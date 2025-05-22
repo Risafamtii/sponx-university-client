@@ -116,7 +116,7 @@ const EventDetails = () => {
                   name="type"
                   value={editedEvent.type}
                   onChange={handleChange}
-                  className="border p-2 w-full rounded"
+                  className="border border-blue-200 p-2 w-full rounded"
                 />
               ) : (
                 <h1 className="text-lg font-semibold">
@@ -130,7 +130,7 @@ const EventDetails = () => {
                   name="date"
                   value={event.date}
                   onChange={handleChange}
-                  className="border p-2 w-full rounded"
+                  className="border border-blue-200 p-2 w-full rounded"
                 />
               ) : (
                 <h1 className="text-lg font-semibold">
@@ -145,7 +145,7 @@ const EventDetails = () => {
                   name="description"
                   value={editedEvent.description}
                   onChange={handleChange}
-                  className="border p-2 w-full rounded"
+                  className="border border-blue-200 p-2 w-full rounded"
                 />
               ) : (
                 <>
@@ -163,13 +163,13 @@ const EventDetails = () => {
                   name="location"
                   value={editedEvent.location}
                   onChange={handleChange}
-                  className="border p-2 w-full rounded"
+                  className="border border-blue-200 p-2 w-full rounded"
                 />
               ) : (
                 <>
                   <h1 className="text-lg font-semibold">
                     Location:{" "}
-                    <span className="font-bold">123, Panadura Road, Town Hall</span>
+                    <span className="font-bold">{event.location}</span>
                   </h1>
                 </>
               )}
@@ -180,34 +180,36 @@ const EventDetails = () => {
                   name="budget"
                   value={editedEvent.budget}
                   onChange={handleChange}
-                  className="border p-2 w-full rounded"
+                  className="border border-blue-200 p-2 w-full rounded"
                 />
               ) : (
                 <>
                   <h1 className="text-lg font-semibold">
-                    Budget: <span className="font-bold">Rs. 80,000</span>
+                    Budget: <span className="font-bold">{event.budget}</span>
                   </h1>
                 </>
               )}
 
               {isEditing ? (
                 <select
-                  name=""
-                  value={editedEvent.budget}
+                  name="status"
                   onChange={handleChange}
-                  className="border p-2 w-full rounded"
-                />
+                  className="border border-blue-200 p-2 w-full rounded"
+                >
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
               ) : (
                 <>
                   <h1 className="text-lg font-semibold">
-                    Budget: <span className="font-bold">Rs. 80,000</span>
+                    Status:{" "}
+                    <span className="text-green-500 font-bold">Activity</span>
                   </h1>
                 </>
               )}
-              <h1 className="text-lg font-semibold">
-                Status:{" "}
-                <span className="text-green-500 font-bold">Activity</span>
-              </h1>
+              
             </div>
             <div className=" mb-4 md:ml-96">
               {isEditing ? (

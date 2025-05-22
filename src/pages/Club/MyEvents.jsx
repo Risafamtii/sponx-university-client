@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -9,52 +9,33 @@ import eventImg from "/club/event.svg";
 import { IoCalendarOutline } from "react-icons/io5";
 import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function MyEvents() {
+const MyEvents = () => {
   const navigate = useNavigate();
+  const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(14);
   const days = [10, 11, 12, 13, 14, 15, 16];
   const weekdays = ["S", "M", "T", "W", "T", "F", "S"];
 
+  useEffect(() => {
+    const fetchEvents = async () => {
+      // Replace with the actual organizer ID
+      const organizerId = 1; // Example organizer ID
+      try {
+        console.log(organizerId);
+        const res = await axios.get("http://localhost:8080/api/v1/events/organizer/1");
+        console.log(res.data.events);
+        setEvents(res.data.events);
+      } catch (err) {
+        console.error("Failed to fetch events", err);
+      }
+    };
+    fetchEvents();
+  }, []);
+
   const desc = "University of Colombo School of Computing University of Colombo School of Computing University of Colombo School of Computing University of Colombo School of Computing University of Colombo School of Computing University of Colombo School of Computing."
-  const events = [
-    {
-      name: "Halloween Fest 2024",
-      type: "Fun and Activity",
-      banner: eventImg,
-      sponsorship: 90,
-      date: "31 Dec 2024",
-      status: "Active",
-      description: desc,
-    },
-    {
-      name: "IEEE Xtream 2024",
-      type: "Hackathon",
-      banner: eventImg,
-      sponsorship: 100,
-      date: "07 Nov 2024",
-      status: "Closed",
-      description: desc,
-    },
-    {
-      name: "Reid Shadows 2024",
-      type: "Fun and Activity",
-      banner: eventImg,
-      sponsorship: 25,
-      date: "13 OCT 2024",
-      status: "Closed",
-      description: desc,
-    },
-    {
-      name: "Reid Shadows 2024",
-      type: "Fun and Activity",
-      banner: eventImg,
-      sponsorship: 25,
-      date: "13 OCT 2024",
-      status: "Closed",
-      description: desc,
-    },
-  ];
+
 
   return (
     <div className=" bg-gray-100 p-6 w-[83%] ml-[17%] mt-[5%] flex items-center ">
@@ -96,7 +77,7 @@ function MyEvents() {
             {events.map((event, index) => (
               <div
                 key={index}
-                onClick={() => navigate("/club/eventdetails",{ state: { event }})}
+                onClick={() => navigate("/club/eventdetails", { state: { event } })}
                 className="cursor-pointer hover:bg-gray-100 p-4 rounded p-4 max-w-[350px] bg-white rounded-2xl shadow-lg"
               >
                 <img
@@ -116,23 +97,21 @@ function MyEvents() {
                     </div>
                     <div className="relative w-full mt-2 bg-gray-200 rounded-full h-2">
                       <div
-                        className={`h-2 rounded-full ${
-                          event.sponsorship < 30
-                            ? "bg-red-500"
-                            : event.sponsorship === 100
+                        className={`h-2 rounded-full ${event.sponsorship < 30
+                          ? "bg-red-500"
+                          : event.sponsorship === 100
                             ? "bg-green-400"
                             : "bg-blue-500"
-                        }`}
+                          }`}
                         style={{ width: `${event.sponsorship}%` }}
                       ></div>
                       <div
-                        className={`absolute top-1/2 transform -translate-y-1/2 right-0 w-3 h-3 -ml-1 rounded-full ${
-                          event.sponsorship < 30
-                            ? "bg-red-500"
-                            : event.sponsorship === 100
+                        className={`absolute top-1/2 transform -translate-y-1/2 right-0 w-3 h-3 -ml-1 rounded-full ${event.sponsorship < 30
+                          ? "bg-red-500"
+                          : event.sponsorship === 100
                             ? "bg-green-400"
                             : "bg-blue-500"
-                        }`}
+                          }`}
                         style={{ left: `${event.sponsorship}%` }}
                       ></div>
                     </div>
@@ -143,11 +122,10 @@ function MyEvents() {
                       {event.date}
                     </p>
                     <span
-                      className={`text-sm font-medium ${
-                        event.status === "Active"
-                          ? "text-green-500"
-                          : "text-red-500"
-                      }`}
+                      className={`text-sm font-medium ${event.status === "Active"
+                        ? "text-green-500"
+                        : "text-red-500"
+                        }`}
                     >
                       {event.status}
                     </span>
