@@ -104,17 +104,17 @@ const Companies = () => {
 
             <div className="px-4 py-6">
               <div className='flex items-center justify-between'>
-                <h2 className='text-xl font-extrabold text-gray-800'>{profile.name}</h2>
+                <h2 className='text-xl font-extrabold text-gray-800'>{profile?.user?.name}</h2>
                 <Link to = {`/admin/users/companies/view/${profile.id}`}>
                   <button className='px-4 py-1 font-medium text-white transition duration-300 bg-blue-600 rounded-full hover:bg-blue-800' >View</button>
                 </Link>
               </div>
 
               <div className='flex items-center justify-center gap-20 mt-4 font-medium text-gray-700 flex- text-md'>
-                <div className='flex items-center gap-2'><img src={propic} alt="" className='h-4'/> {profile.name}</div>
+                <div className='flex items-center gap-2'><img src={propic} alt="" className='h-4'/> {profile?.user?.name}</div>
                 <div className='flex items-center gap-2'><img src={location} alt="" className='h-4'/> {profile.address}</div>
-                <div className='flex items-center gap-2'><img src={phone} alt="" className='h-4'/> {profile.phone}</div>
-                <div className='flex items-center gap-2'><img src={mail} alt="" className='h-4'/> {profile.user.email}</div>
+                <div className='flex items-center gap-2'><img src={phone} alt="" className='h-4'/> {profile?.user?.phone}</div>
+                <div className='flex items-center gap-2'><img src={mail} alt="" className='h-4'/> {profile?.user?.email}</div>
               </div>
             </div>
           </div>
