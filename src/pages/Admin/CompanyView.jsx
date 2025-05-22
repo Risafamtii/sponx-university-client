@@ -23,7 +23,7 @@ const CompanyView = () => {
         fetchCompany();
     }, [id]);
 
-    //console.log(company);
+    console.log(company);
 
     const handleBack = () => {
         window.history.back();
@@ -131,7 +131,7 @@ const CompanyView = () => {
                                     <input
                                         type="text"
                                         className="input-field"
-                                        value={company?.name || "Loading...."}
+                                        value={company?.user?.name || "Loading...."}
                                         readOnly
                                     />
                                 </label>
