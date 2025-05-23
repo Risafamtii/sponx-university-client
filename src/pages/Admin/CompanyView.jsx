@@ -10,6 +10,10 @@ const CompanyView = () => {
     const [company, setCompany] = useState(null);
     const { id } = useParams();
 
+    const [showBlockModal, setShowBlockModal] = useState(false);
+    const [blockReason, setBlockReason] = useState('');
+    const [selectedCompanyId, setSelectedCompanyId] = useState(null);
+
     useEffect(() => {
         const fetchCompany = async () => {
             try {
@@ -31,19 +35,23 @@ const CompanyView = () => {
 
     const handleBlock = async (id) => {
         try {
-            const updatedCompany = await blockCompany(id);
-
-            setCompany(prev => ({
-                ...prev,
-                user: {
-                    ...prev.user,
-                    isBlock: true,
-                },
-            }));
-    
-            console.log("Company successfully blocked:", updatedCompany);
+            setShowBlockModal(true);
             
-            toast.success("Company blocked successfully!");
+            
+
+            //const updatedCompany = await blockCompany(id);
+
+            // setCompany(prev => ({
+            //     ...prev,
+            //     user: {
+            //         ...prev.user,
+            //         isBlock: true,
+            //     },
+            // }));
+    
+            // console.log("Company successfully blocked:", updatedCompany);
+            
+            // toast.success("Company blocked successfully!");
         } catch (error) {
             
             console.error("Error blocking company with ID", id, ":", error.message);
@@ -413,8 +421,58 @@ const CompanyView = () => {
             </div>
             
         </div>
-        
-        
+
+        {showBlockModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="w-full max-w-md p-6 bg-white rounded-lg">
+                <h3 className="mb-4 text-lg font-semibold">Block Company</h3>
+                <p className="mb-4">Please provide a reason for blocking this company:</p>
+                
+                <textarea
+                    className="w-full p-2 mb-4 border border-gray-300 rounded-md"
+                    rows="4"
+                    placeholder="Enter reason..."
+                    value={blockReason}
+                    onChange={(e) => setBlockReason(e.target.value)}
+                />
+                
+                <div className="flex justify-end gap-3">
+                    <button
+                    onClick={() => {
+                        setShowBlockModal(false);
+                        setBlockReason('');
+                    }}
+                    className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300"
+                    >
+                    Cancel
+                    </button>
+                    <button
+                    onClick={async () => {
+                        try {
+                        await blockCompany(selectedCompanyId, blockReason); // Make sure your API accepts the reason
+                        setCompany(prev => ({
+                            ...prev,
+                            user: {
+                            ...prev.user,
+                            isBlock: true,
+                            },
+                        }));
+                        setShowBlockModal(false);
+                        setBlockReason('');
+                        toast.success("Company blocked successfully!");
+                        } catch (error) {
+                        console.error("Error blocking company:", error);
+                        toast.error("Error blocking company");
+                        }
+                    }}
+                    className="px-4 py-2 text-white bg-red-600 rounded-md hover:bg-red-700"
+                    >
+                    Confirm Block
+                    </button>
+                </div>
+                </div>
+            </div>
+            )}
     
     </div>
   )
