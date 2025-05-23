@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const CreateEvents = () => {
+const CreateEvent = () => {
   const [selectedCompanies, setSelectedCompanies] = useState([]);
   const [banner, setCoverPhoto] = useState(null);
   const [proposal, setEventProposal] = useState(null);
@@ -288,4 +288,4 @@ const CreateEvents = () => {
   );
 };
 
-export default CreateEvents;
+export default CreateEvent;
