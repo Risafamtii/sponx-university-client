@@ -7,7 +7,7 @@ import {
 } from "react-icons/fa";
 import eventImg from "/club/event.svg";
 import { IoCalendarOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function MyEvents() {
   const [selectedDate, setSelectedDate] = useState(14);
@@ -47,7 +47,7 @@ function MyEvents() {
 
   return (
     <div className=" bg-gray-100 p-6 w-[83%] ml-[17%] mt-[5%] flex items-center ">
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-semibold">Events</h1>
@@ -56,32 +56,32 @@ function MyEvents() {
 
         <div className="flex flex-col gap-6">
           {/* Filter and Create Event Section */}
-          <div className="bg-white p-6 rounded-2xl shadow-sm flex flex-row md:flex-row items-center md:space-x-4">
-            <div className="relative w-full md:w-auto mb-4 md:mb-0">
+          <div className="flex flex-row items-center p-6 bg-white shadow-sm rounded-2xl md:flex-row md:space-x-4">
+            <div className="relative w-full mb-4 md:w-auto md:mb-0">
               <input
                 type="text"
                 placeholder="Search events..."
                 className="w-[400px] p-2 border rounded-full pl-10"
               />
-              <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <FaSearch className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" />
             </div>
             <div className="mt-4 md:mt-0">
-              <select className="w-full md:w-auto p-2 border rounded-3xl">
+              <select className="w-full p-2 border md:w-auto rounded-3xl">
                 <option>All Events</option>
                 <option>Upcoming Events</option>
                 <option>Past Events</option>
               </select>
             </div>
             <div className="flex-grow"></div>
-            <Link to="/club/createevent">
-              <button className="w-full md:w-auto bg-blue-500 text-white p-2 px-4 rounded-3xl flex items-center justify-center ">
+            <NavLink to="/club/createevent">
+              <button className="flex items-center justify-center w-full p-2 px-4 text-white bg-blue-500 md:w-auto rounded-3xl ">
                 <FaPlus className="mr-2" /> Create Event
               </button>
-            </Link>
+            </NavLink>
           </div>
 
           {/* Events List Section */}
-          <div className="flex gap-10 flex-wrap">
+          <div className="flex flex-wrap gap-10">
             {events.map((event, index) => (
               <div
                 key={index}
@@ -90,7 +90,7 @@ function MyEvents() {
                 <img
                   src={eventImg}
                   alt="Event"
-                  className=" h-32 object-cover rounded-t-2xl"
+                  className="object-cover h-32 rounded-t-2xl"
                 />
                 <div className="p-4">
                   <h3 className="font-semibold">{event.name}</h3>
@@ -102,7 +102,7 @@ function MyEvents() {
                         {event.sponsorship}%
                       </span>
                     </div>
-                    <div className="relative w-full mt-2 bg-gray-200 rounded-full h-2">
+                    <div className="relative w-full h-2 mt-2 bg-gray-200 rounded-full">
                       <div
                         className={`h-2 rounded-full ${
                           event.sponsorship < 30
@@ -125,9 +125,9 @@ function MyEvents() {
                       ></div>
                     </div>
                   </div>
-                  <div className="mt-4 flex justify-between items-center">
-                    <p className="text-sm text-gray-500 flex gap-2">
-                      <IoCalendarOutline className="text-black text-lg" />
+                  <div className="flex items-center justify-between mt-4">
+                    <p className="flex gap-2 text-sm text-gray-500">
+                      <IoCalendarOutline className="text-lg text-black" />
                       {event.date}
                     </p>
                     <span
