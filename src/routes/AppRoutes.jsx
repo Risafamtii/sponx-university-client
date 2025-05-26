@@ -94,7 +94,7 @@ const AppRoutes = () => {
             <Route path="users">
               <Route path="companies">
                 <Route index element={<AdminCompanies />} />
-                <Route path="new" element={<AdminCompanyAdd />} />
+                <Route path="add" element={<AdminCompanyAdd />} />
                 <Route path="view/:id" element={<AdminCompanyView />} />
               </Route>
               <Route path="orgs" element={<AdminOrgs />} />
