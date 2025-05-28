@@ -22,7 +22,7 @@ const Companies = () => {
       try {
         setIsLoading(true);
         const res = await getAllCompanies();
-        // console.log(res.data.companies[0].user.id);
+        // console.log(res.data.companies);
         setProfiles(res.data.companies);
       } catch (error) {
         console.error("Failed to fetch companies:", error);
@@ -130,7 +130,7 @@ const Companies = () => {
                 <div className='flex items-center justify-between'>
                   <h2 className='text-xl font-extrabold text-gray-800'>{profile?.user?.name}</h2>
                     <Link 
-                      to={`/admin/users/companies/view/${profile?.user?.id}`}
+                      to={`/admin/users/companies/view/${profile?.id}`}
                       onClick={() => console.log("Navigating to company ID:", profile?.user?.id)}
                     >
                       <button className='px-4 py-1 font-medium text-white transition duration-300 bg-blue-600 rounded-full hover:bg-blue-800'>
