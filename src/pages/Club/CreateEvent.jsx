@@ -9,6 +9,10 @@ const CreateEvent = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
+  const user = JSON.parse(localStorage.getItem("user")); // adjust key based on your app
+  const organizerId = user?.id;
+
+
   const initialFormState = {
     name: "",
     date: "",
@@ -32,10 +36,13 @@ const CreateEvent = () => {
     setSelectedCompanies(selectedCompanies.filter((c) => c !== company));
   };
 
-  const handleFileChange = (e, setFile) => {
+  const handleFileChange = (e, fieldName) => {
     const file = e.target.files[0];
     if (file) {
-      setFile(file);
+      setFormData((prev) => ({
+        ...prev,
+        [fieldName]: file,
+      }));
     }
   };
 
@@ -61,19 +68,20 @@ const CreateEvent = () => {
       formDataToSend.append("location", formData.location);
       formDataToSend.append("description", formData.description);
       formDataToSend.append("type", formData.type);
+      formDataToSend.append("organizerId", parseInt(organizerId));
 
       formDataToSend.append("companies", JSON.stringify(selectedCompanies));
 
-      if (banner) {
-        formDataToSend.append("banner", banner);
+      if (formData.coverPhoto) {
+        formDataToSend.append('banner', formData.coverPhoto); // 🟢 This will send the file
       }
 
-      if (proposal) {
-        formDataToSend.append("proposal", proposal);
+      if (formData.proposal) {
+        formDataToSend.append("proposal", formData.proposal);
       }
 
       const response = await axios.post(
-        "http://localhost:8080/api/v1/events",
+        "http://localhost:8080/api/v1/events/create",
         formDataToSend,
         {
           headers: {
@@ -133,7 +141,7 @@ const CreateEvent = () => {
               <div>
                 <label className="block mb-1 text-sm font-medium text-gray-700">Budget (LKR)</label>
                 <input
-                  type="text"
+                  type="number"
                   name="budget"
                   value={formData.budget}
                   onChange={handleInputChange}
@@ -183,38 +191,38 @@ const CreateEvent = () => {
               ></textarea>
             </div>
 
-              <div>
-                <label className="block mb-1 text-sm font-medium text-gray-700">Sponsorship Requests</label>
-                <select
-                  className="w-full p-3 border border-gray-300 rounded-lg"
-                  onChange={(e) => handleCompanySelect(e.target.value)}
-                  defaultValue=""
-                >
-                  <option value="" disabled>Select a company</option>
-                  {companies.map((company, index) => (
-                    <option key={index} value={company}>
-                      {company}
-                    </option>
-                  ))}
-                </select>
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {selectedCompanies.map((company, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-2 px-3 py-1 text-sm text-blue-800 bg-blue-100 rounded-full"
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">Sponsorship Requests</label>
+              <select
+                className="w-full p-3 border border-gray-300 rounded-lg"
+                onChange={(e) => handleCompanySelect(e.target.value)}
+                defaultValue=""
+              >
+                <option value="" disabled>Select a company</option>
+                {companies.map((company, index) => (
+                  <option key={index} value={company}>
+                    {company}
+                  </option>
+                ))}
+              </select>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {selectedCompanies.map((company, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 px-3 py-1 text-sm text-blue-800 bg-blue-100 rounded-full"
+                  >
+                    {company}
+                    <button
+                      type="button"
+                      onClick={() => removeCompany(company)}
+                      className="text-lg font-bold text-blue-800 hover:text-blue-600"
                     >
-                      {company}
-                      <button
-                        type="button"
-                        onClick={() => removeCompany(company)}
-                        className="text-lg font-bold text-blue-800 hover:text-blue-600"
-                      >
-                        &times;
-                      </button>
-                    </div>
-                  ))}
-                </div>
+                      &times;
+                    </button>
+                  </div>
+                ))}
               </div>
+            </div>
 
             <div className="flex justify-end gap-4 pt-4">
               <button
@@ -249,7 +257,7 @@ const CreateEvent = () => {
               accept="image/*"
               className="hidden"
               id="cover-photo"
-              onChange={(e) => handleFileChange(e, setCoverPhoto)}
+              onChange={(e) => handleFileChange(e, 'coverPhoto')}
             />
             <label htmlFor="cover-photo" className="flex flex-col items-center justify-center cursor-pointer">
               <svg className="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -271,7 +279,7 @@ const CreateEvent = () => {
               accept="application/pdf"
               className="hidden"
               id="event-proposal"
-              onChange={(e) => handleFileChange(e, setEventProposal)}
+              onChange={(e) => handleFileChange(e, 'proposal')}
             />
             <label htmlFor="event-proposal" className="flex flex-col items-center justify-center cursor-pointer">
               <svg className="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -283,6 +291,8 @@ const CreateEvent = () => {
           </div>
           {proposal && <p className="mt-2 text-sm text-gray-700">{proposal.name}</p>}
         </div>
+
+
       </div>
     </div>
   );

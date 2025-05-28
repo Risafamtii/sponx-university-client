@@ -1,14 +1,21 @@
-import { useState } from "react";
-import { FaQuestionCircle } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { assets } from "../../assets/assets";
+import axios from 'axios';
 
 const EventsList = () => {
-    const events = Array(9).fill({
-        title: "IEEE EXTREME 1.0",
-        date: "22.12.2025",
-        image: assets.image1, // Replace with actual images
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    });
+    const [events, setEvents] = useState([]);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const res = await axios.get('http://localhost:8080/api/v1/events');
+                setEvents(res.data);
+            } catch (err) {
+                console.error("Failed to fetch events", err);
+            }
+        };
+        fetchEvents();
+    }, []);
 
     return (
         <div className="w-[83%] mt-[5%] bg-white ml-[17%] ">
@@ -74,20 +81,22 @@ const EventsList = () => {
                                 className="relative bg-white p-4 shadow rounded-lg overflow-hidden group"
                             >
                                 <img
-                                    src={event.image}
-                                    alt={event.title}
+                                    src={event.banner}
+                                    alt={event.name}
                                     className="w-full h-40 object-cover rounded"
                                 />
                                 <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-center">
-                                    <h3 className="text-lg font-bold text-white">{event.title}</h3>
+                                    <h3 className="text-lg font-bold text-white">{event.name}</h3>
                                     <p className="text-white text-sm mt-2">{event.description}</p>
-                                    <p className="mt-2 text-sm text-gray-300">Event Date: {event.date}</p>
+                                    <p className="mt-2 text-sm text-gray-300">Event Date: {new Date(event.date).toLocaleDateString()}</p>
                                     <button className="mt-2 bg-white text-blue-900 px-4 py-2 rounded">Learn More</button>
                                 </div>
-                                <h3 className="mt-2 text-lg font-bold text-center">{event.title}</h3>
-                                <p className="text-gray-600 text-sm text-center">Event Date: {event.date}</p>
+                                <h3 className="mt-2 text-lg font-bold text-center">{event.name}</h3>
+                                <p className="text-gray-600 text-sm text-center">Event Date: {new Date(event.date).toLocaleDateString()}</p>
                             </div>
                         ))}
+
+                        
                     </div>
                 </main>
             </div>
