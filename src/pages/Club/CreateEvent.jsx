@@ -73,11 +73,11 @@ const CreateEvent = () => {
       formDataToSend.append("companies", JSON.stringify(selectedCompanies));
 
       if (formData.coverPhoto) {
-        form.append('banner', formData.coverPhoto); // 🟢 This will send the file
+        formDataToSend.append('banner', formData.coverPhoto); // 🟢 This will send the file
       }
 
-      if (proposal) {
-        formDataToSend.append("proposal", proposal);
+      if (formData.proposal) {
+        formDataToSend.append("proposal", formData.proposal);
       }
 
       const response = await axios.post(
@@ -271,6 +271,27 @@ const CreateEvent = () => {
         </div>
 
         {/* Event Proposal */}
+        <div className="p-6 bg-white shadow-lg rounded-xl">
+          <h3 className="mb-4 text-lg font-semibold text-gray-800">Event Proposal (PDF)</h3>
+          <div className="p-6 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:border-blue-500">
+            <input
+              type="file"
+              accept="application/pdf"
+              className="hidden"
+              id="event-proposal"
+              onChange={(e) => handleFileChange(e, 'proposal')}
+            />
+            <label htmlFor="event-proposal" className="flex flex-col items-center justify-center cursor-pointer">
+              <svg className="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 20h9M12 4h9m-9 8h9M3 20h.01M3 4h.01M3 12h.01" />
+              </svg>
+              <p className="font-medium text-blue-600">Click to upload</p>
+              <p className="mt-1 text-xs text-center text-gray-500">Only PDF format supported</p>
+            </label>
+          </div>
+          {proposal && <p className="mt-2 text-sm text-gray-700">{proposal.name}</p>}
+        </div>
+
 
       </div>
     </div>

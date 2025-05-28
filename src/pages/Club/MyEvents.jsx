@@ -82,7 +82,7 @@ const MyEvents = () => {
                 className="cursor-pointer hover:bg-gray-100 p-4 rounded p-4 max-w-[350px] bg-white rounded-2xl shadow-lg"
               >
                 <img
-                  src={event.banner}
+                  src={`http://localhost:8080${event.banner}`}
                   alt="Event"
                   className="object-cover h-32 rounded-t-2xl"
                 />
