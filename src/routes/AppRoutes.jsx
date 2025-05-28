@@ -1,119 +1,162 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import PrivateRoutes from './PrivateRoutes';
 
-import AdminLayout from '../layouts/AdminLayout'
-import AdminOverview from '../pages/Admin/Overview'
-import AdminBids from '../pages/Admin/Bids'
-import AdminCompanies from '../pages/Admin/Companies'
-import AdminOrgs from '../pages/Admin/Organizations'
-import AdminEvents from '../pages/Admin/Events'
-import AdminPayments from '../pages/Admin/Payments'
-import AdminSettings from '../pages/Admin/Settings'
-import AdminCompose from '../pages/Admin/Compose'
-import AdminSent from '../pages/Admin/Sent'
-import AdminEventsView from '../pages/Admin/EventsView';
-import AdminReport from '../pages/Admin/Report';
-import AdminFeedback from '../pages/Admin/Feedback';
-import AdminCompanyAdd from '../pages/Admin/CompanyAdd';
+// Layouts
+import AdminLayout from '../layouts/AdminLayout';
+import ClubLayout from '../layouts/ClubLayout';
+import CompanyLayout from '../layouts/CompanyLayout';
 
-
+// Public Components
 import Home from '../pages/Home/Home';
 import Header from '../components/Header';
 import Footer from '../components/FooterComp';
 import LoginPage from '../pages/LoginPage';
+import Register from '../pages/RegistrationTypePage';
+import Signup from '../pages/SignupPage';
 
-import ClubLayout from '../layouts/ClubLayout'
-import ClubOverview from '../pages/Club/Overview'
-import ClubBank from '../pages/Club/BankDetails'
-import ClubDetails from '../pages/Club/ClubDetailsPage'
-import ClubEvents from '../pages/Club/MyEvents'
-import ClubProfile from '../pages/Club/Profile'
-import ClubSelectAd from '../pages/Club/SelectedAd'
-import ClubAdvertise from '../pages/Club/AdvertiseEvents'
-import ClubEventDetails from '../pages/Club/EventDetails'
-import ClubCreateEvent from '../pages/Club/CreateEvent'
-
-import CompanyLayout from '../layouts/CompanyLayout';
-import CompanyOverview from '../pages/Company/Overview';
-import CompanyProfile from '../pages/Company/Profile';
-import CompanyPayment from '../pages/Company/Payment';
-
+// Admin Pages
+import AdminOverview from '../pages/Admin/Overview';
+import AdminBids from '../pages/Admin/Bids';
+import AdminCompanies from '../pages/Admin/Companies';
+import AdminOrgs from '../pages/Admin/Organizations';
+import AdminEvents from '../pages/Admin/Events';
+import AdminPayments from '../pages/Admin/Payments';
+import AdminSettings from '../pages/Admin/Settings';
+import AdminCompose from '../pages/Admin/Compose';
+import AdminSent from '../pages/Admin/Sent';
+import AdminEventsView from '../pages/Admin/EventsView';
+import AdminReport from '../pages/Admin/Report';
+import AdminFeedback from '../pages/Admin/Feedback';
+import AdminCompanyAdd from '../pages/Admin/CompanyAdd';
 import AdminCompanyView from '../pages/Admin/CompanyView';
 import AdminClubView from '../pages/Admin/ClubView';
 
+// Club Pages
+import ClubOverview from '../pages/Club/Overview';
+import ClubBank from '../pages/Club/BankDetails';
+import ClubDetails from '../pages/Club/ClubDetailsPage';
+import ClubEvents from '../pages/Club/MyEvents';
+import ClubProfile from '../pages/Club/Profile';
+import ClubSelectAd from '../pages/Club/SelectedAd';
+import ClubAdvertise from '../pages/Club/AdvertiseEvents';
+import ClubEventDetails from '../pages/Club/EventDetails';
+import ClubCreateEvent from '../pages/Club/CreateEvent';
 
+// Company Pages
+import CompanyOverview from '../pages/Company/Overview';
+import CompanyProfile from '../pages/Company/Profile';
+import CompanyPayment from '../pages/Company/Payment';
 import CompanySponsorship from '../pages/Company/Sponsorship';
 import CompanyEvents from '../pages/Company/Eventlist';
-
-import Register from '../pages/RegistrationTypePage'
-import Signup from '../pages/SignupPage'
-
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Header />
-              <Home />
-              <Footer />
-            </>
-          }
-        />
+        {/* Public Routes */}
+        <Route path="/" element={
+          <>
+            <Header />
+            <Home />
+            <Footer />
+          </>
+        } />
+        
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/register/:type" element={<Signup/>}/>
+        
+        <Route path="/register">
+          <Route index element={<Register />} />
+          <Route path=":type" element={<Signup />} />
+        </Route>
 
-
-
-
-        {/* <Route element={<PrivateRoutes />}> */}
+        {/* Protected Routes */}
+        <Route element={<PrivateRoutes />}>
+          {/* Admin Routes */}
           <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<AdminOverview />} />
+            
+            {/* Bidding Management */}
             <Route path="bids" element={<AdminBids />} />
-            <Route path="events" element={<AdminEvents />} />
-            <Route path="users/companies" element={<AdminCompanies />} />
-            <Route path="users/orgs" element={<AdminOrgs />} />
+            
+            {/* Event Management */}
+            <Route path="events">
+              <Route index element={<AdminEvents />} />
+              <Route path=":eventId">
+                <Route index element={<AdminEventsView />} />
+                <Route path="report" element={<AdminReport />} />
+                <Route path="feedback" element={<AdminFeedback />} />
+              </Route>
+            </Route>
+            
+            {/* User Management */}
+            <Route path="users">
+              <Route path="companies">
+                <Route index element={<AdminCompanies />} />
+                <Route path="new" element={<AdminCompanyAdd />} />
+                <Route path="view/:id" element={<AdminCompanyView />} />
+              </Route>
+              <Route path="orgs" element={<AdminOrgs />} />
+              <Route path="clubs/:clubId" element={<AdminClubView />} />
+            </Route>
+            
+            {/* Financial */}
             <Route path="payments" element={<AdminPayments />} />
-            <Route path="notifications/compose" element={<AdminCompose />} />
-            <Route path="notifications/sent" element={<AdminSent />} />
+            
+            {/* Communication */}
+            <Route path="notifications">
+              <Route path="compose" element={<AdminCompose />} />
+              <Route path="sent" element={<AdminSent />} />
+            </Route>
+            
+            {/* Settings */}
             <Route path="settings" element={<AdminSettings />} />
-            <Route path="users/companies/view/:id" element={<AdminCompanyView />} />
-            <Route path="users/clubs/view" element={<AdminClubView />} />
-            <Route path="events/view" element={<AdminEventsView />} />
-            <Route path="events/view/report" element={<AdminReport />} />
-            <Route path="events/view/feedback" element={<AdminFeedback />} />
-            <Route path="users/companies/add" element={<AdminCompanyAdd/>}/>
           </Route>
 
+          {/* Club Routes */}
           <Route path="/club" element={<ClubLayout />}>
+            <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<ClubOverview />} />
-            <Route path="advertise" element={<ClubAdvertise />} />
-            <Route path="bankdetails" element={<ClubBank />} />
-            <Route path="clubdetails" element={<ClubDetails />} />
-            <Route path="myevents" element={<ClubEvents />} />
-            <Route path="eventdetails" element={<ClubEventDetails />} />
+            <Route path='myevents' element={< ClubEvents/>}/>
+            <Route path="createevent" element={<ClubCreateEvent />} />
+            
+            
+            {/* Profile Management */}
             <Route path="profile" element={<ClubProfile />} />
-            <Route path="selectad" element={<ClubSelectAd />} />
+            <Route path="details" element={<ClubDetails />} />
+            
+            {/* Financial */}
+            <Route path="banking" element={<ClubBank />} />
+            
+            {/* Sponsorships */}
+            <Route path="sponsorships">
+              <Route path="select" element={<ClubSelectAd />} />
+            </Route>
           </Route>
 
+          {/* Company Routes */}
           <Route path="/company" element={<CompanyLayout />}>
-            <Route path="overview" element={<CompanyOverview />} />
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<CompanyOverview />} />
+            
+            {/* Profile */}
             <Route path="profile" element={<CompanyProfile />} />
-            <Route path="payment" element={<CompanyPayment />} />
-            <Route path="sponsorship" element={<CompanySponsorship />} />
-            <Route path="events" element={<CompanyEvents />} />
+            
+            {/* Sponsorships */}
+            <Route path="sponsorships">
+              <Route index element={<CompanySponsorship />} />
+              <Route path="events" element={<CompanyEvents />} />
+            </Route>
+            
+            {/* Payments */}
+            <Route path="payments" element={<CompanyPayment />} />
           </Route>
-        {/* </Route> */}
+        </Route>
 
       </Routes>
     </Router>
+  );
+};
 
-  )
-}
-
-export default AppRoutes
+export default AppRoutes;
