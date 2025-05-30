@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
-import { createCompany } from '../../utils/api/admin';
+import { companyService } from '../../utils/api/admin';
 import { toast } from 'react-toastify';
 
 const CompanyAdd = () => {
@@ -127,7 +127,9 @@ const CompanyAdd = () => {
         }
       };
 
-      const response = await createCompany(companyData);
+      const response = await companyService.create(companyData);
+
+      console.log(response);
 
       if (response.status === 201) {
         toast.success(response.data?.message || "Company created successfully!");

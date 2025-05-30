@@ -7,7 +7,7 @@ import propic from '../../assets/img/pro.png';
 import location from '../../assets/img/location.png';
 import phone from '../../assets/img/Phone.png';
 import mail from '../../assets/img/Mail.png';
-import { getAllCompanies } from '../../utils/api/admin';
+import { companyService } from '../../utils/api/admin';
 import { LoadingDots } from '../../components/Loading';
 
 const Companies = () => {
@@ -21,7 +21,7 @@ const Companies = () => {
     const fetchCompanies = async () => {
       try {
         setIsLoading(true);
-        const res = await getAllCompanies();
+        const res = await companyService.getAll();
         // console.log(res.data.companies);
         setProfiles(res.data.companies);
       } catch (error) {

@@ -48,13 +48,13 @@ const menuConfig = {
         { name: 'Settings', basePath: '/admin/settings', icon: FaCog },
     ],
 
-    club: [
-        { name: 'Overview', basePath: '/club/overview', icon: FaBorderAll },
-        { name: 'Advertise', basePath: '/club/advertise', icon: FaAd },
-        { name: 'Transaction', basePath: '/club/bankdetails', icon: FaMoneyCheckAlt  },
-        { name: 'Events', basePath: '/club/myevents', icon: MdEvent },
-        { name: 'Profile', basePath: '/club/profile', icon: CgProfile },
-        { name: 'Ad', basePath: '/club/selectad', icon: BiSolidSelectMultiple },
+    org: [
+        { name: 'Overview', basePath: '/org/overview', icon: FaBorderAll },
+        { name: 'Advertise', basePath: '/org/advertise', icon: FaAd },
+        { name: 'Transaction', basePath: '/org/bankdetails', icon: FaMoneyCheckAlt  },
+        { name: 'Events', basePath: '/org/myevents', icon: MdEvent },
+        { name: 'Profile', basePath: '/org/profile', icon: CgProfile },
+        { name: 'Ad', basePath: '/org/selectad', icon: BiSolidSelectMultiple },
 
 
     ],
