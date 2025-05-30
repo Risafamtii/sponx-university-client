@@ -9,7 +9,7 @@ const CreateEvent = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const user = JSON.parse(localStorage.getItem("user")); // adjust key based on your app
+  const user = JSON.parse(sessionStorage.getItem("user")); 
   const organizerId = user?.id;
 
 
