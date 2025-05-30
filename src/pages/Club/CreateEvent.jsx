@@ -9,9 +9,8 @@ const CreateEvent = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const user = JSON.parse(sessionStorage.getItem("user")); 
-  const organizerId = user?.id;
-
+  const user = JSON.parse(localStorage.getItem("user")); 
+  const userId = user?.id;
 
   const initialFormState = {
     name: "",
@@ -68,7 +67,7 @@ const CreateEvent = () => {
       formDataToSend.append("location", formData.location);
       formDataToSend.append("description", formData.description);
       formDataToSend.append("type", formData.type);
-      formDataToSend.append("organizerId", parseInt(organizerId));
+      formDataToSend.append("userId", parseInt(userId));
 
       formDataToSend.append("companies", JSON.stringify(selectedCompanies));
 
