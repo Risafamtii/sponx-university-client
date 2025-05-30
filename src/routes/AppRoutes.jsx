@@ -4,7 +4,7 @@ import PrivateRoutes from './PrivateRoutes';
 
 // Layouts
 import AdminLayout from '../layouts/AdminLayout';
-import ClubLayout from '../layouts/ClubLayout';
+import ClubLayout from '../layouts/OrgLayout';
 import CompanyLayout from '../layouts/CompanyLayout';
 
 // Public Components
@@ -30,7 +30,7 @@ import AdminReport from '../pages/Admin/Report';
 import AdminFeedback from '../pages/Admin/Feedback';
 import AdminCompanyAdd from '../pages/Admin/CompanyAdd';
 import AdminCompanyView from '../pages/Admin/CompanyView';
-import AdminClubView from '../pages/Admin/ClubView';
+import AdminOrgView from '../pages/Admin/OrgView';
 
 // Club Pages
 import ClubOverview from '../pages/Club/Overview';
@@ -49,6 +49,7 @@ import CompanyProfile from '../pages/Company/Profile';
 import CompanyPayment from '../pages/Company/Payment';
 import CompanySponsorship from '../pages/Company/Sponsorship';
 import CompanyEvents from '../pages/Company/Eventlist';
+import ClubDetailsPage from '../pages/Club/ClubDetailsPage';
 
 const AppRoutes = () => {
   return (
@@ -92,13 +93,18 @@ const AppRoutes = () => {
             
             {/* User Management */}
             <Route path="users">
+              
               <Route path="companies">
                 <Route index element={<AdminCompanies />} />
                 <Route path="add" element={<AdminCompanyAdd />} />
                 <Route path="view/:id" element={<AdminCompanyView />} />
               </Route>
-              <Route path="orgs" element={<AdminOrgs />} />
-              <Route path="clubs/:clubId" element={<AdminClubView />} />
+
+              <Route path='orgs'>
+                <Route index element={<AdminOrgs />} />
+                <Route path="view/:id" element={<AdminOrgView />} />
+              </Route>
+
             </Route>
             
             {/* Financial */}
@@ -115,11 +121,15 @@ const AppRoutes = () => {
           </Route>
 
           {/* Club Routes */}
-          <Route path="/club" element={<ClubLayout />}>
+          <Route path="/org" element={<ClubLayout />}>
             <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<ClubOverview />} />
             <Route path='myevents' element={< ClubEvents/>}/>
             <Route path="createevent" element={<ClubCreateEvent />} />
+            <Route path="advertise" element={<ClubAdvertise />} />
+            <Route path="bankdetails" element={<ClubBank />} />       
+            {/* <Route path="selectad" element={< />} /> */}
+
             
             
             {/* Profile Management */}

@@ -10,7 +10,7 @@ const ClubLayout = () => {
     <div className="flex h-full">
       <Navbar userType={userType}/>
       {/* Sidebar on the left */}
-      <Sidebar menuItems={menuConfig.club} />
+      <Sidebar menuItems={menuConfig.org} />
       
       {/* Main content area where child routes will render */}
       <div className="flex-1 p-4 bg-gray-100">
