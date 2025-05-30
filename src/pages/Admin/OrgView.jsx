@@ -60,7 +60,7 @@ const ClubView = () => {
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-700">Organizer not found</h2>
           <p className="mt-2 text-gray-500">The requested organizer could not be loaded.</p>
-          <button 
+          <button
             onClick={() => navigate('/admin/users/orgs')}
             className="px-6 py-2 mt-4 text-white bg-[#303972] rounded-lg hover:bg-[#1B264B] transition-colors"
           >
@@ -83,18 +83,18 @@ const ClubView = () => {
           animate={{ opacity: 0.7 }}
           transition={{ duration: 0.5 }}
         />
-        
+
         {/* Profile Picture */}
-        <motion.div 
+        <motion.div
           className="absolute z-10 bg-white border-4 border-white rounded-full shadow-xl w-36 h-36 left-8 -bottom-16"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <img 
-            src={organizer.user?.profilepic || assets.defaultProfile} 
-            alt="Profile" 
-            className="object-cover w-full h-full rounded-full" 
+          <img
+            src={organizer.user?.profilepic || assets.defaultProfile}
+            alt="Profile"
+            className="object-cover w-full h-full rounded-full"
           />
         </motion.div>
       </div>
@@ -102,7 +102,7 @@ const ClubView = () => {
       {/* Main Content */}
       <div className="px-10 pt-24 pb-10">
         {/* Club Info */}
-        <motion.div 
+        <motion.div
           className='mb-8'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -120,16 +120,16 @@ const ClubView = () => {
         </motion.div>
 
         {/* Social Links */}
-        <motion.div 
+        <motion.div
           className='flex flex-wrap gap-6 mb-8'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
           {organizer.user?.facebook && (
-            <a 
-              href={`https://facebook.com/${organizer.user.facebook}`} 
-              target="_blank" 
+            <a
+              href={`https://facebook.com/${organizer.user.facebook}`}
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 transition-all duration-300 rounded-lg hover:bg-gray-100"
             >
@@ -137,11 +137,11 @@ const ClubView = () => {
               <span className='font-medium text-gray-700'>{organizer.user.facebook}</span>
             </a>
           )}
-          
+
           {organizer.user?.instagram && (
-            <a 
-              href={`https://instagram.com/${organizer.user.instagram}`} 
-              target="_blank" 
+            <a
+              href={`https://instagram.com/${organizer.user.instagram}`}
+              target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 transition-all duration-300 rounded-lg hover:bg-gray-100"
             >
@@ -149,9 +149,9 @@ const ClubView = () => {
               <span className='font-medium text-gray-700'>{organizer.user.instagram}</span>
             </a>
           )}
-          
+
           {organizer.user?.phone && (
-            <a 
+            <a
               href={`tel:${organizer.user.phone}`}
               className="flex items-center gap-2 px-4 py-2 transition-all duration-300 rounded-lg hover:bg-gray-100"
             >
@@ -159,9 +159,9 @@ const ClubView = () => {
               <span className='font-medium text-gray-700'>{organizer.user.phone}</span>
             </a>
           )}
-          
+
           {organizer.user?.email && (
-            <a 
+            <a
               href={`mailto:${organizer.user.email}`}
               className="flex items-center gap-2 px-4 py-2 transition-all duration-300 rounded-lg hover:bg-gray-100"
             >
@@ -169,7 +169,7 @@ const ClubView = () => {
               <span className='font-medium text-gray-700'>{organizer.user.email}</span>
             </a>
           )}
-          
+
           {organizer.user?.location && (
             <div className="flex items-center gap-2 px-4 py-2 transition-all duration-300 rounded-lg hover:bg-gray-100">
               <FiMapPin className="w-5 h-5 text-[#303972]" />
@@ -179,7 +179,7 @@ const ClubView = () => {
         </motion.div>
 
         {/* Description */}
-        <motion.div 
+        <motion.div
           className='mb-10'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -231,7 +231,7 @@ const ClubView = () => {
         </div>
 
         {/* Events Button */}
-        <motion.div 
+        <motion.div
           className="flex justify-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -242,29 +242,28 @@ const ClubView = () => {
             className="flex items-center gap-2 px-8 py-3 text-white bg-[#303972] rounded-lg shadow-md hover:bg-[#1B264B] transition-all hover:shadow-lg"
           >
             {showEvents ? "Hide Events" : "View Upcoming Events"}
-            <FiArrowRight className="transition-transform duration-300" style={{ 
-              transform: showEvents ? 'rotate(90deg)' : 'rotate(0deg)' 
+            <FiArrowRight className="transition-transform duration-300" style={{
+              transform: showEvents ? 'rotate(90deg)' : 'rotate(0deg)'
             }} />
           </button>
 
-          { organizer?.user?. }
 
-          
+
         </motion.div>
 
-        
+
       </div>
 
       {/* Events Modal */}
       <AnimatePresence>
         {showEvents && (
-          <motion.div 
+          <motion.div
             className="fixed inset-0 z-50 flex justify-end bg-black bg-opacity-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <motion.div 
+            <motion.div
               className="w-full max-w-md bg-white shadow-2xl rounded-l-xl"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
@@ -272,8 +271,8 @@ const ClubView = () => {
               transition={{ type: 'spring', damping: 30 }}
             >
               <div className="relative h-screen p-6 overflow-y-auto">
-                <button 
-                  onClick={() => setShowEvents(false)} 
+                <button
+                  onClick={() => setShowEvents(false)}
                   className="absolute p-2 text-gray-500 rounded-full top-4 right-4 hover:bg-gray-100"
                 >
                   <FiX className="w-5 h-5" />
@@ -295,7 +294,7 @@ const ClubView = () => {
                         <span>{event.time}</span>
                       </div>
                       <div className="flex justify-end mt-3">
-                        <button 
+                        <button
                           className="flex items-center gap-1 px-4 py-1.5 text-sm font-medium text-white bg-[#303972] rounded-lg hover:bg-[#1B264B]"
                         >
                           View Details

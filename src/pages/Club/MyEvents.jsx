@@ -106,7 +106,7 @@ const MyEvents = () => {
               </div>
               
               <NavLink 
-                to="/club/createevent"
+                to="/org/createevent"
                 className="flex items-center justify-center p-3 px-6 text-white transition-colors duration-200 bg-blue-600 rounded-lg hover:bg-blue-700"
               >
                 <FaPlus className="mr-2" /> 
