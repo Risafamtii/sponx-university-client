@@ -3,10 +3,10 @@ import { assets } from '../../assets/assets';
 import { toast } from 'react-toastify';
 import { organizationService } from '../../utils/api/admin';
 import { useParams, useNavigate } from 'react-router-dom';
-import { FiArrowRight, FiX, FiAlertCircle, FiLock, FiUnlock, FiChevronLeft , FiPhone , FiMail , FiFacebook , FiInstagram , FiMapPin} from 'react-icons/fi';
+import { FiArrowRight, FiX, FiAlertCircle, FiLock, FiUnlock, FiChevronLeft, FiPhone, FiMail, FiFacebook, FiInstagram, FiMapPin } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const ClubView = () => {
+const OrgView = () => {
   const [organizer, setOrganizer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showBlockModal, setShowBlockModal] = useState(false);
@@ -344,9 +344,6 @@ const ClubView = () => {
             </motion.button>
           )}
         </div>
-        </motion.div>
-
-
       </div>
 
       {/* Events Modal */}
@@ -599,4 +596,4 @@ const ClubView = () => {
   );
 };
 
-export default ClubView;
+export default OrgView;
