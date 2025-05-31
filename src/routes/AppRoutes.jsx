@@ -31,6 +31,7 @@ import AdminFeedback from '../pages/Admin/Feedback';
 import AdminCompanyAdd from '../pages/Admin/CompanyAdd';
 import AdminCompanyView from '../pages/Admin/CompanyView';
 import AdminOrgView from '../pages/Admin/OrgView';
+import AdminOrgAdd from '../pages/Admin/OrganizationAdd'
 
 // Club Pages
 import ClubOverview from '../pages/Club/Overview';
@@ -103,6 +104,7 @@ const AppRoutes = () => {
 
               <Route path='orgs'>
                 <Route index element={<AdminOrgs />} />
+                <Route path="add" element={<AdminOrgAdd />} />
                 <Route path="view/:id" element={<AdminOrgView />} />
               </Route>
 

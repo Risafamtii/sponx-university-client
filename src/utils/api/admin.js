@@ -17,7 +17,7 @@ export const companyService = {
 export const organizationService = {
   getAll: () => API.get("/api/v1/admin/organizations/all-organizations"),
   getById: (id) => API.get(`/api/v1/admin/organizations/${id}`),
-  // block: (id, reason) => API.put(`/api/v1/admin/organizations/block-organization/${id}`, { reason }),
-  // unblock: (id) => API.put(`/api/v1/admin/organizations/unblock-organization/${id}`),
-  // create: (companyData) => API.post("/api/v1/admin/organizations/add", companyData),
+  block: (id, reason) => API.put(`/api/v1/admin/organizations/block-organization/${id}`, { reason }),
+  unblock: (id) => API.put(`/api/v1/admin/organizations/unblock-organization/${id}`),
+  create: (companyData) => API.post("/api/v1/admin/organizations/add", companyData),
 }
