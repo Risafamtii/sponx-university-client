@@ -3,7 +3,7 @@ import { assets } from '../../assets/assets';
 import { toast } from 'react-toastify';
 import { organizationService } from '../../utils/api/admin';
 import { useParams, useNavigate } from 'react-router-dom';
-import { FiX, FiArrowRight, FiFacebook, FiInstagram, FiPhone, FiMail, FiMapPin } from 'react-icons/fi';
+import { FiArrowRight, FiX, FiAlertCircle, FiLock, FiUnlock, FiChevronLeft , FiPhone , FiMail , FiFacebook , FiInstagram , FiMapPin} from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ClubView = () => {
@@ -42,6 +42,72 @@ const ClubView = () => {
 
     fetchOrganizerData();
   }, [id, navigate]);
+
+  const handleBlockClick = (organizerId) => {
+    setShowBlockModal(true);
+    setSelectedOrganizerId(organizerId);
+  };
+
+  const handleUnblockClick = (organizerId) => {
+    setShowUnblockModal(true);
+    setSelectedOrganizerId(organizerId);
+  };
+
+  const confirmBlock = async () => {
+    if (!blockReason.trim()) {
+      toast.error("Please provide a reason for blocking");
+      return;
+    }
+
+    try {
+      setIsProcessing(true);
+      await organizationService.block(selectedOrganizerId, blockReason);
+      
+      setOrganizer(prev => ({
+        ...prev,
+        user: {
+          ...prev.user,
+          isBlock: true,
+          status: 'BLOCKED'
+        }
+      }));
+      
+      setShowBlockModal(false);
+      setBlockReason('');
+      toast.success("Organizer blocked successfully!");
+    } catch (error) {
+      console.error("Error blocking organizer:", error);
+      toast.error(error.response?.data?.message || "Failed to block organizer");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const confirmUnblock = async () => {
+    try {
+      setIsProcessing(true);
+      await organizationService.unblock(selectedOrganizerId);
+      
+      setOrganizer(prev => ({
+        ...prev,
+        user: {
+          ...prev.user,
+          isBlock: false,
+          status: 'ACTIVE'
+        }
+      }));
+      
+      setShowUnblockModal(false);
+      toast.success("Organizer unblocked successfully!");
+    } catch (error) {
+      console.error("Error unblocking organizer:", error);
+      toast.error(error.response?.data?.message || "Failed to unblock organizer");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleBack = () => navigate(-1);
 
   if (loading) {
     return (
@@ -101,6 +167,16 @@ const ClubView = () => {
 
       {/* Main Content */}
       <div className="px-10 pt-24 pb-10">
+        {/* Back Button */}
+        <motion.button
+          onClick={handleBack}
+          whileHover={{ x: -2 }}
+          className="flex items-center gap-2 mb-6 text-sm font-medium text-[#303972] hover:text-[#1B264B]"
+        >
+          <FiChevronLeft className="w-5 h-5" />
+          Back to Organizations
+        </motion.button>
+
         {/* Club Info */}
         <motion.div 
           className='mb-8'
@@ -230,29 +306,44 @@ const ClubView = () => {
           </motion.div>
         </div>
 
-        {/* Events Button */}
-        <motion.div 
-          className="flex justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          <button
+        {/* Action Buttons */}
+        <div className="flex flex-wrap justify-center gap-4">
+          {/* Events Button */}
+          <motion.button
             onClick={() => setShowEvents(!showEvents)}
-            className="flex items-center gap-2 px-8 py-3 text-white bg-[#303972] rounded-lg shadow-md hover:bg-[#1B264B] transition-all hover:shadow-lg"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="flex items-center gap-2 px-8 py-3 text-white bg-[#303972] rounded-lg shadow-md hover:bg-[#1B264B] transition-all"
           >
             {showEvents ? "Hide Events" : "View Upcoming Events"}
             <FiArrowRight className="transition-transform duration-300" style={{ 
               transform: showEvents ? 'rotate(90deg)' : 'rotate(0deg)' 
             }} />
-          </button>
+          </motion.button>
 
-          { organizer?.user?. }
-
-          
-        </motion.div>
-
-        
+          {/* Block/Unblock Button */}
+          {organizer?.user?.isBlock ? (
+            <motion.button
+              onClick={() => handleUnblockClick(organizer.id)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-2 px-8 py-3 text-white transition-all bg-green-600 rounded-lg shadow-md hover:bg-green-700"
+            >
+              <FiUnlock className="w-5 h-5" />
+              Unblock Organizer
+            </motion.button>
+          ) : (
+            <motion.button
+              onClick={() => handleBlockClick(organizer.id)}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-2 px-8 py-3 text-white transition-all bg-red-600 rounded-lg shadow-md hover:bg-red-700"
+            >
+              <FiLock className="w-5 h-5" />
+              Block Organizer
+            </motion.button>
+          )}
+        </div>
       </div>
 
       {/* Events Modal */}
@@ -305,6 +396,197 @@ const ClubView = () => {
                     </motion.div>
                   ))}
                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Block Organizer Modal */}
+      <AnimatePresence>
+        {showBlockModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="w-full max-w-md p-6 bg-white shadow-2xl rounded-xl"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-semibold text-gray-800">Block Organizer</h3>
+                <button
+                  onClick={() => {
+                    setShowBlockModal(false);
+                    setBlockReason('');
+                  }}
+                  className="p-1 text-gray-400 rounded-full hover:text-gray-500 hover:bg-gray-100"
+                >
+                  <FiX className="w-5 h-5" />
+                </button>
+              </div>
+              
+              <p className="mb-4 text-gray-600">Please provide a reason for blocking this organizer:</p>
+              
+              <textarea
+                className="w-full p-3 mb-4 text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#303972] focus:border-transparent"
+                rows="4"
+                placeholder="Enter reason..."
+                value={blockReason}
+                onChange={(e) => setBlockReason(e.target.value)}
+                required
+              />
+              
+              <div className="flex justify-end gap-3">
+                <motion.button
+                  onClick={() => {
+                    setShowBlockModal(false);
+                    setBlockReason('');
+                  }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 transition-colors bg-gray-200 rounded-lg hover:bg-gray-300"
+                >
+                  Cancel
+                </motion.button>
+                
+                <motion.button
+                  onClick={confirmBlock}
+                  disabled={!blockReason.trim() || isProcessing}
+                  whileHover={!isProcessing ? { scale: 1.02 } : {}}
+                  whileTap={!isProcessing ? { scale: 0.98 } : {}}
+                  className={`flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-lg transition-all ${
+                    isProcessing
+                      ? 'bg-red-400 cursor-not-allowed'
+                      : 'bg-red-600 hover:bg-red-700'
+                  }`}
+                >
+                  {isProcessing ? (
+                    <>
+                      <svg
+                        className="w-4 h-4 animate-spin"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Blocking...
+                    </>
+                  ) : (
+                    <>
+                      <FiLock className="w-4 h-4" />
+                      Confirm Block
+                    </>
+                  )}
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Unblock Organizer Modal */}
+      <AnimatePresence>
+        {showUnblockModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="w-full max-w-md p-6 bg-white shadow-2xl rounded-xl"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-semibold text-gray-800">Unblock Organizer</h3>
+                <button
+                  onClick={() => setShowUnblockModal(false)}
+                  className="p-1 text-gray-400 rounded-full hover:text-gray-500 hover:bg-gray-100"
+                >
+                  <FiX className="w-5 h-5" />
+                </button>
+              </div>
+              
+              <div className="p-4 mb-4 text-center rounded-lg bg-yellow-50">
+                <FiAlertCircle className="w-12 h-12 mx-auto text-yellow-500" />
+                <p className="mt-2 text-gray-700">Are you sure you want to unblock this organizer?</p>
+                <p className="mt-1 text-sm text-gray-500">
+                  The organizer will regain full access to their account and all features.
+                </p>
+              </div>
+              
+              <div className="flex justify-end gap-3">
+                <motion.button
+                  onClick={() => setShowUnblockModal(false)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 transition-colors bg-gray-200 rounded-lg hover:bg-gray-300"
+                >
+                  Cancel
+                </motion.button>
+                
+                <motion.button
+                  onClick={confirmUnblock}
+                  disabled={isProcessing}
+                  whileHover={!isProcessing ? { scale: 1.02 } : {}}
+                  whileTap={!isProcessing ? { scale: 0.98 } : {}}
+                  className={`flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-lg transition-all ${
+                    isProcessing
+                      ? 'bg-green-400 cursor-not-allowed'
+                      : 'bg-green-600 hover:bg-green-700'
+                  }`}
+                >
+                  {isProcessing ? (
+                    <>
+                      <svg
+                        className="w-4 h-4 animate-spin"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Unblocking...
+                    </>
+                  ) : (
+                    <>
+                      <FiUnlock className="w-4 h-4" />
+                      Confirm Unblock
+                    </>
+                  )}
+                </motion.button>
               </div>
             </motion.div>
           </motion.div>
