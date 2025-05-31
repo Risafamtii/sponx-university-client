@@ -43,6 +43,7 @@ import ClubAdvertise from '../pages/Club/AdvertiseEvents';
 import ClubEventDetails from '../pages/Club/EventDetails';
 import ClubCreateEvent from '../pages/Club/CreateEvent';
 
+
 // Company Pages
 import CompanyOverview from '../pages/Company/Overview';
 import CompanyProfile from '../pages/Company/Profile';
@@ -63,9 +64,9 @@ const AppRoutes = () => {
             <Footer />
           </>
         } />
-        
+
         <Route path="/login" element={<LoginPage />} />
-        
+
         <Route path="/register">
           <Route index element={<Register />} />
           <Route path=":type" element={<Signup />} />
@@ -77,10 +78,10 @@ const AppRoutes = () => {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<AdminOverview />} />
-            
+
             {/* Bidding Management */}
             <Route path="bids" element={<AdminBids />} />
-            
+
             {/* Event Management */}
             <Route path="events">
               <Route index element={<AdminEvents />} />
@@ -90,10 +91,10 @@ const AppRoutes = () => {
                 <Route path="feedback" element={<AdminFeedback />} />
               </Route>
             </Route>
-            
+
             {/* User Management */}
             <Route path="users">
-              
+
               <Route path="companies">
                 <Route index element={<AdminCompanies />} />
                 <Route path="add" element={<AdminCompanyAdd />} />
@@ -106,16 +107,16 @@ const AppRoutes = () => {
               </Route>
 
             </Route>
-            
+
             {/* Financial */}
             <Route path="payments" element={<AdminPayments />} />
-            
+
             {/* Communication */}
             <Route path="notifications">
               <Route path="compose" element={<AdminCompose />} />
               <Route path="sent" element={<AdminSent />} />
             </Route>
-            
+
             {/* Settings */}
             <Route path="settings" element={<AdminSettings />} />
           </Route>
@@ -124,21 +125,23 @@ const AppRoutes = () => {
           <Route path="/org" element={<ClubLayout />}>
             <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<ClubOverview />} />
-            <Route path='myevents' element={< ClubEvents/>}/>
+            <Route path='myevents' element={< ClubEvents />} />
             <Route path="createevent" element={<ClubCreateEvent />} />
             <Route path="advertise" element={<ClubAdvertise />} />
-            <Route path="bankdetails" element={<ClubBank />} />       
+            <Route path="bankdetails" element={<ClubBank />} />
+            <Route path="eventdetails/:id" element={<ClubEventDetails />} />
+
             {/* <Route path="selectad" element={< />} /> */}
 
-            
-            
+
+
             {/* Profile Management */}
             <Route path="profile" element={<ClubProfile />} />
             <Route path="details" element={<ClubDetails />} />
-            
+
             {/* Financial */}
             <Route path="banking" element={<ClubBank />} />
-            
+
             {/* Sponsorships */}
             <Route path="sponsorships">
               <Route path="select" element={<ClubSelectAd />} />
@@ -149,16 +152,16 @@ const AppRoutes = () => {
           <Route path="/company" element={<CompanyLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<CompanyOverview />} />
-            
+
             {/* Profile */}
             <Route path="profile" element={<CompanyProfile />} />
-            
+
             {/* Sponsorships */}
             <Route path="sponsorships">
               <Route index element={<CompanySponsorship />} />
               <Route path="events" element={<CompanyEvents />} />
             </Route>
-            
+
             {/* Payments */}
             <Route path="payments" element={<CompanyPayment />} />
           </Route>
