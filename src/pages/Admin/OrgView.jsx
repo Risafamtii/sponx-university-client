@@ -17,6 +17,8 @@ const OrgView = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [showEvents, setShowEvents] = useState(false);
+  const logedUser = JSON.parse(localStorage.getItem("user"));  
+
 
   const upcomingEvents = [
     { id: 1, title: "World History", date: "March 20, 2021", time: "09:00 - 10:00 AM", class: "Class VII-B" },
@@ -61,7 +63,7 @@ const OrgView = () => {
 
     try {
       setIsProcessing(true);
-      await organizationService.block(selectedOrganizerId, blockReason);
+      await organizationService.block(selectedOrganizerId,logedUser.id,blockReason);
       
       setOrganizer(prev => ({
         ...prev,
@@ -86,7 +88,7 @@ const OrgView = () => {
   const confirmUnblock = async () => {
     try {
       setIsProcessing(true);
-      await organizationService.unblock(selectedOrganizerId);
+      await organizationService.unblock(selectedOrganizerId,logedUser.id);
       
       setOrganizer(prev => ({
         ...prev,

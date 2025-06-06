@@ -17,6 +17,8 @@ const CompanyView = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const logedUser = JSON.parse(localStorage.getItem("user"));  
+
 
   // Sample data
   const investmentData = [
@@ -114,7 +116,7 @@ const CompanyView = () => {
 
     try {
       setIsProcessing(true);
-      await companyService.block(selectedCompanyId, blockReason);
+      await companyService.block(selectedCompanyId, logedUser.id , blockReason);
       
       setCompany(prev => ({
         ...prev,
@@ -138,8 +140,9 @@ const CompanyView = () => {
 
   const confirmUnblock = async () => {
     try {
+      
       setIsProcessing(true);
-      await companyService.unblock(selectedCompanyId);
+      await companyService.unblock(selectedCompanyId , logedUser.id);
       
       setCompany(prev => ({
         ...prev,
