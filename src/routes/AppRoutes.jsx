@@ -152,20 +152,12 @@ const AppRoutes = () => {
 
           {/* Company Routes */}
           <Route path="/company" element={<CompanyLayout />}>
-            <Route index element={<Navigate to="dashboard" replace />} />
-            <Route path="dashboard" element={<CompanyOverview />} />
-
-            {/* Profile */}
+            <Route index element={<Navigate to="overview" replace />} />
+            <Route path="overview" element={<CompanyOverview />} />
+            <Route path="events" element={<CompanyEvents />} />
+            <Route path="payment" element={<CompanyPayment />} />
+            <Route path="sponsorship" element={<CompanySponsorship />} />
             <Route path="profile" element={<CompanyProfile />} />
-
-            {/* Sponsorships */}
-            <Route path="sponsorships">
-              <Route index element={<CompanySponsorship />} />
-              <Route path="events" element={<CompanyEvents />} />
-            </Route>
-
-            {/* Payments */}
-            <Route path="payments" element={<CompanyPayment />} />
           </Route>
         </Route>
 

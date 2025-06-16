@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { assets } from "../../assets/assets";
+import { FaPenToSquare, FaSquareCheck } from "react-icons/fa6";
 import { FaCrown, FaTrophy, FaMedal } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -17,6 +18,7 @@ import {
 } from "chart.js";
 import { Doughnut, Bar } from "react-chartjs-2";
 
+
 ChartJS.register(
   ArcElement,
   CategoryScale,
@@ -28,49 +30,32 @@ ChartJS.register(
 );
 
 const barData = {
-  labels: ["S", "M", "T", "W", "T", "F", "S", "M", "T", "W"],
+  labels: ["WSO2", "WinSys", "sysco", "Creative Software"],
   datasets: [
     {
-      label: "Primary",
-      data: Array.from({ length: 10 }, () =>
-        Math.floor(Math.random() * 30 + 20)
-      ),
-      backgroundColor: "#2563eb",
-      borderRadius: 4,
-    },
-    {
-      label: "Secondary",
-      data: Array.from({ length: 10 }, () =>
-        Math.floor(Math.random() * 40 + 10)
-      ),
-      backgroundColor: "#67e8f9",
-      borderRadius: 4,
+      label: "Bid Amount",
+      data: [450, 400, 300, 600],
+      backgroundColor: ["#f97316", "#6b7280", "#3b82f6", "#a855f7"], // orange, gray, blue, purple
     },
   ],
 };
 
 const barOptions = {
-  responsive: true,
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: {
+        callback: (value) => `$ ${value}`,
+      },
+    },
+  },
   plugins: {
     legend: {
       display: false,
     },
   },
-  scales: {
-    x: {
-      grid: {
-        display: false,
-      },
-    },
-    y: {
-      grid: {
-        display: false,
-      },
-      display: false,
-    },
-  },
-  maintainAspectRatio: false,
 };
+
 
 const EventDetails = () => {
   const { id } = useParams();
@@ -139,8 +124,30 @@ const EventDetails = () => {
     <div className="flex flex-col items-center justify-center p-6 w-[83%] ml-[17%]">
       {/* Info Section */}
       <div className="w-full bg-white p-6 rounded-lg shadow-lg ml-6 mt-16">
-        <p className="text-3xl text-bolder mb-6">{event.name}</p>
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-3xl text-bolder mb-6">{event.name}</p>
+          {/* Buttons */}
+          <div className="mb-4 md:ml-96 flex flex-col md:flex-row gap-4">
+            {isEditing ? (
+              <button
+                className="mt-4 flex items-center text-blue-600 px-4 py-2 rounded hover:text-blue-700"
+                onClick={handleSave}
+              >
+                <FaSquareCheck className="mr-2 text-xl" />
+                Save Changes
+              </button>
+            ) : (
+              <button
+                className="mt-4 flex items-center text-red-600 px-4 py-2 rounded hover:text-red-900"
+                onClick={() => setIsEditing(true)}
+              >
+                <FaPenToSquare className="mr-2 text-xl" />
+                Edit Event
+              </button>
+            )}
+          </div>
 
+        </div>
         <div className="flex items-start gap-12">
           {/* Image */}
           <div className="mt-1">
@@ -233,42 +240,18 @@ const EventDetails = () => {
             )}
 
             {isEditing ? (
-              <select
-                name="status"
-                value={editedEvent.status}
-                onChange={handleChange}
-                className="border border-blue-200 p-2 w-full rounded"
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
+              <h1 className="text-lg font-semibold">
+                Status:
+                <span className="text-green-500 font-bold">{event.status}</span>
+              </h1>
             ) : (
               <h1 className="text-lg font-semibold">
-                Status:{" "}
+                Status:
                 <span className="text-green-500 font-bold">{event.status}</span>
               </h1>
             )}
 
-            {/* Buttons */}
-            <div className="mb-4 md:ml-96">
-              {isEditing ? (
-                <button
-                  className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                  onClick={handleSave}
-                >
-                  Save Changes
-                </button>
-              ) : (
-                <button
-                  className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-                  onClick={() => setIsEditing(true)}
-                >
-                  Edit Event
-                </button>
-              )}
-            </div>
+
           </div>
         </div>
       </div>
@@ -277,17 +260,18 @@ const EventDetails = () => {
       <div className="mt-8 w-full bg-white p-6 rounded-lg shadow-lg flex flex-col lg:flex-row gap-6 ml-6">
         <div className="bg-white p-6 rounded-2xl shadow-xl">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="font-semibold text-xl">Conversions</h3>
-            <select className="text-sm text-gray-500 border rounded-md px-2 py-1">
-              <option>This Week</option>
-            </select>
+            <h3 className="font-semibold text-xl">Biding Information</h3>
+            <button className="bg-blue-600 text-white text-sm px-4 py-2 rounded hover:bg-blue-700">
+              Stop Bid
+            </button>
           </div>
           <div className="h-[300px] w-[650px]">
             <Bar data={barData} options={barOptions} />
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-xl w-[400px] ml-16">
+
+        <div className="bg-white p-6 rounded-2xl shadow-xl text-blue-950 w-[400px] ml-16">
           <div className="space-y-8 mt-4">
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-lg font-semibold">Sponsorship</h2>
@@ -297,18 +281,18 @@ const EventDetails = () => {
               <div className="bg-blue-500 h-2.5 rounded-full w-[90%]"></div>
             </div>
             <div className="space-y-3">
-              <div className="flex items-center text-lg font-medium">
+              <div className="flex items-center  text-lg font-medium">
                 <FaCrown className="text-purple-600 mr-3 text-xl" />
                 Creative Software:{" "}
-                <span className="ml-auto font-bold">Rs. 40,000</span>
+                <span className="ml-auto font-semibold">Rs. 40,000</span>
               </div>
               <div className="flex items-center text-lg font-medium">
                 <FaTrophy className="text-orange-500 mr-3 text-xl" />
-                WSO2: <span className="ml-auto font-bold">Rs. 25,000</span>
+                WSO2: <span className="ml-auto font-semibold">Rs. 25,000</span>
               </div>
               <div className="flex items-center text-lg font-medium">
                 <FaMedal className="text-gray-600 mr-3 text-xl" />
-                WinSys: <span className="ml-auto font-bold">Rs. 10,000</span>
+                WinSys: <span className="ml-auto font-semibold">Rs. 10,000</span>
               </div>
             </div>
             <hr className="my-3" />
