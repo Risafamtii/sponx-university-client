@@ -14,14 +14,17 @@ const MyEvents = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("all");
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userId = user?.id;
+
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
-    
+
     if (value === "") {
       setFilteredEvents(allEvents);
     } else {
-      const filtered = allEvents.filter(event => 
+      const filtered = allEvents.filter(event =>
         event.name.toLowerCase().includes(value.toLowerCase()) ||
         event.description?.toLowerCase().includes(value.toLowerCase())
       );
@@ -32,8 +35,8 @@ const MyEvents = () => {
   const applyFilter = (filterType) => {
     setActiveFilter(filterType);
     const now = new Date();
-    
-    switch(filterType) {
+
+    switch (filterType) {
       case "upcoming":
         setFilteredEvents(allEvents.filter(event => new Date(event.date) > now));
         break;
@@ -49,7 +52,7 @@ const MyEvents = () => {
     const fetchEvents = async () => {
       try {
         setIsLoading(true);
-        const res = await axios.get("http://localhost:8080/api/v1/events/organizer/1");
+        const res = await axios.get(`http://localhost:8080/api/v1/events/organizer/${userId}`);
         setAllEvents(res.data.events);
         setFilteredEvents(res.data.events);
       } catch (err) {
@@ -88,13 +91,13 @@ const MyEvents = () => {
                 onChange={handleSearch}
               />
             </div>
-            
+
             <div className="flex items-center space-x-2">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <FaFilter className="text-gray-400" />
                 </div>
-                <select 
+                <select
                   className="p-3 pl-10 pr-8 bg-white border border-gray-200 rounded-lg appearance-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   onChange={(e) => applyFilter(e.target.value)}
                   value={activeFilter}
@@ -104,12 +107,12 @@ const MyEvents = () => {
                   <option value="past">Past Events</option>
                 </select>
               </div>
-              
-              <NavLink 
+
+              <NavLink
                 to="/org/createevent"
                 className="flex items-center justify-center p-3 px-6 text-white transition-colors duration-200 bg-blue-600 rounded-lg hover:bg-blue-700"
               >
-                <FaPlus className="mr-2" /> 
+                <FaPlus className="mr-2" />
                 <span className="whitespace-nowrap">Create Event</span>
               </NavLink>
             </div>
@@ -119,13 +122,13 @@ const MyEvents = () => {
         {/* Events List Section */}
         <div className="mb-8">
           <h2 className="mb-4 text-xl font-semibold text-gray-800">
-            {activeFilter === 'upcoming' ? 'Upcoming Events' : 
-             activeFilter === 'past' ? 'Past Events' : 'All Events'}
+            {activeFilter === 'upcoming' ? 'Upcoming Events' :
+              activeFilter === 'past' ? 'Past Events' : 'All Events'}
             <span className="ml-2 text-sm font-normal text-gray-500">
               ({filteredEvents.length} {filteredEvents.length === 1 ? 'event' : 'events'})
             </span>
           </h2>
-          
+
           {isLoading ? (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[...Array(6)].map((_, i) => (
@@ -143,7 +146,8 @@ const MyEvents = () => {
               {filteredEvents.map((event) => (
                 <div
                   key={event.id}
-                  onClick={() => navigate("/club/eventdetails", { state: { event } })}
+                  onClick={() => navigate(`/org/eventdetails/${event.id}`)}
+
                   className="overflow-hidden transition-shadow duration-200 bg-white shadow-sm cursor-pointer rounded-xl hover:shadow-md"
                 >
                   <div className="relative h-48 overflow-hidden">
@@ -166,9 +170,9 @@ const MyEvents = () => {
                         {event.type}
                       </span>
                     </div>
-                    
+
                     <p className="mb-4 text-sm text-gray-600 line-clamp-2">{event.description}</p>
-                    
+
                     <div className="flex flex-col space-y-3 text-sm text-gray-500">
                       <div className="flex items-center">
                         <IoCalendarOutline className="mr-2 text-gray-400" />
@@ -188,19 +192,19 @@ const MyEvents = () => {
           ) : (
             <div className="flex flex-col items-center justify-center py-12 bg-white shadow-sm rounded-xl">
               <div className="max-w-md text-center">
-                
+
                 <h3 className="mt-4 text-lg font-medium text-gray-900">
                   {searchTerm ? "No matching events found" : "No events available"}
                 </h3>
                 <p className="mt-2 text-gray-500">
-                  {searchTerm 
+                  {searchTerm
                     ? "Try adjusting your search or filter to find what you're looking for."
-                    : activeFilter === 'upcoming' 
+                    : activeFilter === 'upcoming'
                       ? "You don't have any upcoming events scheduled."
                       : "You don't have any past events yet."}
                 </p>
                 {!searchTerm && activeFilter !== 'all' && (
-                  <button 
+                  <button
                     onClick={() => applyFilter('all')}
                     className="px-4 py-2 mt-4 text-sm font-medium text-blue-600 rounded-md bg-blue-50 hover:bg-blue-100"
                   >

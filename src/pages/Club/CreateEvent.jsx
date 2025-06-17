@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
+import { toast } from 'react-toastify';
+
 
 const CreateEvent = () => {
   const [selectedCompanies, setSelectedCompanies] = useState([]);
@@ -8,8 +11,9 @@ const CreateEvent = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [companyList, setCompanyList] = useState([]);
 
-  const user = JSON.parse(localStorage.getItem("user")); 
+  const user = JSON.parse(localStorage.getItem("user"));
   const userId = user?.id;
 
   const initialFormState = {
@@ -22,6 +26,25 @@ const CreateEvent = () => {
   };
 
   const [formData, setFormData] = useState(initialFormState);
+
+  const fetchCompanies = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/v1/events/companylist");
+      return response.data.companies;
+    } catch (error) {
+      console.error("Error fetching companies:", error);
+      return []; // fallback empty list
+    }
+  };
+
+  useEffect(() => {
+    const getCompanies = async () => {
+      const data = await fetchCompanies();
+      setCompanyList(data);
+    };
+    getCompanies();
+  }, []);
+
 
   const companies = ["WSO2", "IFS", "Google", "Microsoft", "Amazon"];
 
@@ -198,12 +221,13 @@ const CreateEvent = () => {
                 defaultValue=""
               >
                 <option value="" disabled>Select a company</option>
-                {companies.map((company, index) => (
-                  <option key={index} value={company}>
-                    {company}
+                {companyList.map((company) => (
+                  <option key={company.id} value={company.name}>
+                    {company.name}
                   </option>
                 ))}
               </select>
+
               <div className="flex flex-wrap gap-2 mt-3">
                 {selectedCompanies.map((company, index) => (
                   <div
@@ -222,6 +246,7 @@ const CreateEvent = () => {
                 ))}
               </div>
             </div>
+
 
             <div className="flex justify-end gap-4 pt-4">
               <button
