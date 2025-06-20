@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { assets } from "../../assets/assets";
 import { eventService } from "../../utils/api/company";
+import { useNavigate } from "react-router-dom";
 
 const EventsList = () => {
     const [events, setEvents] = useState([]);
     const [topEvent, setTopEvent] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
+    
     useEffect(() => {
         const fetchEvents = async () => {
             try {
@@ -28,6 +31,13 @@ const EventsList = () => {
         };
         fetchEvents();
     }, []);
+
+    const handleViewEvent = (eventId) => {
+        return (e) => {
+            e.preventDefault();
+            navigate(`/company/events/view/${eventId}`); // Adjust this path to match your route
+        };
+    };
 
     if (loading) {
         return <div className="flex items-center justify-center w-full h-screen">Loading...</div>;
@@ -107,7 +117,9 @@ const EventsList = () => {
                                     <p className="mt-2 text-sm text-gray-300">
                                         Event Date: {event.date ? new Date(event.date).toLocaleDateString() : "TBD"}
                                     </p>
-                                    <button className="px-4 py-2 mt-2 text-blue-900 bg-white rounded">
+                                    <button className="px-4 py-2 mt-2 text-blue-900 bg-white rounded"
+                                        onClick={handleViewEvent(event.id)}
+                                    >
                                         Learn More
                                     </button>
                                 </div>
