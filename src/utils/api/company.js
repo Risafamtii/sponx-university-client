@@ -7,4 +7,5 @@ const API = axios.create({
 
 export const eventService = {
   getAll: () => API.get("/api/v1/company/events/all-events"),
+  getById: (id) => API.get(`/api/v1/company/events/${id}`),
 };

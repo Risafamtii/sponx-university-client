@@ -51,6 +51,7 @@ import CompanyPayment from '../pages/Company/Payment';
 import CompanySponsorship from '../pages/Company/Sponsorship';
 import CompanyEvents from '../pages/Company/Eventlist';
 import ClubDetailsPage from '../pages/Club/ClubDetailsPage';
+import CompanyEventView from '../pages/Company/EventView';
 
 const AppRoutes = () => {
   return (
@@ -85,7 +86,7 @@ const AppRoutes = () => {
             {/* Event Management */}
             <Route path="events">
               <Route index element={<AdminEvents />} />
-              <Route path=":eventId">
+              <Route path="view/:eventId">
                 <Route index element={<AdminEventsView />} />
                 <Route path="report" element={<AdminReport />} />
                 <Route path="feedback" element={<AdminFeedback />} />
@@ -155,6 +156,13 @@ const AppRoutes = () => {
             <Route path="payment" element={<CompanyPayment />} />
             <Route path="sponsorship" element={<CompanySponsorship />} />
             <Route path="profile" element={<CompanyProfile />} />
+            <Route path="view" element={<CompanyEventView/>}/>
+
+              <Route path="events">
+                <Route index element={<CompanyEvents />} />
+                <Route path="view/:id" element={<CompanyEventView />} />
+              </Route>
+
           </Route>
         </Route>
 
