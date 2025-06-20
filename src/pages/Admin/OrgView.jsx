@@ -109,18 +109,7 @@ const OrgView = () => {
     }
   };
 
-  const handleBack = () => navigate(-1);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-gray-50 ml-[17%] mt-[5%]">
-        <div className="flex flex-col items-center">
-          <div className="w-12 h-12 border-4 border-t-[#303972] border-gray-200 rounded-full animate-spin"></div>
-          <p className="mt-4 text-lg font-medium text-gray-600">Loading organizer data...</p>
-        </div>
-      </div>
-    );
-  }
+  h
 
   if (!organizer) {
     return (

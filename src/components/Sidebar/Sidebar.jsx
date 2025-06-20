@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { assets } from '../../assets/assets';
-import { HelpCircle } from 'lucide-react';
+import { HelpCircle, ChevronDown } from 'lucide-react';
 
 const Sidebar = ({ menuItems }) => {
   const [dropDown, setDropDown] = useState(null);
@@ -11,60 +11,71 @@ const Sidebar = ({ menuItems }) => {
   };
 
   return (
-    <div className={'transition-all duration-300 w-[17%] fixed top-0 left-0 h-full overflow-y-auto'}>
-      <div className="body bg-[#192440] flex flex-col gap-10 py-4 items-center h-[100%]">
-        
-        {/* Logo */}
-        <div>
-          <img src={assets.logo} alt="Logo" className='w-auto' />
+    <div className="fixed top-0 left-0 h-full w-[17%] min-w-[200px] bg-[#192440] shadow-lg z-50">
+      <div className="flex flex-col h-full">
+        <div className="py-6 px-4 border-b border-[#2a3655]">
+          <img 
+            src={assets.logo} 
+            alt="Company Logo" 
+            className="w-auto h-8 mx-auto" 
+          />
         </div>
 
-        {/* Menu Items */}
-        <div>
-          <ul className="flex flex-col gap-2">
+        <div className="flex-1 px-4 py-6 overflow-y-auto">
+          <ul className="flex flex-col gap-1 mx-4">
             {menuItems.map((item, index) => (
               <li key={index}>
                 {!item.Children ? (
                   <NavLink
                     to={item.basePath}
                     className={({ isActive }) =>
-                      isActive
-                        ? 'flex items-center gap-4 text-black bg-white px-6 py-[8px] rounded-xl'
-                        : 'flex items-center gap-4 text-[#8E92BC] hover:bg-[#1E2C4A] hover:text-white px-6 py-[8px] rounded-xl transition-all duration-300 ease-in-out'
+                      `flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200 ${
+                        isActive
+                          ? 'bg-white text-black font-medium shadow-sm'
+                          : 'text-[#8E92BC] hover:bg-[#1E2C4A] hover:text-white'
+                      }`
                     }
                   >
-                    <span className="text-xl">
-                      <item.icon />
-                    </span>
-                    <span>{item.name}</span>
+                    <item.icon size={20} className="flex-shrink-0" />
+                    <span className="truncate">{item.name}</span>
                   </NavLink>
                 ) : (
                   <>
-                    {/* Parent Item with Dropdown Toggle */}
                     <button
                       onClick={() => handleDropDown(index)}
-                      className="flex items-center gap-4 text-[#8E92BC] hover:bg-[#1E2C4A] hover:text-white px-6 py-[8px] rounded-xl transition-all duration-300 ease-in-out w-full"
+                      className={`flex items-center justify-between w-full gap-3 px-4 py-3 rounded-lg transition-colors duration-200 ${
+                        dropDown === index 
+                          ? 'text-white bg-[#1E2C4A]' 
+                          : 'text-[#8E92BC] hover:bg-[#1E2C4A] hover:text-white'
+                      }`}
                     >
-                      <span className="text-xl">
-                        <item.icon />
-                      </span>
-                      <span>{item.name}</span>
+                      <div className="flex items-center gap-3">
+                        <item.icon size={20} className="flex-shrink-0" />
+                        <span className="truncate">{item.name}</span>
+                      </div>
+                      <ChevronDown 
+                        size={16} 
+                        className={`transition-transform duration-200 ${
+                          dropDown === index ? 'rotate-180' : ''
+                        }`} 
+                      />
                     </button>
 
-                    {/* Child Items (Dropdown) */}
                     {dropDown === index && (
-                      <ul className="flex flex-col gap-2 pt-1 pl-10 relative before:absolute before:top-0 before:left-8 before:h-full before:w-[1px] before:bg-[#8E92BC]">
+                      <ul className="flex flex-col gap-1 pl-4 mt-1 ml-6 border-l-2 border-[#2a3655]">
                         {item.Children.map((child, childIndex) => (
                           <li key={childIndex}>
                             <NavLink
                               to={child.basePath}
                               className={({ isActive }) =>
-                                isActive
-                                  ? 'flex items-center gap-4 text-black bg-white px-6 py-[8px] rounded-xl'
-                                  : 'flex items-center gap-4 text-[#8E92BC] hover:bg-[#1E2C4A] hover:text-white px-6 py-[8px] rounded-xl transition-all duration-300 ease-in-out'
+                                `flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-200 ${
+                                  isActive
+                                    ? 'bg-white text-black font-medium shadow-sm'
+                                    : 'text-[#8E92BC] hover:bg-[#1E2C4A] hover:text-white'
+                                }`
                               }
                             >
-                              <span className="ml-4 text-sm">{child.name}</span>
+                              <span className="text-sm truncate">{child.name}</span>
                             </NavLink>
                           </li>
                         ))}
@@ -77,6 +88,21 @@ const Sidebar = ({ menuItems }) => {
           </ul>
         </div>
 
+        <div className="px-4 py-4 border-t border-[#2a3655]">
+          <NavLink
+            to="/help"
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors duration-200 ${
+                isActive
+                  ? 'bg-white text-black font-medium'
+                  : 'text-[#8E92BC] hover:bg-[#2a3655] hover:text-white'
+              }`
+            }
+          >
+            <HelpCircle size={18} />
+            <span className="text-sm">Help & Support</span>
+          </NavLink>
+        </div>
       </div>
     </div>
   );
