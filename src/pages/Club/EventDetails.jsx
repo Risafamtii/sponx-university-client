@@ -29,17 +29,6 @@ ChartJS.register(
   Legend
 );
 
-const barData = {
-  labels: ["WSO2", "WinSys", "sysco", "Creative Software"],
-  datasets: [
-    {
-      label: "Bid Amount",
-      data: [450, 400, 300, 600],
-      backgroundColor: ["#f97316", "#6b7280", "#3b82f6", "#a855f7"], // orange, gray, blue, purple
-    },
-  ],
-};
-
 const barOptions = {
   scales: {
     y: {
@@ -57,10 +46,12 @@ const barOptions = {
 };
 
 
+
 const EventDetails = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [bids, setBids] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editedEvent, setEditedEvent] = useState({
     name: "",
@@ -74,6 +65,18 @@ const EventDetails = () => {
     proposal: "",
     organizerId: "",
   });
+
+  const [barChartData, setBarChartData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: "Bid Amount",
+        data: [],
+        backgroundColor: ["#f97316", "#6b7280", "#3b82f6", "#a855f7"],
+      },
+    ],
+  });
+
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -89,6 +92,38 @@ const EventDetails = () => {
     };
 
     fetchEvent();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchBids = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/api/v1/bids/${id}`);
+        const bidData = res?.data?.data || [];
+        setBids(bidData);
+
+
+        // Optional: update chart data
+        const labels = bidData.map(b => b.company?.user?.name || "Unknown");
+        const amounts = bidData.map(b => b.amount);
+
+        setBarChartData({
+          labels,
+          datasets: [
+            {
+              label: "Bid Amount",
+              data: amounts,
+              backgroundColor: ["#f97316", "#6b7280", "#3b82f6", "#a855f7"],
+            },
+          ],
+        });
+
+
+      } catch (error) {
+        console.error("Error fetching bids:", error);
+      }
+    };
+
+    fetchBids();
   }, [id]);
 
   if (isLoading) return <p>Loading...</p>;
@@ -258,51 +293,85 @@ const EventDetails = () => {
 
       {/* Charts & Sponsorship */}
       <div className="mt-8 w-full bg-white p-6 rounded-lg shadow-lg flex flex-col lg:flex-row gap-6 ml-6">
+        {/* Bidding Chart */}
         <div className="bg-white p-6 rounded-2xl shadow-xl">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="font-semibold text-xl">Biding Information</h3>
+            <h3 className="font-semibold text-xl">Bidding Information</h3>
             <button className="bg-blue-600 text-white text-sm px-4 py-2 rounded hover:bg-blue-700">
               Stop Bid
             </button>
           </div>
           <div className="h-[300px] w-[650px]">
-            <Bar data={barData} options={barOptions} />
+            <Bar data={barChartData} options={barOptions} />
           </div>
         </div>
 
-
+        {/* Sponsorship Panel */}
         <div className="bg-white p-6 rounded-2xl shadow-xl text-blue-950 w-[400px] ml-16">
           <div className="space-y-8 mt-4">
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-lg font-semibold">Sponsorship</h2>
-              <span className="text-blue-600 font-bold text-sm">90%</span>
+              <span className="text-blue-600 font-bold text-sm">
+                {
+                  event.budget > 0
+                    ? `${Math.min(100, Math.round((bids.reduce((acc, bid) => acc + bid.amount, 0) / event.budget) * 100))}%`
+                    : "0%"
+                }
+              </span>
             </div>
+
             <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-              <div className="bg-blue-500 h-2.5 rounded-full w-[90%]"></div>
+              <div
+                className="bg-blue-500 h-2.5 rounded-full"
+                style={{
+                  width: event.budget > 0
+                    ? `${Math.min(100, Math.round((bids.reduce((acc, bid) => acc + bid.amount, 0) / event.budget) * 100))}%`
+                    : "0%",
+                }}
+              ></div>
             </div>
+
+            {/* Top 3 Bidders */}
             <div className="space-y-3">
-              <div className="flex items-center  text-lg font-medium">
-                <FaCrown className="text-purple-600 mr-3 text-xl" />
-                Creative Software:{" "}
-                <span className="ml-auto font-semibold">Rs. 40,000</span>
-              </div>
-              <div className="flex items-center text-lg font-medium">
-                <FaTrophy className="text-orange-500 mr-3 text-xl" />
-                WSO2: <span className="ml-auto font-semibold">Rs. 25,000</span>
-              </div>
-              <div className="flex items-center text-lg font-medium">
-                <FaMedal className="text-gray-600 mr-3 text-xl" />
-                WinSys: <span className="ml-auto font-semibold">Rs. 10,000</span>
-              </div>
+              {bids
+                .sort((a, b) => b.amount - a.amount)
+                .slice(0, 3)
+                .map((bid, index) => (
+                  <div
+                    key={bid.id}
+                    className="flex items-center text-lg font-medium"
+                  >
+                    {index === 0 && <FaCrown className="text-purple-600 mr-3 text-xl" />}
+                    {index === 1 && <FaTrophy className="text-orange-500 mr-3 text-xl" />}
+                    {index === 2 && <FaMedal className="text-gray-600 mr-3 text-xl" />}
+                    {bid.company?.user?.name || "Unknown Company"}:
+                    <span className="ml-auto font-semibold">
+                      Rs. {bid.amount.toLocaleString()}
+                    </span>
+                  </div>
+                ))}
             </div>
+
+            {/* Total */}
             <hr className="my-3" />
             <div className="flex justify-between text-lg font-bold">
               <span>TOTAL</span>
-              <span>Rs. 75,000</span>
+              <span>
+                Rs.{" "}
+                {bids.length > 0
+                  ? bids
+                    .sort((a, b) => b.amount - a.amount)
+                    .slice(0, 3)
+                    .reduce((acc, bid) => acc + bid.amount, 0)
+                    .toLocaleString()
+                  : "0"}
+              </span>
+
             </div>
           </div>
         </div>
       </div>
+
     </div>
   );
 };
