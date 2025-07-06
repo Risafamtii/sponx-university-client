@@ -9,13 +9,27 @@ import { MdClose, MdEdit } from "react-icons/md";
 import menuConfig from '../../utils/menuConfig';
 import { FaArrowRight } from "react-icons/fa";
 import { toast } from 'react-toastify';
+import { connectCompanySocket, subscribeToNotifications, disconnectSocket } from '../../utils/socket';
+import { getStoredNotifications, storeNotifications, removeNotificationById, addNotification } from '../../utils/notificationStore';
 
-const Navbar = ({ userType }) => {
+const Navbar = ({ userType, userId }) => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
   const [logoutConfirmOpen, setLogoutConfirmOpen] = useState(false);
+  const [notifications, setNotifications] = useState(getStoredNotifications());
+  const [selectedNotification, setSelectedNotification] = useState(null);
   const location = useLocation();
+  // Prevent duplicate notifications by eventId (or id)
+  const deduplicateNotifications = (notifs) => {
+    const seen = new Set();
+    return notifs.filter(n => {
+      const id = n.event?.eventId || n.id;
+      if (seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+  };
   
   const getCurrentPage = () => {
     let currentPage = "Overview"; 
@@ -72,40 +86,41 @@ const Navbar = ({ userType }) => {
     }, 1000);
   };
 
-  const notifications = [
-    {
-      id: 1,
-      avatar: "HA",
-      name: "Hashir Ahamed",
-      action: "assigned an issue to you",
-      description: "[LMS] - AdminDashboard - Navbar (Develop)",
-      time: "19 hours ago",
-    },
-    {
-      id: 2,
-      avatar: "AB",
-      name: "Abdul Basith",
-      action: "assigned an issue to you",
-      description: "FE - Company overview",
-      time: "5 days ago",
-    },
-    {
-      id: 3,
-      avatar: "HA",
-      name: "Hashir Ahamed",
-      action: "assigned an issue to you",
-      description: "[LMS] - Login - Backend",
-      time: "1 week ago",
-    },
-    {
-      id: 4,
-      avatar: "RI",
-      name: "Risafa Imtiyas",
-      action: "changed an issue from To Do to Done",
-      description: "[UML] - Wireframe of UI",
-      time: "2 weeks ago",
-    },
-  ];
+  // Real-time notification setup for company users
+  // Real-time notification setup for company users
+  useEffect(() => {
+    let interval;
+    if (userType === 'company' && userId) {
+      connectCompanySocket(userId);
+      subscribeToNotifications((notification) => {
+        const notifId = notification.eventId || notification.id || Date.now();
+        setNotifications((prev) => {
+          // Deduplicate by eventId or id
+          if (prev.some(n => (n.event?.eventId || n.id) === notifId)) return prev;
+          const notifObj = {
+            id: notifId,
+            avatar: notification.organization?.[0]?.toUpperCase() || 'EV',
+            name: notification.organization,
+            action: notification.title,
+            description: notification.message,
+            time: 'Just now',
+            event: notification // store all event details
+          };
+          const updated = addNotification(notifObj);
+          return deduplicateNotifications(updated);
+        });
+        setNotificationOpen(true);
+      });
+      // Poll every 5 seconds for updates from localStorage
+      interval = setInterval(() => {
+        setNotifications(deduplicateNotifications(getStoredNotifications()));
+      }, 5000);
+      return () => {
+        disconnectSocket();
+        clearInterval(interval);
+      };
+    }
+  }, [userType, userId]);
 
   return (
     <nav className="z-20 fixed flex items-center justify-between w-[83%] ml-[17%] px-4 py-2 bg-white shadow-md h-[10%]">
@@ -120,13 +135,16 @@ const Navbar = ({ userType }) => {
 
         {/* Notifications Button */}
         <button
-          className="relative p-2 rounded-full hover:bg-gray-100"
+          className="relative p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
           onClick={toggleNotification}
+          aria-label="Notifications"
         >
           <IoIosNotifications className="w-6 h-6" />
-          <span className="absolute top-0 right-0 flex items-center justify-center w-3 h-3 text-xs text-white bg-red-500 rounded-full">
-            3
-          </span>
+          {notifications.length > 0 && (
+            <span className="absolute top-0 right-0 flex items-center justify-center w-4 h-4 text-xs text-white bg-red-500 rounded-full shadow-lg animate-pulse">
+              {notifications.length}
+            </span>
+          )}
         </button>
 
         {/* Notifications Popup */}
@@ -138,20 +156,25 @@ const Navbar = ({ userType }) => {
               onClick={toggleNotification}
             ></div>
 
-            <div className="absolute z-50 bg-white rounded-lg shadow-lg w-96 right-4 top-14 animate-fade-in-down">
+            <div className="absolute z-50 bg-white border border-blue-100 rounded-lg shadow-2xl w-96 right-4 top-14 animate-fade-in-down">
               <div className="p-4">
-                <h2 className="text-lg font-semibold text-gray-800">Notifications</h2>
-                <div className="mt-4 overflow-y-auto max-h-64">
+                <h2 className="flex items-center gap-2 text-lg font-semibold text-gray-800">
+                  <IoIosNotifications className="w-5 h-5 text-blue-500" /> Notifications
+                </h2>
+                <div className="pr-1 mt-4 overflow-y-auto max-h-64 custom-scrollbar">
                   {notifications.length > 0 ? (
                     notifications.map((notification) => (
                       <div
                         key={notification.id}
-                        className="flex items-start gap-4 py-3 border-b last:border-none"
+                        className={`flex items-start gap-4 py-3 border-b last:border-none cursor-pointer transition-all duration-150 hover:bg-blue-50/70 ${selectedNotification && selectedNotification.id === notification.id ? 'bg-blue-100/60' : ''}`}
+                        onClick={() => setSelectedNotification(notification)}
+                        tabIndex={0}
+                        aria-label={`Notification from ${notification.name}`}
                       >
-                        <div className="flex items-center justify-center w-10 h-10 font-bold text-white bg-blue-500 rounded-full">
+                        <div className="flex items-center justify-center w-10 h-10 font-bold text-white rounded-full shadow bg-gradient-to-br from-blue-500 to-blue-700">
                           {notification.avatar}
                         </div>
-                        <div>
+                        <div className="flex-1">
                           <p className="text-sm">
                             <span className="font-semibold">{notification.name}</span>{" "}
                             {notification.action}
@@ -161,16 +184,77 @@ const Navbar = ({ userType }) => {
                           </p>
                           <p className="text-xs text-gray-400">{notification.time}</p>
                         </div>
+                        <div className="flex flex-col gap-1 ml-2">
+                          <button
+                            className="text-green-600 transition-colors duration-150 hover:text-green-800"
+                            title="Mark as done"
+                            onClick={e => {
+                              e.stopPropagation();
+                              setNotifications(removeNotificationById(notification.id));
+                              setSelectedNotification(null);
+                            }}
+                          >
+                            &#10003;
+                          </button>
+                          <button
+                            className="text-red-600 transition-colors duration-150 hover:text-red-800"
+                            title="Dismiss"
+                            onClick={e => {
+                              e.stopPropagation();
+                              setNotifications(removeNotificationById(notification.id));
+                              setSelectedNotification(null);
+                            }}
+                          >
+                            <MdClose className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
                     ))
                   ) : (
-                    <p className="text-sm text-gray-600">No new notifications</p>
+                    <p className="py-8 text-sm text-center text-gray-600">No new notifications</p>
+                  )}
+                  {/* Event Details Modal */}
+                  {selectedNotification && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 animate-fade-in">
+                      <div className="bg-white rounded-lg shadow-2xl p-6 w-[400px] relative border border-blue-100 animate-fade-in-up">
+                        <button
+                          className="absolute text-gray-500 top-2 right-2 hover:text-gray-800"
+                          onClick={() => setSelectedNotification(null)}
+                          aria-label="Close event details"
+                        >
+                          <MdClose className="w-6 h-6" />
+                        </button>
+                        <h3 className="mb-2 text-lg font-bold text-blue-700">Event Details</h3>
+                        <div className="mb-2">
+                          <span className="font-semibold">Event Name:</span> {selectedNotification.event?.eventName || selectedNotification.event?.name || selectedNotification.description}
+                        </div>
+                        <div className="mb-2">
+                          <span className="font-semibold">Organization:</span> {selectedNotification.name}
+                        </div>
+                        <div className="mb-2">
+                          <span className="font-semibold">Description:</span> {selectedNotification.event?.description || selectedNotification.description}
+                        </div>
+                        <div className="mb-2">
+                          <span className="font-semibold">Date:</span> {selectedNotification.event?.date ? new Date(selectedNotification.event.date).toLocaleString() : selectedNotification.time}
+                        </div>
+                        <div className="mb-2">
+                          <span className="font-semibold">Location:</span> {selectedNotification.event?.location || 'N/A'}
+                        </div>
+                        <div className="mb-2">
+                          <span className="font-semibold">Budget:</span> {selectedNotification.event?.budget ? `₹${selectedNotification.event.budget}` : 'N/A'}
+                        </div>
+                        <div className="mb-2">
+                          <span className="font-semibold">Type:</span> {selectedNotification.event?.type || 'N/A'}
+                        </div>
+                      </div>
+                    </div>
                   )}
                 </div>
                 <div className="flex items-center justify-center mt-4">
                   <button
                     className="flex items-center justify-center gap-1 px-3 py-1 text-xs font-medium text-white transition-all duration-300 bg-red-600 rounded-full shadow hover:bg-red-700"
                     onClick={toggleNotification}
+                    aria-label="Close notifications"
                   >
                     <MdClose className="w-4 h-4" />
                   </button>

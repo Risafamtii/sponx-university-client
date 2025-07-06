@@ -4,23 +4,27 @@ import { Outlet } from 'react-router-dom'
 import menuConfig from '../utils/menuConfig'
 import Navbar from '../components/Navbar/Navbar'
 
-const CompanyLayout = () => {
 
+const CompanyLayout = () => {
   const userType = 'company';
+  // Get user from localStorage
+  let userId = null;
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    userId = user?.id;
+  } catch (e) {}
 
   return (
     <div className="flex h-full">
-      
-      <Navbar userType={userType}/>
+      <Navbar userType={userType} userId={userId} />
       {/* Sidebar on the left */}
       <Sidebar menuItems={menuConfig.company} />
-      
       {/* Main content area where child routes will render */}
       <div className="flex-1">
         <Outlet /> {/* Renders the content of the nested route */}
       </div>
     </div>
-  )
+  );
 }
 
 export default CompanyLayout;
